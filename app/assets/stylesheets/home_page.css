@@ -1,0 +1,20 @@
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-links {
+  justify-self: end;
+}
+
+#logo-text {
+  width: 500px;
+  justify-content: center;
+  display: flex;
+}

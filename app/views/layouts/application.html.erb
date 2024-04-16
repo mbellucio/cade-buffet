@@ -10,6 +10,20 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav class="navigation">
+        <div id="logo-text">
+          <h1>Cadê Buffet</h1>
+        </div>
+        <div class="register-links">
+          <%= link_to 'Empresas/Buffets', root_path %>
+          <%= link_to 'Login', root_path %>
+        </div>
+      </nav>
+    </header>
+    <hr>
+    <div class="center">
+      <%= yield %>
+    </div>
   </body>
 </html>
