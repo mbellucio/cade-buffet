@@ -30,7 +30,7 @@ describe 'User access homepage' do
     visit root_path
     #assert
     within("nav") do
-      expect(page).to have_content("Login")
+      expect(page).to have_content("Entrar")
     end
   end
 end

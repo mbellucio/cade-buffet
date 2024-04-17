@@ -15,17 +15,27 @@
         <div id="logo-text">
           <h1>Cadê Buffet</h1>
         </div>
-        <div class="register-links">
-          <%= link_to 'Empresas/Buffets', root_path %>
-          <%= link_to 'Login', root_path %>
-        </div>
+        <% if company_signed_in? %>
+          <div class="register-links">
+            <p><%= current_company.buffet_name %></p>
+            <p><%= current_company.email %></p>
+            <%= button_to 'Sair', destroy_company_session_path, method: :delete %>
+          </div>
+        <% else %>
+          <div class="register-links">
+            <%= link_to 'Empresas/Buffets', new_company_session_path %>
+            <%= link_to 'Entrar', root_path %>
+          </div>
+        <% end %>
       </nav>
     </header>
     <hr>
     <div class="center">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
+    <div>
       <%= yield %>
+    </div>
     </div>
   </body>
 </html>
