@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    models:
+      buffet: Empresa
+    attributes:
+      buffet:
+        company_name: Razão Social
+        phone_number: Telefone para contato
+        zip_code: CEP
+        adress: Endereço
+        neighborhood: Bairro
+        city: Cidade
+        state_code: Estado
+        description: Descrição
+
+
+
+
+

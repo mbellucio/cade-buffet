@@ -13,12 +13,17 @@
     <header>
       <nav class="navigation">
         <div id="logo-text">
-          <h1>Cadê Buffet</h1>
+          <%= link_to root_path do %>
+            <h1>Cadê Buffet</h1>
+          <% end %>
         </div>
         <% if company_signed_in? %>
           <div class="register-links">
             <p><%= current_company.buffet_name %></p>
             <p><%= current_company.email %></p>
+            <% if current_company.buffet.present? %>
+              <%= link_to 'Meu Buffet', buffet_path(current_company.buffet.id) %>
+            <% end %>    
             <%= button_to 'Sair', destroy_company_session_path, method: :delete %>
           </div>
         <% else %>
@@ -30,12 +35,12 @@
       </nav>
     </header>
     <hr>
-    <div class="center">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    <div>
-      <%= yield %>
-    </div>
-    </div>
+    <section class="center">
+      <div>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+        <%= yield %>
+      </div>
+    </section>
   </body>
 </html>

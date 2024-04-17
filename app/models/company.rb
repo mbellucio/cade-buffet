@@ -4,6 +4,8 @@ class Company < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one :buffet
+
   validates :buffet_name, :company_registration_number, presence: true
   validates :company_registration_number, uniqueness: true
 end

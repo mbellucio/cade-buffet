@@ -5,7 +5,7 @@ pt-BR:
     attributes:
       company:
         email: E-mail
-        buffet_name: Nome do Buffet
+        buffet_name: Nome fantasia
         password: Senha
         password_confirmation: Confirme sua senha
         company_registration_number: CNPJ

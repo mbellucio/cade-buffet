@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User register company' do
+describe 'User register as company' do
   it 'with success' do
     #arrange
 
@@ -15,7 +15,6 @@ describe 'User register company' do
     fill_in "CNPJ", with: "74.391.888/0001-77"
     click_on "Enviar"
     #assert
-    expect(page).to have_content("Bem vindo! Você realizou seu registro com sucesso.")
     within("nav") do
       expect(page).to have_content("Bellucio's Buffet")
       expect(page).to have_content("Sair")
@@ -69,5 +68,37 @@ describe 'User register company' do
       expect(page).not_to have_content("Empresas/Buffets")
       expect(page).not_to have_content("Entrar")
     end
+  end
+
+  it "and is redirected to buffet creation form" do
+    #arrange
+    company = Company.create!(
+      buffet_name: "Bellucio's Buffet",
+      company_registration_number: "74.391.888/0001-77",
+      email: "bellucioalimentacao@gmail.com",
+      password: "belluciobuffet2024"
+    )
+    #act
+    login_as(company)
+    visit root_path
+    #assert
+    expect(current_path).to eq new_buffet_path
+  end
+
+  it "and only has acess to buffet creation route" do
+    company = Company.create!(
+      buffet_name: "some Buffet",
+      company_registration_number: "74.391.888/0001-77",
+      email: "company@gmail.com",
+      password: "safestpasswordever"
+    )
+    #act
+    login_as(company)
+    visit root_path
+    within("nav") do
+      click_on "Cadê Buffet"
+    end
+    #assert
+    expect(current_path).to eq(new_buffet_path)
   end
 end

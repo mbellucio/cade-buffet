@@ -1,0 +1,45 @@
+<div>
+  <% if @buffet.errors.any? %>
+    <ul>
+      <% @buffet.errors.full_messages.each do |err| %>
+        <li><%= err %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_with model: @buffet do |f| %>
+    <div>
+      <%= f.label :company_name %>
+      <%= f.text_field :company_name %>
+    </div>
+    <div>
+      <%= f.label :phone_number %>
+      <%= f.text_field :phone_number %>
+    </div>
+    <div>
+      <%= f.label :zip_code %>
+      <%= f.text_field :zip_code %>
+    </div>
+    <div>
+      <%= f.label :adress %>
+      <%= f.text_field :adress %>
+    </div>
+    <div>
+      <%= f.label :neighborhood %>
+      <%= f.text_field :neighborhood %>
+    </div>
+    <div>
+      <%= f.label :city %>
+      <%= f.text_field :city %>
+    </div>
+    <div>
+      <%= f.label :state_code %>
+      <%= f.text_field :state_code %>
+    </div>
+    <div>
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+    </div>
+    <%= f.submit "Enviar" %>
+  <% end %>
+</div>
