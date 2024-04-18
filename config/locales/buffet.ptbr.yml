@@ -4,7 +4,7 @@ pt-BR:
       buffet: Empresa
     attributes:
       buffet:
-        company_name: Razão Social
+        company_name: Razão social
         phone_number: Telefone para contato
         zip_code: CEP
         adress: Endereço

@@ -1,5 +1,6 @@
 class Buffet < ApplicationRecord
   belongs_to :company
+  accepts_nested_attributes_for :company
 
   validates :company_id, uniqueness: true
   validates(

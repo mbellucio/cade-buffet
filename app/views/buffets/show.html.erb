@@ -1,7 +1,7 @@
 <div id="buffet-details">
 
-  <p><strong>Nome Fantasia: </strong><%= @buffet.company.buffet_name%></p>
-  <p><strong>Razão Social: </strong><%= @buffet.company_name%></p>
+  <p><strong>Nome fantasia: </strong><%= @buffet.company.buffet_name%></p>
+  <p><strong>Razão social: </strong><%= @buffet.company_name%></p>
   <p><strong>CNPJ: </strong><%= @buffet.company.company_registration_number%></p>
   <p><strong>E-mail: </strong><%= @buffet.company.email%></p>
   <p><strong>Telefone para contato: </strong><%= @buffet.phone_number%></p>
@@ -10,7 +10,7 @@
   <p><strong>Cidade: </strong><%= @buffet.city%></p>
   <p><strong>Estado: </strong><%= @buffet.state_code%></p>
   <p><strong>Descrição: </strong><%= @buffet.description%></p>
-  
+
+  <%= link_to 'Editar informações', edit_buffet_path(@buffet.id) %>
 </div>
 
- 

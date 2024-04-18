@@ -13,7 +13,7 @@ describe 'Company register a buffet' do
     #act
     login_as(company)
     visit root_path
-    fill_in "Razão Social", with: "buffet company 1000"
+    fill_in "Razão social", with: "buffet company 1000"
     fill_in "Telefone para contato", with: "40 98567-0045"
     fill_in "Endereço", with: "Rua 10"
     fill_in "Estado", with: "RJ"
@@ -41,7 +41,7 @@ describe 'Company register a buffet' do
     #act
     login_as(company)
     visit root_path
-    fill_in "Razão Social", with: ""
+    fill_in "Razão social", with: ""
     fill_in "Telefone para contato", with: ""
     fill_in "Endereço", with: ""
     fill_in "Estado", with: ""

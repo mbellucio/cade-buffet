@@ -1,4 +1,6 @@
 class BuffetsController < ApplicationController
+  before_action :find_buffet, only: [:show, :edit, :update]
+
   def new
     @buffet = Buffet.new
   end
@@ -13,11 +15,23 @@ class BuffetsController < ApplicationController
     render "new"
   end
 
-  def show
-    @buffet = Buffet.find(params[:id])
+  def show; end
+
+  def edit
+    @buffet.build_company unless @buffet.company.present?
+  end
+
+  def update
+    if @buffet.update(buffet_params) && @buffet.company.update(company_params)
+      return redirect_to buffet_path(@buffet), notice: "Buffet atualizado com sucesso!"
+    end
   end
 
   private
+
+  def find_buffet
+    @buffet = Buffet.find(params[:id])
+  end
 
   def buffet_params
     params.require(:buffet).permit(
@@ -28,7 +42,13 @@ class BuffetsController < ApplicationController
       :neighborhood,
       :city,
       :state_code,
-      :description,
+      :description
+    )
+  end
+
+  def company_params
+    params.require(:buffet).require(:company_attributes).permit(
+      :buffet_name
     )
   end
 end
