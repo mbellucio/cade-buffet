@@ -11,10 +11,6 @@
     
     <%= f.fields_for :company do |cp| %>
       <div>
-        <%= cp.label :email %>
-        <%= cp.text_field :email, disabled: true %>
-      </div>
-      <div>
         <%= cp.label :company_registration_number %>
         <%= cp.text_field :company_registration_number, disabled: true %>
       </div>
@@ -27,6 +23,10 @@
     <div>
       <%= f.label :company_name %>
       <%= f.text_field :company_name %>
+    </div>
+    <div>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
     </div>
     <div>
       <%= f.label :phone_number %>
@@ -51,6 +51,10 @@
     <div>
       <%= f.label :state_code %>
       <%= f.text_field :state_code %>
+    </div>
+    <div>
+      <%= f.label :payment_method %>
+      <%= f.text_field :payment_method %>
     </div>
     <div>
       <%= f.label :description %>

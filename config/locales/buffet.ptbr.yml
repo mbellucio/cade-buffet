@@ -5,12 +5,14 @@ pt-BR:
     attributes:
       buffet:
         company_name: Razão social
+        email: E-mail
         phone_number: Telefone para contato
         zip_code: CEP
         adress: Endereço
         neighborhood: Bairro
         city: Cidade
         state_code: Estado
+        payment_method: Métodos de pagamento aceitos
         description: Descrição
 
 

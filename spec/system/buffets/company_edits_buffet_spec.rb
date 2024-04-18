@@ -10,6 +10,8 @@ describe 'Company edits buffet' do
       password: "safestpasswordever"
     )
     Buffet.create!(
+      email: "someemail@gmail.com",
+      payment_method: "pix, cc",
       company_name: "some company",
       phone_number: "112345556",
       zip_code: "123231231",
@@ -29,12 +31,13 @@ describe 'Company edits buffet' do
     expect(page).to have_field("Nome fantasia")
     expect(page).to have_field("Razão social")
     expect(page).to have_content("CNPJ")
-    expect(page).to have_content("E-mail")
+    expect(page).to have_field("E-mail")
     expect(page).to have_field("Telefone para contato")
     expect(page).to have_field("CEP")
     expect(page).to have_field("Bairro")
     expect(page).to have_field("Cidade")
     expect(page).to have_field("Estado")
+    expect(page).to have_field("Métodos de pagamento aceitos")
     expect(page).to have_field("Descrição")
   end
 
@@ -47,6 +50,8 @@ describe 'Company edits buffet' do
       password: "safestpasswordever"
     )
     Buffet.create!(
+      email: "someemail@gmail.com",
+      payment_method: "pix, cc",
       company_name: "some company",
       phone_number: "112345556",
       zip_code: "123231231",
@@ -71,12 +76,13 @@ describe 'Company edits buffet' do
     expect(page).to have_content "Tesla"
     expect(page).to have_content "some company"
     expect(page).to have_content "74.391.888/0001-77"
-    expect(page).to have_content "company@gmail.com"
+    expect(page).to have_content "someemail@gmail.com"
     expect(page).to have_content "112345556"
     expect(page).to have_content "20561-116"
     expect(page).to have_content "some district"
     expect(page).to have_content "some city"
     expect(page).to have_content "CA"
+    expect(page).to have_content "pix, cc"
     expect(page).to have_content "Um buffet bem daora!"
   end
 end

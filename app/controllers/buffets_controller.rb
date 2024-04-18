@@ -8,6 +8,7 @@ class BuffetsController < ApplicationController
   def create
     @buffet = Buffet.new(buffet_params)
     @buffet.company_id = current_company.id
+
     if @buffet.save
       return redirect_to buffet_path(@buffet.id), notice: "Buffet Cadastrado com sucesso!"
     end
@@ -42,7 +43,9 @@ class BuffetsController < ApplicationController
       :neighborhood,
       :city,
       :state_code,
-      :description
+      :description,
+      :email,
+      :payment_method
     )
   end
 

@@ -9,10 +9,10 @@ describe 'Company register a buffet' do
       email: "company@gmail.com",
       password: "safestpasswordever"
     )
-
     #act
     login_as(company)
     visit root_path
+    fill_in "E-mail", with: "support@gmail.com"
     fill_in "Razão social", with: "buffet company 1000"
     fill_in "Telefone para contato", with: "40 98567-0045"
     fill_in "Endereço", with: "Rua 10"
@@ -20,6 +20,7 @@ describe 'Company register a buffet' do
     fill_in "Cidade", with: "Rio de Janeiro"
     fill_in "Bairro", with: "Tijuca"
     fill_in "CEP", with: "20561-116"
+    fill_in "Métodos de pagamento aceitos", with: "pix, cc, cd"
     fill_in "Descrição", with: "Buffet de casamento"
     click_on "Enviar"
 
@@ -28,6 +29,8 @@ describe 'Company register a buffet' do
     expect(page).to have_content("some Buffet")
     expect(page).to have_content("buffet company 1000")
     expect(page).to have_content("Buffet de casamento")
+    expect(page).to have_content("pix, cc, cd")
+    expect(page).to have_content("support@gmail.com")
   end
 
   it "with empty data" do
@@ -59,5 +62,7 @@ describe 'Company register a buffet' do
     expect(page).to have_content "Cidade não pode ficar em branco"
     expect(page).to have_content "Estado não pode ficar em branco"
     expect(page).to have_content "Estado não possui o tamanho esperado (2 caracteres)"
+    expect(page).to have_content "E-mail não pode ficar em branco"
+    expect(page).to have_content "Métodos de pagamento aceitos não pode ficar em branco"
   end
 end

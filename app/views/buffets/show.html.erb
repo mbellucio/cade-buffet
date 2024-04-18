@@ -3,12 +3,13 @@
   <p><strong>Nome fantasia: </strong><%= @buffet.company.buffet_name%></p>
   <p><strong>Razão social: </strong><%= @buffet.company_name%></p>
   <p><strong>CNPJ: </strong><%= @buffet.company.company_registration_number%></p>
-  <p><strong>E-mail: </strong><%= @buffet.company.email%></p>
+  <p><strong>E-mail: </strong><%= @buffet.email%></p>
   <p><strong>Telefone para contato: </strong><%= @buffet.phone_number%></p>
   <p><strong>CEP: </strong><%= @buffet.zip_code%></p>
   <p><strong>Bairro: </strong><%= @buffet.neighborhood%></p>
   <p><strong>Cidade: </strong><%= @buffet.city%></p>
   <p><strong>Estado: </strong><%= @buffet.state_code%></p>
+  <p><strong>Métodos de pagamento aceitos: </strong><%= @buffet.payment_method%></p>
   <p><strong>Descrição: </strong><%= @buffet.description%></p>
 
   <%= link_to 'Editar informações', edit_buffet_path(@buffet.id) %>

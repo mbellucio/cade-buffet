@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_17_175623) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_18_230055) do
   create_table "buffets", force: :cascade do |t|
     t.string "company_name"
     t.string "phone_number"
@@ -23,6 +23,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_17_175623) do
     t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
+    t.string "payment_method"
     t.index ["company_id"], name: "index_buffets_on_company_id", unique: true
   end
 
