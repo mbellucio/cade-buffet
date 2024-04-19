@@ -65,4 +65,33 @@ describe 'Company register a buffet' do
     expect(page).to have_content "E-mail não pode ficar em branco"
     expect(page).to have_content "Métodos de pagamento aceitos não pode ficar em branco"
   end
+
+  it "and can't access buffet creation page again" do
+    #arrange
+    company = Company.create!(
+      buffet_name: "some Buffet",
+      company_registration_number: "74.391.888/0001-77",
+      email: "company@gmail.com",
+      password: "safestpasswordever"
+    )
+    buffet = Buffet.create!(
+      email: "somecompany@gmail.com",
+      payment_method: "pix, cc",
+      company_name: "some company",
+      phone_number: "112345556",
+      zip_code: "123231231",
+      adress: "some street 1000",
+      neighborhood: "some district",
+      city: "some city",
+      state_code: "CA",
+      description: "A nice buffet",
+      company_id: company.id
+    )
+    #act
+    login_as(company)
+    visit root_path
+    visit new_buffet_path
+    #assert
+    expect(current_path).to eq(buffet_path(buffet.id))
+  end
 end

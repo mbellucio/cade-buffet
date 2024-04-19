@@ -2,6 +2,9 @@ class BuffetsController < ApplicationController
   before_action :find_buffet, only: [:show, :edit, :update]
 
   def new
+    if current_company.buffet.present?
+      redirect_to buffet_path(current_company.buffet.id)
+    end
     @buffet = Buffet.new
   end
 
