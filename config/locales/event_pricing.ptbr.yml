@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      event_pricing: Precificação do evento
+    attributes:
+      event_pricing:
+        base_price: Preço base
+        extra_person_fee: Adicional por pessoa
+        extra_hour_fee: Adicional por hora extra de evento

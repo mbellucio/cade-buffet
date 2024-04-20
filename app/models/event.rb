@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :buffet
+  has_many :event_pricings
+  has_many :pricings, through: :event_pricings
 
   validates(
     :name,

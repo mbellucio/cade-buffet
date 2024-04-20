@@ -1,0 +1,21 @@
+<div>
+  <h2><%= "Precificação para #{@pricing.category}" %></h2>
+
+  <%= form_with model: @event_pricing do |f| %>
+    <div>
+      <%= f.label :base_price, "Preço base (#{@event.min_quorum} pessoas)" %>
+      <%= f.number_field :base_price %>
+    </div>
+    <div>
+      <%= f.label :extra_person_fee %>
+      <%= f.number_field :extra_person_fee %>
+    </div>
+    <div>
+      <%= f.label :extra_hour_fee %>
+      <%= f.number_field :extra_hour_fee %>
+    </div>
+    <%= f.hidden_field :pricing_id, value: @pricing.id %>
+    <%= f.hidden_field :event_id, value: @event.id %>
+    <%= f.submit %>
+  <% end %>
+</div>
