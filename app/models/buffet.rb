@@ -1,6 +1,7 @@
 class Buffet < ApplicationRecord
   belongs_to :company
   accepts_nested_attributes_for :company
+  has_many :events
 
   validates :company_id, :email, uniqueness: true
   validates :email, format:

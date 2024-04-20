@@ -1,0 +1,63 @@
+<div id="edit-event">
+
+  <h2>Editar evento</h2>
+
+  <% if @event.errors.any? %>
+    <ul>
+      <% @event.errors.full_messages.each do |err| %>
+        <li><%= err %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_with model: @event do |f| %>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+    <div>
+      <%= f.label :min_quorum %>
+      <%= f.text_field :min_quorum %>
+    </div>
+    <div>
+      <%= f.label :max_quorum %>
+      <%= f.text_field :max_quorum %>
+    </div>
+    <div>
+      <%= f.label :standard_duration %>
+      <%= f.text_field :standard_duration %>
+    </div>
+    <div>
+      <%= f.label :menu %>
+      <%= f.text_area :menu %>
+    </div>
+    <div>
+      <%= f.label :serve_alcohol %>
+      <%= f.check_box :serve_alcohol %>
+    </div>
+    <div>
+      <%= f.label :handle_decoration %>
+      <%= f.check_box :handle_decoration %>
+    </div>
+    <div>
+      <%= f.label :valet_service %>
+      <%= f.check_box :valet_service %>
+    </div>
+    <div>
+      <%= f.label :flexible_location %>
+      <%= f.check_box :flexible_location %>
+    </div>
+    <%= f.submit %>
+  <% end %>
+
+  <%= link_to 'Voltar', event_path(@event.id) %>
+
+</div>
+
+
+
+

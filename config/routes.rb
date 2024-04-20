@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 
   resources :companies, only: [:new, :create]
   resources :buffets, only: [:new, :create, :show, :edit, :update]
+  resources :events, only: [:new, :create, :show, :edit, :update]
 end

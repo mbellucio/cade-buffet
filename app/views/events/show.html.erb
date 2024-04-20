@@ -1,0 +1,16 @@
+<div id=event-details>
+
+  <h2><%= @event.name %></h2>
+  <p><strong>Descrição do evento:</strong> <%= @event.description %></p>
+  <p><strong>Quórum mínimo:</strong> <%= @event.min_quorum %></p>
+  <p><strong>Quórum máximo:</strong> <%= @event.max_quorum %></p>
+  <p><strong>Duração padrão do evento (min):</strong> <%= @event.standard_duration %></p>
+  <p><strong>Menu do evento:</strong> <%= @event.menu %></p>
+  <p><strong>Serve bebida alcoólica:</strong> <%= @event.translate @event.serve_alcohol %></p>
+  <p><strong>Faz a decoração:</strong> <%= @event.translate @event.handle_decoration %></p>
+  <p><strong>Serviço de estacionamento/valet:</strong> <%= @event.translate @event.valet_service %></p>
+  <p><strong>Realiza evento no local do contratante:</strong> <%= @event.translate @event.flexible_location %></p>
+
+  <%= link_to 'Editar', edit_event_path(@event.id) %>
+  <%= link_to 'Voltar', buffet_path(@event.buffet.id) %>
+</div>

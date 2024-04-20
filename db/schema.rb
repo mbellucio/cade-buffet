@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_18_230055) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_19_033210) do
   create_table "buffets", force: :cascade do |t|
     t.string "company_name"
     t.string "phone_number"
@@ -42,5 +42,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_230055) do
     t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "min_quorum"
+    t.integer "max_quorum"
+    t.integer "standard_duration"
+    t.string "menu"
+    t.boolean "serve_alcohol"
+    t.boolean "handle_decoration"
+    t.boolean "valet_service"
+    t.boolean "flexible_location"
+    t.integer "buffet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buffet_id"], name: "index_events_on_buffet_id"
+  end
+
   add_foreign_key "buffets", "companies"
+  add_foreign_key "events", "buffets"
 end

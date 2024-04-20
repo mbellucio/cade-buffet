@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      event: Evento
+    attributes:
+      event:
+        name: Nome do evento
+        description: Descrição do evento
+        min_quorum: Quórum mínimo
+        max_quorum: Quórum máximo
+        standard_duration: Duração padrão do evento (min)
+        menu: Menu do evento
+        serve_alcohol: Serve bebida alcoólica
+        handle_decoration: Faz a decoração
+        valet_service: Serviço de estacionamento/valet
+        flexible_location: Realiza evento no local do contratante

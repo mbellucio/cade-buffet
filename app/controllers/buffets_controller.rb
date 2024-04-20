@@ -1,5 +1,6 @@
 class BuffetsController < ApplicationController
   before_action :find_buffet, only: [:show, :edit, :update]
+  before_action :authenticate_company!
 
   def new
     if current_company.buffet.present?
@@ -34,7 +35,7 @@ class BuffetsController < ApplicationController
   private
 
   def find_buffet
-    @buffet = Buffet.find(params[:id])
+    @buffet = current_company.buffet
   end
 
   def buffet_params
