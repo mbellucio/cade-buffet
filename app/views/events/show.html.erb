@@ -1,5 +1,7 @@
 <div id="events">
   <div id=event-details>
+    <%= link_to 'Voltar', buffet_path(@event.buffet.id) %>
+
     <h2><%= @event.name %></h2>
 
     <p><strong>Descrição do evento:</strong> <%= @event.description %></p>
@@ -13,8 +15,6 @@
     <p><strong>Realiza evento no local do contratante:</strong> <%= @event.translate @event.flexible_location %></p>
 
     <%= link_to 'Editar', edit_event_path(@event.id) %>
-    <%= link_to 'Voltar', buffet_path(@event.buffet.id) %>
-    
   </div>
 
   <div id="pricings">
@@ -30,7 +30,7 @@
           <p><%= "Adicional por pessoa: #{number_to_currency event_pricing.extra_person_fee}"%></p>
           <p><%= "Adicional por hora extra de evento: #{number_to_currency event_pricing.extra_hour_fee}"%></p>
 
-          <%= link_to 'Editar', edit_event_path(event_pricing.id) %>
+          <%= link_to 'Editar', edit_event_pricing_path(event_pricing.id, pricing_id: pricing.id, event_id: @event.id) %>
         <% else %>
           <%= link_to "Configurar", new_event_pricing_path(pricing_id: pricing.id, event_id: @event.id) %>
         <% end %>

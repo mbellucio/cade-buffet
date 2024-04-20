@@ -1,4 +1,13 @@
 <div>
+
+  <% if @event_pricing.errors.any? %>
+    <ul>
+      <% @event_pricing.errors.full_messages.each do |err| %>
+        <li><%= err %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  
   <h2><%= "Precificação para #{@pricing.category}" %></h2>
 
   <%= form_with model: @event_pricing do |f| %>
@@ -16,6 +25,7 @@
     </div>
     <%= f.hidden_field :pricing_id, value: @pricing.id %>
     <%= f.hidden_field :event_id, value: @event.id %>
-    <%= f.submit %>
+    <%= f.submit "Enviar" %>
+    <%= link_to 'Voltar', event_path(@event.id) %>
   <% end %>
 </div>

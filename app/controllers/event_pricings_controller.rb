@@ -1,4 +1,6 @@
 class EventPricingsController < ApplicationController
+  before_action :find_event_pricing, only: [:edit, :update]
+
   def new
     @event = Event.find(params[:event_id])
     @pricing = Pricing.find(params[:pricing_id])
@@ -10,9 +12,28 @@ class EventPricingsController < ApplicationController
     if @event_pricing.save
       return redirect_to @event_pricing.event
     end
+    get_event_and_pricing
+    render "new"
+  end
+
+  def edit
+    get_event_and_pricing
+  end
+
+  def update
+    if @event_pricing.update(event_pricing_params)
+      return redirect_to @event_pricing.event
+    end
+    get_event_and_pricing
+    render "edit"
   end
 
   private
+  def get_event_and_pricing
+    @event = @event_pricing.event
+    @pricing = @event_pricing.pricing
+  end
+
   def find_event_pricing
     @event_pricing = EventPricing.find(params[:id])
   end
