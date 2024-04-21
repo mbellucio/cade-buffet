@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
-  before_action :find_event, only: [:edit, :show, :update]
+  before_action :find_event, only: [:edit, :show, :update, :destroy]
   before_action :authenticate_company!
-  
+
   def new
     @event = Event.new
   end
@@ -26,6 +26,13 @@ class EventsController < ApplicationController
     end
     flash.now[:notice] = "Falha ao atualizar evento."
     render "edit"
+  end
+
+  def destroy
+    buffet_id = @event.buffet.id
+    @event.event_pricings.each {|ep| ep.destroy}
+    @event.destroy
+    redirect_to buffet_path(buffet_id), notice: "Evento removido com sucesso!"
   end
 
   private

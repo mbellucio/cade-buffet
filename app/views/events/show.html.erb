@@ -15,6 +15,7 @@
     <p><strong>Realiza evento no local do contratante:</strong> <%= @event.translate @event.flexible_location %></p>
 
     <%= link_to 'Editar', edit_event_path(@event.id) %>
+    <%= button_to 'Remover evento', event_path(@event.id), method: :delete %>
   </div>
 
   <div id="pricings">
