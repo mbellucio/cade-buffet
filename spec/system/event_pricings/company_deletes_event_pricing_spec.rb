@@ -58,6 +58,8 @@ describe 'Company deletes an event pricing' do
       click_on "Remover"
     end
     #assert
+    expect(current_path).to eq event_path(event.id)
+    sleep 1
     within("div#pricing-#{pricing2.id}") do
       expect(page).to have_link "Configurar"
       expect(page).not_to have_content "Preço base (10 pessoas): R$ 7.000,00"
@@ -66,6 +68,3 @@ describe 'Company deletes an event pricing' do
     end
   end
 end
-
-
-
