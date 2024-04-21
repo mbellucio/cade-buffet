@@ -1,5 +1,5 @@
 class EventPricingsController < ApplicationController
-  before_action :find_event_pricing, only: [:edit, :update]
+  before_action :find_event_pricing, only: [:edit, :update, :destroy]
   before_action :authenticate_company!
 
   def new
@@ -27,6 +27,12 @@ class EventPricingsController < ApplicationController
     end
     get_event_and_pricing
     render "edit"
+  end
+
+  def destroy
+    event_id = @event_pricing.event.id
+    @event_pricing.destroy
+    redirect_to event_path(event_id)
   end
 
   private

@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :companies, only: [:new, :create]
   resources :buffets, only: [:new, :create, :show, :edit, :update]
   resources :events, only: [:new, :create, :show, :edit, :update, :destroy]
-  resources :event_pricings, only: [:new, :create, :edit, :update]
+  resources :event_pricings, only: [:new, :create, :edit, :update, :destroy]
 end
