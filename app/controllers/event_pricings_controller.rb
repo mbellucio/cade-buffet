@@ -1,5 +1,6 @@
 class EventPricingsController < ApplicationController
   before_action :find_event_pricing, only: [:edit, :update]
+  before_action :authenticate_company!
 
   def new
     @event = Event.find(params[:event_id])

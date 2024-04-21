@@ -6,8 +6,8 @@ pt-BR:
       event:
         name: Nome do evento
         description: Descrição do evento
-        min_quorum: Quórum mínimo
-        max_quorum: Quórum máximo
+        min_quorum: Limite mínimo de pessoas
+        max_quorum: Limite máximo de pessoas
         standard_duration: Duração padrão do evento (min)
         menu: Menu do evento
         serve_alcohol: Serve bebida alcoólica

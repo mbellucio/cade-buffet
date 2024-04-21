@@ -41,8 +41,8 @@ describe 'Company edits event' do
     click_on "Editar"
     #assert
     expect(page).to have_field "Descrição do evento"
-    expect(page).to have_field "Quórum mínimo"
-    expect(page).to have_field "Quórum máximo"
+    expect(page).to have_field "Limite mínimo de pessoas"
+    expect(page).to have_field "Limite máximo de pessoas"
     expect(page).to have_field "Duração padrão do evento (min)"
     expect(page).to have_field "Menu do evento"
     expect(page).to have_field "Serve bebida alcoólica"
@@ -89,7 +89,7 @@ describe 'Company edits event' do
     login_as(company)
     visit edit_event_path(event.id)
     fill_in "Nome do evento",	with: "Evento 2"
-    fill_in "Quórum mínimo", with: 20
+    fill_in "Limite mínimo de pessoas", with: 20
     check("Serviço de estacionamento/valet")
     click_on "Atualizar Evento"
     #assert
@@ -142,8 +142,8 @@ describe 'Company edits event' do
     visit edit_event_path(event.id)
     fill_in "Nome do evento",	with: ""
     fill_in "Descrição do evento", with: ""
-    fill_in "Quórum mínimo", with: ""
-    fill_in "Quórum máximo", with: ""
+    fill_in "Limite mínimo de pessoas", with: ""
+    fill_in "Limite máximo de pessoas", with: ""
     fill_in "Duração padrão do evento", with: ""
     fill_in "Menu do evento", with: ""
     click_on "Atualizar Evento"
@@ -151,7 +151,7 @@ describe 'Company edits event' do
     expect(page).to have_content "Falha ao atualizar evento."
     expect(page).to have_content "Nome do evento não pode ficar em branco"
     expect(page).to have_content "Descrição do evento não pode ficar em branco"
-    expect(page).to have_content "Quórum mínimo não pode ficar em branco"
-    expect(page).to have_content "Quórum máximo não pode ficar em branco"
+    expect(page).to have_content "Limite mínimo de pessoas não pode ficar em branco"
+    expect(page).to have_content "Limite máximo de pessoas não pode ficar em branco"
   end
 end

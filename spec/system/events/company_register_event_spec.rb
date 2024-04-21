@@ -27,8 +27,8 @@ describe 'Company register event' do
     visit new_event_path
     fill_in "Nome do evento",	with: "Churrasco"
     fill_in "Descrição do evento", with: "bem legal"
-    fill_in "Quórum mínimo", with: 10
-    fill_in "Quórum máximo", with: 50
+    fill_in "Limite mínimo de pessoas", with: 10
+    fill_in "Limite máximo de pessoas", with: 50
     fill_in "Duração padrão do evento", with: 240
     fill_in "Menu do evento", with: "Picanha, maminha, baby beef"
     check("Serve bebida alcoólica")
@@ -78,24 +78,21 @@ describe 'Company register event' do
     visit new_event_path
     fill_in "Nome do evento",	with: ""
     fill_in "Descrição do evento", with: ""
-    fill_in "Quórum mínimo", with: ""
-    fill_in "Quórum máximo", with: ""
+    fill_in "Limite mínimo de pessoas", with: ""
+    fill_in "Limite máximo de pessoas", with: ""
     fill_in "Duração padrão do evento", with: ""
     fill_in "Menu do evento", with: ""
     click_on "Enviar"
     #assert
     within("div#event-details") do
       expect(page).to have_content("Nome do evento não pode ficar em branco")
-      expect(page).to have_content(" Descrição do evento não pode ficar em branco")
-      expect(page).to have_content("Quórum mínimo não pode ficar em branco")
-      expect(page).to have_content("Quórum máximo não pode ficar em branco")
+      expect(page).to have_content("Descrição do evento não pode ficar em branco")
+      expect(page).to have_content("Limite mínimo de pessoas não pode ficar em branco")
+      expect(page).to have_content("Limite máximo de pessoas não pode ficar em branco")
       expect(page).to have_content("Duração padrão do evento (min) não pode ficar em branco")
-      expect(page).to have_content("Quórum mínimo não é um número")
-      expect(page).to have_content("Quórum máximo não é um número")
+      expect(page).to have_content("Limite mínimo de pessoas não é um número")
+      expect(page).to have_content("Limite máximo de pessoas não é um número")
       expect(page).to have_content("Duração padrão do evento (min) não é um número")
-      expect(page).to have_content("Quórum mínimo não pode ficar em branco")
-      expect(page).to have_content("Quórum máximo não pode ficar em branco")
-      expect(page).to have_content("Duração padrão do evento (min) não pode ficar em branco")
     end
   end
 end

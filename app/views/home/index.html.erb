@@ -1,4 +1,9 @@
 <div>
-  <p>something
-  </p>
+  <h2>Bem vindo ao Cadê Buffet!</h2>
+  
+  <% if company_signed_in? %>
+    <%= link_to 'Acessar meu Buffet', buffet_path(current_company.buffet.id) %>
+  <% end %>
+  
 </div>
+
