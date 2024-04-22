@@ -91,7 +91,7 @@ describe 'Company edits event' do
     fill_in "Nome do evento",	with: "Evento 2"
     fill_in "Limite mínimo de pessoas", with: 20
     check("Serviço de estacionamento/valet")
-    click_on "Atualizar Evento"
+    click_on "Enviar"
     #assert
     expect(current_path).to eq event_path(event.id)
     expect(page).to have_content "Evento atualizado com sucesso!"
@@ -146,7 +146,7 @@ describe 'Company edits event' do
     fill_in "Limite máximo de pessoas", with: ""
     fill_in "Duração padrão do evento", with: ""
     fill_in "Menu do evento", with: ""
-    click_on "Atualizar Evento"
+    click_on "Enviar"
     #assert
     expect(page).to have_content "Falha ao atualizar evento."
     expect(page).to have_content "Nome do evento não pode ficar em branco"

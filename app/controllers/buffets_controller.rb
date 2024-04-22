@@ -30,6 +30,9 @@ class BuffetsController < ApplicationController
     if @buffet.update(buffet_params) && @buffet.company.update(company_params)
       return redirect_to buffet_path(@buffet), notice: "Buffet atualizado com sucesso!"
     end
+    find_buffet
+    flash.now[:notice] = "Edição não foi bem sucedida"
+    render "edit"
   end
 
   private

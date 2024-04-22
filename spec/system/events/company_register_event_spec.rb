@@ -37,6 +37,7 @@ describe 'Company register event' do
     check("Realiza evento no local do contratante")
     click_on "Enviar"
     #assert
+    expect(page).to have_link("Voltar")
     within("div#event-details") do
       expect(page).to have_content("Churrasco")
       expect(page).to have_content("bem legal")
@@ -48,7 +49,6 @@ describe 'Company register event' do
       expect(page).to have_content("Faz a decoração: Sim")
       expect(page).to have_content("Serviço de estacionamento/valet: Sim")
       expect(page).to have_content("Realiza evento no local do contratante: Sim")
-      expect(page).to have_link("Voltar")
     end
   end
 

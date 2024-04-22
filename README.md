@@ -1,24 +1,6 @@
-# README
+# Cadê Buffet
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Projeto feito no crash course "Ruby on rails com TDD" da turma TreinaDev12 by Campus Code
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Rodar ```ruby rails db:seed``` no terminal para que o componente "EventPricing" possa ser usado
+...

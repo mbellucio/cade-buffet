@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-center mb-4">
+  <div class="container shadow rounded p-5 w-50">
+    <% if @event.errors.any? %>
+      <ul>
+        <% @event.errors.full_messages.each do |err| %>
+          <li><%= err %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= form_with model: @event do |f| %>
+      <div>
+        <%= f.label :name, class: "form-label" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div>
+        <%= f.label :description, class: "form-label" %>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+      <div>
+        <%= f.label :min_quorum, class: "form-label" %>
+        <%= f.text_field :min_quorum, class: "form-control" %>
+      </div>
+      <div>
+        <%= f.label :max_quorum, class: "form-label" %>
+        <%= f.text_field :max_quorum, class: "form-control" %>
+      </div>
+      <div>
+        <%= f.label :standard_duration, class: "form-label" %>
+        <%= f.text_field :standard_duration, class: "form-control" %>
+      </div>
+      <div>
+        <%= f.label :menu, class: "form-label" %>
+        <%= f.text_area :menu, class: "form-control" %>
+      </div>
+      <div>
+        <%= f.label :serve_alcohol, class: "form-check-label" %>
+        <%= f.check_box :serve_alcohol, class: "form-check-control" %>
+      </div>
+      <div>
+        <%= f.label :handle_decoration, class: "form-check-label" %>
+        <%= f.check_box :handle_decoration, class: "form-check-control" %>
+      </div>
+      <div>
+        <%= f.label :valet_service, class: "form-check-label" %>
+        <%= f.check_box :valet_service, class: "form-check-control" %>
+      </div>
+      <div>
+        <%= f.label :flexible_location, class: "form-check-label" %>
+        <%= f.check_box :flexible_location, class: "form-check-control" %>
+      </div>
+      <%= f.submit "Enviar", class: "btn btn-outline-dark mt-3" %>
+    <% end %>
+  </div>
+</div>

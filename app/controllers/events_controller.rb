@@ -37,7 +37,7 @@ class EventsController < ApplicationController
 
   private
   def find_event
-    @event = current_company.buffet.events.find_by(params[:id])
+    @event = Event.find(params[:id])
   end
 
   def event_params
