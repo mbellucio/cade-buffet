@@ -1,9 +1,29 @@
-<div class="container text-center">
-  <h2>Bem vindo ao Cadê Buffet!</h2>
-  
-  <% if company_signed_in? %>
-    <%= link_to 'Acessar meu Buffet', buffet_path(current_company.buffet.id) %>
-  <% end %>
-  
+<div class="d-flex justify-content-center" id="buffets">
+  <div class="container">
+
+    <div class="container text-center">
+      <h2>Bem vindo ao Cadê Buffet!</h2>
+    </div>
+
+    <% if company_signed_in? %>
+      <%= link_to 'Acessar meu Buffet', buffet_path(current_company.buffet.id) %>
+    <% end %>
+    
+    <div class="row mt-4">
+      <% @buffets.each do |buffet| %>
+
+        <div class="card m-3" style="width: 18rem;">
+          <img src="https://media.istockphoto.com/id/650655146/photo/catering-food-wedding-event-table.jpg?s=612x612&w=0&k=20&c=ATGYgW8bM_559jJ5aUNO4HlJqpkOWUmNNMMflx5kajo=" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><%= buffet.company.buffet_name %></h5>
+            <p class="card-text"><%= "#{buffet.city}, #{buffet.state_code}" %></p>
+            <a href="#" class="btn btn-dark">Ver detalhes</a>
+          </div>
+        </div>
+        
+      <% end %>
+    </div>
+
+  </div>
 </div>
 

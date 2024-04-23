@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :companies
+  devise_for :companies, path: "companies"
   root to: "home#index"
 
   resources :companies, only: [:new, :create]
