@@ -85,4 +85,34 @@ describe 'Company edits buffet' do
     expect(page).to have_content "pix, cc"
     expect(page).to have_content "Um buffet bem daora!"
   end
+
+  it "and cancel edition going back to view buffet" do
+    #arrange
+    company = Company.create!(
+      buffet_name: "some Buffet",
+      company_registration_number: "74.391.888/0001-77",
+      email: "company@gmail.com",
+      password: "safestpasswordever"
+    )
+    buffet = Buffet.create!(
+      email: "someemail@gmail.com",
+      payment_method: "pix, cc",
+      company_name: "some company",
+      phone_number: "112345556",
+      zip_code: "123231231",
+      adress: "some street 1000",
+      neighborhood: "some district",
+      city: "some city",
+      state_code: "CA",
+      description: "A nice buffet",
+      company_id: company.id
+    )
+    #act
+    login_as(company)
+    visit buffet_path(buffet.id)
+    click_on "Editar informações"
+    click_on "Voltar"
+    #assert
+    expect(current_path).to eq buffet_path(buffet.id)
+  end
 end

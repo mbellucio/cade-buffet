@@ -49,7 +49,10 @@
         <%= f.label :flexible_location, class: "form-check-label" %>
         <%= f.check_box :flexible_location, class: "form-check-control" %>
       </div>
-      <%= f.submit "Enviar", class: "btn btn-outline-dark mt-3" %>
+      <div class="mt-2 ">
+        <%= f.submit "Enviar", class: "btn btn-outline-dark me-2" %>
+        <%= link_to 'Voltar', (@event.id.present? ? event_path(@event.id) : buffet_path(current_company.buffet.id) ), class: "btn btn-outline-dark" %>
+      </div>
     <% end %>
   </div>
 </div>
