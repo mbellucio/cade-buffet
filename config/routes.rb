@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   devise_for :companies, path: "companies"
+  get '/company' => "buffets#show", :as => :company_root
+
   root to: "home#index"
 
   resources :companies, only: [:new, :create]

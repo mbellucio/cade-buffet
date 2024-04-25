@@ -1,4 +1,11 @@
-<div class="containe ms-5 ">
+
+<% if !company_signed_in? %>
+  <div class="container text-center">
+    <h2>Você está vendo um evento do Buffet: <%= @event.buffet.company.buffet_name %></h2>
+  </div>
+<% end %>
+
+<div class="container ms-5 ">
   <%= link_to 'Voltar', buffet_path(@event.buffet.id), class: "btn btn-outline-dark mb-3" %>
 </div>
 
@@ -8,7 +15,6 @@
     <h2><%= @event.name %></h2>
     <hr>
 
-    <p><strong>Descrição do evento:</strong> <%= @event.description %></p>
     <p><strong>Limite mínimo de pessoas:</strong> <%= @event.min_quorum %></p>
     <p><strong>Limite máximo de pessoas:</strong> <%= @event.max_quorum %></p>
     <p><strong>Duração padrão do evento (min):</strong> <%= @event.standard_duration %></p>
@@ -17,11 +23,15 @@
     <p><strong>Faz a decoração:</strong> <%= @event.translate @event.handle_decoration %></p>
     <p><strong>Serviço de estacionamento/valet:</strong> <%= @event.translate @event.valet_service %></p>
     <p><strong>Realiza evento no local do contratante:</strong> <%= @event.translate @event.flexible_location %></p>
+    <p><strong>Descrição do evento:</strong> <%= @event.description %></p>
 
-    <div class="d-flex">
-      <%= link_to 'Editar', edit_event_path(@event.id), class: "btn btn-outline-dark me-3" %>
-      <%= button_to 'Remover evento', event_path(@event.id), method: :delete, class: "btn btn-outline-dark " %>
-    </div>
+    <% if company_signed_in? && current_company.buffet == @event.buffet%>
+      <div class="d-flex">
+        <%= link_to 'Editar', edit_event_path(@event.id), class: "btn btn-outline-dark me-3" %>
+        <%= button_to 'Remover evento', event_path(@event.id), method: :delete, class: "btn btn-outline-dark " %>
+      </div>
+    <% end %>
+    
   </div>
 
   <div id="pricings" class="shadow rounded p-4 mx-3">
@@ -37,12 +47,21 @@
           <p><%= "Adicional por pessoa: #{number_to_currency event_pricing.extra_person_fee}"%></p>
           <p><%= "Adicional por hora extra de evento: #{number_to_currency event_pricing.extra_hour_fee}"%></p>
           
-          <div class="d-flex">
-            <%= link_to 'Editar', edit_event_pricing_path(event_pricing.id, pricing_id: pricing.id, event_id: @event.id), class: "btn btn-outline-dark me-2" %>
-            <%= button_to 'Remover',  event_pricing_path(event_pricing.id, event_id: @event.id), method: :delete, class: "btn btn-outline-dark " %>
-          </div>
+          <% if company_signed_in? && current_company.buffet == @event.buffet %>
+            <div class="d-flex">
+              <%= link_to 'Editar', edit_event_pricing_path(event_pricing.id, pricing_id: pricing.id, event_id: @event.id), class: "btn btn-outline-dark me-2" %>
+              <%= button_to 'Remover',  event_pricing_path(event_pricing.id, event_id: @event.id), method: :delete, class: "btn btn-outline-dark " %>
+            </div>
+          <% end %>
+          
         <% else %>
-          <%= link_to "Configurar", new_event_pricing_path(pricing_id: pricing.id, event_id: @event.id), class: "btn btn-outline-dark " %>
+          
+          <% if company_signed_in? && current_company.buffet == @event.buffet %>
+            <%= link_to "Configurar", new_event_pricing_path(pricing_id: pricing.id, event_id: @event.id), class: "btn btn-outline-dark " %>
+          <% else %>
+            <p>Este Buffet não possui cadastro de preços para este período</p>
+          <% end %>
+          
         <% end %>
       </div>
       <hr>

@@ -1,43 +1,72 @@
+<% if !company_signed_in? %>
+  <div class="container ms-5">
+    <%= link_to 'Voltar', root_path, class: "btn btn-dark me-4" %>
+  </div>
+<% end %>
+
 <div class="container d-flex justify-content-center mb-5">
-  
-    <div id="buffet-details" class="shadow rounded p-3 mx-3">
-      <div class="container">
+    
+  <div id="buffet-details" class="shadow rounded p-3 mx-3">
+    <div class="container">
+      
+      <% if company_signed_in? && current_company.buffet == @buffet %>
         <h2>Informações do Buffet</h2>
         <hr>
         <p><strong>Nome fantasia: </strong><%= @buffet.company.buffet_name%></p>
         <p><strong>Razão social: </strong><%= @buffet.company_name%></p>
         <p><strong>CNPJ: </strong><%= @buffet.company.company_registration_number%></p>
-        <p><strong>E-mail: </strong><%= @buffet.email%></p>
-        <p><strong>Telefone para contato: </strong><%= @buffet.phone_number%></p>
-        <p><strong>CEP: </strong><%= @buffet.zip_code%></p>
-        <p><strong>Bairro: </strong><%= @buffet.neighborhood%></p>
-        <p><strong>Cidade: </strong><%= @buffet.city%></p>
-        <p><strong>Estado: </strong><%= @buffet.state_code%></p>
-        <p><strong>Métodos de pagamento aceitos: </strong><%= @buffet.payment_method%></p>
-        <p><strong>Descrição: </strong><%= @buffet.description%></p>
-        <%= link_to 'Editar informações', edit_buffet_path(@buffet.id), class: "btn btn-outline-dark" %>
-        </div>
-    </div>
-
-    <div id="events" class="shadow rounded p-3 mx-3">
-      <div class="container text-center">
-        <h2>Eventos cadastrados</h2>
+      <% else %>
+        <h2><%= @buffet.company.buffet_name %></h2>
         <hr>
-        <% if @buffet.events.empty? %>
-          <p>Não existem eventos cadastrados</p>
-        <% else %>
-          <div class="row text-center">
-            <% @buffet.events.each do |event| %>
-              <div class="col">
-                <%= link_to event.name, event_path(event.id), class: "link-dark" %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
+        <p><strong>Razão social: </strong><%= @buffet.company_name%></p>
+      <% end %>
+      
+      <p><strong>E-mail: </strong><%= @buffet.email%></p>
+      <p><strong>Telefone para contato: </strong><%= @buffet.phone_number%></p>
+      <p><strong>CEP: </strong><%= @buffet.zip_code%></p>
+      <p><strong>Endereço: </strong><%= @buffet.adress%></p>
+      <p><strong>Bairro: </strong><%= @buffet.neighborhood%></p>
+      <p><strong>Cidade: </strong><%= @buffet.city%></p>
+      <p><strong>Estado: </strong><%= @buffet.state_code%></p>
+      <p><strong>Métodos de pagamento aceitos: </strong><%= @buffet.payment_method%></p>
+      <p><strong>Descrição: </strong><%= @buffet.description%></p>
+      
+      <% if company_signed_in? && current_company.buffet == @buffet %>
+        <%= link_to 'Editar informações', edit_buffet_path(@buffet.id), class: "btn btn-outline-dark" %>
+      <% end %>
+      
+      </div>
+  </div>
+
+  <div id="events" class="shadow rounded p-3 mx-3">
+    <div class="container text-center">
+      
+      <% if company_signed_in? && current_company.buffet == @buffet %>
+        <h2>Eventos cadastrados</h2>
+      <% else %>
+        <h2>Eventos disponíveis</h2>
+      <% end %>
+      
+      <hr>
+      <% if @buffet.events.empty? %>
+        <p>Não existem eventos cadastrados</p>
+      <% else %>
+        <div class="row text-center">
+          <% @buffet.events.each do |event| %>
+            <div class="col">
+              <%= link_to event.name, event_path(event.id), class: "link-dark" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <% if company_signed_in? && current_company.buffet == @buffet %>
         <div class="container text-center">
           <%= link_to 'Cadastrar evento', new_event_path, class: "btn btn-outline-dark mt-3" %>
         </div>
-      </div>
+      <% end %>
+      
     </div>
+  </div>
 
 </div>

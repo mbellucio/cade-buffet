@@ -48,7 +48,7 @@ describe 'Visitant access homepage' do
       email: "company2@gmail.com",
       password: "safestpasswordever"
     )
-    buffet_1 = Buffet.create!(
+      Buffet.create!(
       email: "somecompany@gmail.com",
       payment_method: "pix, cc",
       company_name: "some company",
@@ -61,7 +61,7 @@ describe 'Visitant access homepage' do
       description: "A nice buffet",
       company_id: company_1.id
     )
-    buffet_2 = Buffet.create!(
+      Buffet.create!(
       email: "somecompany2@gmail.com",
       payment_method: "pix, cc",
       company_name: "some company 2",

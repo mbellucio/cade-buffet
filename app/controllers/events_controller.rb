@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  before_action :find_event, only: [:edit, :show, :update, :destroy]
-  before_action :authenticate_company!
+  before_action :find_event, only: [:edit, :update, :destroy]
+  before_action :authenticate_company!, only: [:create, :edit, :update, :new, :destroy]
 
   def new
     @event = Event.new
@@ -16,7 +16,9 @@ class EventsController < ApplicationController
     render "new"
   end
 
-  def show; end
+  def show
+    @event = Event.find(params[:id])
+  end
 
   def edit; end
 
@@ -37,7 +39,10 @@ class EventsController < ApplicationController
 
   private
   def find_event
-    @event = Event.find(params[:id])
+    @event = current_company.buffet.events.find_by(id: params[:id])
+    if @event.nil?
+      redirect_to buffet_path(current_company.buffet.id)
+    end
   end
 
   def event_params
