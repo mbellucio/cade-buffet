@@ -37,14 +37,14 @@ describe 'Company view event pricing details' do
     )
     pricing1 = Pricing.create!(category: "Weekday")
     pricing2 = Pricing.create!(category: "Weekend")
-    event_pricing1 = EventPricing.create!(
+    EventPricing.create!(
       event_id: event.id,
       pricing_id: pricing1.id,
       base_price: 4000,
       extra_person_fee: 300,
       extra_hour_fee: 500
     )
-    event_pricing2 = EventPricing.create!(
+    EventPricing.create!(
       event_id: event.id,
       pricing_id: pricing2.id,
       base_price: 7000,
@@ -99,7 +99,7 @@ describe 'Company view event pricing details' do
       flexible_location: true,
       buffet_id: buffet.id
     )
-    pricing = Pricing.create!(category: "Weekday")
+    Pricing.create!(category: "Weekday")
     #act
     login_as(company)
     visit event_path(event.id)

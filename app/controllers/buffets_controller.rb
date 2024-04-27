@@ -21,7 +21,9 @@ class BuffetsController < ApplicationController
     render "new"
   end
 
-  def show; end
+  def show
+    @url = session[:previous_url] = request.referer
+  end
 
   def edit
     @buffet.build_company unless @buffet.company.present?
@@ -36,8 +38,18 @@ class BuffetsController < ApplicationController
     render "edit"
   end
 
-  private
+  def search
+    @query = params[:query]
+    result = Buffet.joins(:company, :events).where(
+      "buffet_name LIKE ? OR events.name LIKE ? OR city LIKE ?", "%#{@query}%", "%#{@query}%", "%#{@query}%"
+    )
+    if result.empty?
+      result = Buffet.joins(:company).where("buffet_name LIKE ? OR city LIKE ?", "%#{@query}%", "%#{@query}%")
+    end
+    @buffets = result.includes(:company, :events).sort_by { |buffet| buffet.company.buffet_name }
+  end
 
+  private
   def find_company_buffet
     @buffet = current_company.buffet
   end

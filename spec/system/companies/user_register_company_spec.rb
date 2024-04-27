@@ -58,7 +58,7 @@ describe 'User register as company' do
     click_on "Empresas/Buffets"
     fill_in "E-mail",	with: "bellucioalimentacao@gmail.com"
     fill_in "Senha", with: "belluciobuffet2024"
-    within("form") do
+    within("main#main form") do
       click_on "Entrar"
     end
     #assert

@@ -1,14 +1,14 @@
 <% if !company_signed_in? %>
   <div class="container ms-5">
-    <%= link_to 'Voltar', root_path, class: "btn btn-dark me-4" %>
+    <%= link_to 'Voltar', @url, class: "btn btn-dark me-4" %>
   </div>
 <% end %>
 
 <div class="container d-flex justify-content-center mb-5">
-    
+
   <div id="buffet-details" class="shadow rounded p-3 mx-3">
     <div class="container">
-      
+
       <% if company_signed_in? && current_company.buffet == @buffet %>
         <h2>Informações do Buffet</h2>
         <hr>

@@ -18,13 +18,25 @@
               <h1 class="navbar-brand btn text-light">Cadê Buffet</h1>
             <% end %>
           </div>
+
+          <% unless company_signed_in? %>
+            <div>
+              <%= form_with url: search_buffets_path, method: :get do |f| %>
+                <div class="d-flex">
+                  <%= f.text_field :query, placeholder: "Procurar..." %>
+                  <%= f.submit "Procurar", class: "btn btn-light ms-2" %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+
           <% if company_signed_in? %>
             <div class="d-flex align-items-end">
               <% if current_company.buffet.present? %>
                 <%= link_to 'Meu Buffet', buffet_path(current_company.buffet.id), class: "btn btn-outline-light mx-2" %>
               <% end %>    
               <%= button_to 'Sair', destroy_company_session_path, method: :delete, class: "btn btn-outline-light mx-2" %>
-              <p class="text-light align-self-end"><%= "Logado como: #{current_company.buffet_name}" %></p>
+              <p class="text-light align-self-end"><%= "Logado como:#{current_company.buffet_name}" %></p>
             </div>
           <% else %>
             <div class="register-links">
@@ -36,7 +48,7 @@
       </nav>
     </header>
 
-    <main>
+    <main id="main">
       <div>
         <div class="container text-center">
           <p class="notice"><%= notice %></p>
@@ -45,7 +57,7 @@
         <%= yield %>
       </div>
     </main>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

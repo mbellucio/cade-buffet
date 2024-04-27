@@ -139,3 +139,4 @@ describe 'Company register event' do
     expect(current_path).to eq buffet_path(buffet.id)
   end
 end
+
