@@ -23,7 +23,7 @@ describe 'Company view buffet' do
       company_id: company.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit root_path
     click_on "Meu Buffet"
     #assert

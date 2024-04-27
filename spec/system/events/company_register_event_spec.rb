@@ -23,7 +23,7 @@ describe 'Company register event' do
       company_id: company.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit new_event_path
     fill_in "Nome do evento",	with: "Churrasco"
     fill_in "Descrição do evento", with: "bem legal"
@@ -74,7 +74,7 @@ describe 'Company register event' do
       company_id: company.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit new_event_path
     fill_in "Nome do evento",	with: ""
     fill_in "Descrição do evento", with: ""
@@ -131,7 +131,7 @@ describe 'Company register event' do
       buffet_id: buffet.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit buffet_path(buffet.id)
     click_on "Cadastrar evento"
     click_on "Voltar"
@@ -139,4 +139,3 @@ describe 'Company register event' do
     expect(current_path).to eq buffet_path(buffet.id)
   end
 end
-

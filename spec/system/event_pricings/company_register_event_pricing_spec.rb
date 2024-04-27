@@ -37,7 +37,7 @@ describe 'Company register event pricing' do
     )
     pricing = Pricing.create!(category: "Weekday")
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit event_path(event.id)
     within("div#pricing-#{pricing.id}") do
       click_on "Configurar"
@@ -86,7 +86,7 @@ describe 'Company register event pricing' do
     )
     pricing1 = Pricing.create!(category: "Weekday")
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit event_path(event.id)
     within("div#pricing-#{pricing1.id}") do
       click_on "Configurar"
@@ -140,7 +140,7 @@ describe 'Company register event pricing' do
     )
     pricing = Pricing.create!(category: "Weekday")
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit event_path(event.id)
     within("div#pricing-#{pricing.id}") do
       click_on "Configurar"

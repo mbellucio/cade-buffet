@@ -312,7 +312,7 @@ RSpec.describe Buffet, type: :model do
 
       it "false when company_id is nil" do
         #arrange
-        company = Company.create!(
+        Company.create!(
           buffet_name: "some Buffet",
           company_registration_number: "74.391.888/0001-77",
           email: "company@gmail.com",
@@ -338,7 +338,7 @@ RSpec.describe Buffet, type: :model do
 
       it "false when email is nil" do
         #arrange
-        company = Company.create!(
+        Company.create!(
           buffet_name: "some Buffet",
           company_registration_number: "74.391.888/0001-77",
           email: "company@gmail.com",
@@ -364,7 +364,7 @@ RSpec.describe Buffet, type: :model do
 
       it "false when payment method is nil" do
         #arrange
-        company = Company.create!(
+        Company.create!(
           buffet_name: "some Buffet",
           company_registration_number: "74.391.888/0001-77",
           email: "company@gmail.com",

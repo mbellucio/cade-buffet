@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_20_184053) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_27_165051) do
   create_table "buffets", force: :cascade do |t|
     t.string "company_name"
     t.string "phone_number"
@@ -26,6 +26,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_20_184053) do
     t.string "email"
     t.string "payment_method"
     t.index ["company_id"], name: "index_buffets_on_company_id", unique: true
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "full_name"
+    t.string "social_security_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_clients_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
 
   create_table "companies", force: :cascade do |t|

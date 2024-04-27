@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :companies, path: "companies"
+
+  devise_for :companies, path: "companies", controllers: {
+    sessions: "companies/sessions",
+    registrations: "companies/registrations"
+  }
+  devise_for :clients, path: "clients", controllers: {
+    sessions:"clients/sessions",
+    registrations: "clients/registrations"
+  }
+
   get '/company' => "buffets#show", :as => :company_root
 
   root to: "home#index"

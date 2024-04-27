@@ -21,7 +21,7 @@ describe 'Company view event details' do
       description: "A nice buffet",
       company_id: company.id
     )
-    event = Event.create!(
+    Event.create!(
       name: "event1",
       description: "muito legal!",
       min_quorum: 10,
@@ -35,7 +35,7 @@ describe 'Company view event details' do
       buffet_id: buffet.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit buffet_path(buffet.id)
     click_on "event1"
     #assert
@@ -69,7 +69,7 @@ describe 'Company view event details' do
       description: "A nice buffet",
       company_id: company.id
     )
-    event = Event.create!(
+    Event.create!(
       name: "event1",
       description: "muito legal!",
       min_quorum: 10,
@@ -83,7 +83,7 @@ describe 'Company view event details' do
       buffet_id: buffet.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit buffet_path(buffet.id)
     click_on "event1"
     click_on "Voltar"

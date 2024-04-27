@@ -23,7 +23,7 @@ describe 'Company view event list' do
       company_id: company.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit buffet_path(buffet.id)
     #assert
     within("div#events") do
@@ -80,7 +80,7 @@ describe 'Company view event list' do
       buffet_id: buffet.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit buffet_path(buffet.id)
     #assert
     within("div#events") do
@@ -90,4 +90,3 @@ describe 'Company view event list' do
     end
   end
 end
-

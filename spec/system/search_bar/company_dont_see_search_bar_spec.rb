@@ -10,7 +10,7 @@ describe 'Company dont see search bar' do
       password: "safestpasswordever"
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit root_path
     #assert
     within("nav") do

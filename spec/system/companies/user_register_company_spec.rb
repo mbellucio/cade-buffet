@@ -35,7 +35,9 @@ describe 'User register as company' do
     fill_in "Confirme sua senha", with: "belluciobuffet2024"
     fill_in "CNPJ", with: "74.391.888/0001-77"
     click_on "Enviar"
-    click_on "Sair"
+    within("nav") do
+      click_on "Sair"
+    end
     #assert
     within("nav") do
       expect(page).not_to have_content("Bellucio's Buffet")
@@ -79,7 +81,7 @@ describe 'User register as company' do
       password: "belluciobuffet2024"
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit root_path
     #assert
     expect(current_path).to eq new_buffet_path
@@ -93,7 +95,7 @@ describe 'User register as company' do
       password: "safestpasswordever"
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit root_path
     within("nav") do
       click_on "Cadê Buffet"

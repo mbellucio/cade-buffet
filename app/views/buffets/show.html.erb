@@ -1,6 +1,11 @@
-<% if !company_signed_in? %>
+<% unless company_signed_in? %>
   <div class="container ms-5">
-    <%= link_to 'Voltar', @url, class: "btn btn-dark me-4" %>
+    
+    <% if @url.present? %>
+      <%= link_to 'Voltar', @url, class: "btn btn-dark me-4" %>
+    <% else %>
+      <%= link_to 'Voltar', root_path, class: "btn btn-dark me-4" %>
+    <% end %>
   </div>
 <% end %>
 

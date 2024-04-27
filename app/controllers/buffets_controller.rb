@@ -22,7 +22,9 @@ class BuffetsController < ApplicationController
   end
 
   def show
-    @url = session[:previous_url] = request.referer
+    if params[:search].present?
+      @url = session[:previous_url] = request.referer
+    end
   end
 
   def edit

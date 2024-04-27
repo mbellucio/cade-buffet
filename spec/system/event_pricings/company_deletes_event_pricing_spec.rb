@@ -37,14 +37,14 @@ describe 'Company deletes an event pricing' do
     )
     pricing1 = Pricing.create!(category: "Weekday")
     pricing2 = Pricing.create!(category: "Weekend")
-    event_pricing1 = EventPricing.create!(
+    EventPricing.create!(
       event_id: event.id,
       pricing_id: pricing1.id,
       base_price: 4000,
       extra_person_fee: 300,
       extra_hour_fee: 500
     )
-    event_pricing2 = EventPricing.create!(
+    EventPricing.create!(
       event_id: event.id,
       pricing_id: pricing2.id,
       base_price: 7000,
@@ -52,7 +52,7 @@ describe 'Company deletes an event pricing' do
       extra_hour_fee: 900
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit event_path(event.id)
     within("div#pricing-#{pricing2.id}") do
       click_on "Remover"

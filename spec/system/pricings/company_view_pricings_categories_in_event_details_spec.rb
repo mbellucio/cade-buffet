@@ -35,10 +35,10 @@ describe 'company view pricing categories in event details' do
       flexible_location: true,
       buffet_id: buffet.id
     )
-    pricing1 = Pricing.create!(category: "Weekday")
-    pricing2 = Pricing.create!(category: "Weekend")
+    Pricing.create!(category: "Weekday")
+    Pricing.create!(category: "Weekend")
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit event_path(event.id)
     #assert
     within("div#pricings") do

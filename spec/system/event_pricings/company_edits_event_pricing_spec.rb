@@ -36,7 +36,7 @@ describe 'Company edits event pricing' do
       buffet_id: buffet.id
     )
     pricing = Pricing.create!(category: "Weekday")
-    event_pricing = EventPricing.create!(
+    EventPricing.create!(
       event_id: event.id,
       pricing_id: pricing.id,
       base_price: 4000,
@@ -44,7 +44,7 @@ describe 'Company edits event pricing' do
       extra_hour_fee: 500
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit event_path(event.id)
     within("div#pricing-#{pricing.id}") do
       click_on "Editar"

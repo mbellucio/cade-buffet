@@ -36,7 +36,7 @@ describe 'Company edits event' do
       buffet_id: buffet.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit event_path(event.id)
     click_on "Editar"
     #assert
@@ -86,7 +86,7 @@ describe 'Company edits event' do
       buffet_id: buffet.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit edit_event_path(event.id)
     fill_in "Nome do evento",	with: "Evento 2"
     fill_in "Limite mínimo de pessoas", with: 20
@@ -138,7 +138,7 @@ describe 'Company edits event' do
       buffet_id: buffet.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit edit_event_path(event.id)
     fill_in "Nome do evento",	with: ""
     fill_in "Descrição do evento", with: ""
@@ -190,7 +190,7 @@ describe 'Company edits event' do
       buffet_id: buffet.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit event_path(event.id)
     click_on "Editar"
     click_on "Voltar"

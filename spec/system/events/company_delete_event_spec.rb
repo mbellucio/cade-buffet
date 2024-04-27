@@ -36,7 +36,7 @@ describe 'Company delete an event' do
       buffet_id: buffet.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit event_path(event.id)
     click_on "Remover evento"
     #assert

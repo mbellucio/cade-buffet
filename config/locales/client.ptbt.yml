@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      client: Cliente
+    attributes:
+      client:
+        email: E-mail
+        full_name: Nome completo
+        password: Senha
+        password_confirmation: Confirme sua senha
+        social_security_number: CPF

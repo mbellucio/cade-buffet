@@ -52,7 +52,7 @@ describe 'Company view event pricing details' do
       extra_hour_fee: 900
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit event_path(event.id)
     #assert
     within("div#pricings") do
@@ -101,7 +101,7 @@ describe 'Company view event pricing details' do
     )
     Pricing.create!(category: "Weekday")
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit event_path(event.id)
     #assert
     within("div#pricings") do

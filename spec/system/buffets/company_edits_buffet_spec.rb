@@ -23,7 +23,7 @@ describe 'Company edits buffet' do
       company_id: company.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit root_path
     click_on "Meu Buffet"
     click_on "Editar informações"
@@ -63,7 +63,7 @@ describe 'Company edits buffet' do
       company_id: company.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit root_path
     click_on "Meu Buffet"
     click_on "Editar informações"
@@ -108,7 +108,7 @@ describe 'Company edits buffet' do
       company_id: company.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit buffet_path(buffet.id)
     click_on "Editar informações"
     click_on "Voltar"

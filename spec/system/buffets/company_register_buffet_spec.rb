@@ -10,7 +10,7 @@ describe 'Company register a buffet' do
       password: "safestpasswordever"
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit root_path
     fill_in "E-mail", with: "support@gmail.com"
     fill_in "Razão social", with: "buffet company 1000"
@@ -42,7 +42,7 @@ describe 'Company register a buffet' do
       password: "safestpasswordever"
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit root_path
     fill_in "Razão social", with: ""
     fill_in "Telefone para contato", with: ""
@@ -88,7 +88,7 @@ describe 'Company register a buffet' do
       company_id: company.id
     )
     #act
-    login_as(company)
+    login_as(company, :scope => :company)
     visit root_path
     visit new_buffet_path
     #assert
