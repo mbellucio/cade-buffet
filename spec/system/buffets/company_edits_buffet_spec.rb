@@ -70,6 +70,7 @@ describe 'Company edits buffet' do
     fill_in "Nome fantasia", with: "Tesla"
     fill_in "CEP", with: "20561-116"
     fill_in "Descrição", with: "Um buffet bem daora!"
+    attach_file "Foto de exibição", Rails.root.join("spec", "support", "buffet_img.jpg")
     click_on "Enviar"
     #assert
     expect(page).to have_content "Buffet atualizado com sucesso!"
@@ -84,6 +85,7 @@ describe 'Company edits buffet' do
     expect(page).to have_content "CA"
     expect(page).to have_content "pix, cc"
     expect(page).to have_content "Um buffet bem daora!"
+    expect(page).to have_css('img[src*="buffet_img.jpg"]')
   end
 
   it "and cancel edition going back to view buffet" do

@@ -17,12 +17,24 @@
       <% if company_signed_in? && current_company.buffet == @buffet %>
         <h2>Informações do Buffet</h2>
         <hr>
+        <strong>Fotos:</strong>
+        <% if @buffet.cover.present? %>
+          <div class="w-100 rounded shadow my-3">
+            <%= render 'carroussel' %>
+          </div>
+        <% end %>
         <p><strong>Nome fantasia: </strong><%= @buffet.company.buffet_name%></p>
         <p><strong>Razão social: </strong><%= @buffet.company_name%></p>
         <p><strong>CNPJ: </strong><%= @buffet.company.company_registration_number%></p>
       <% else %>
         <h2><%= @buffet.company.buffet_name %></h2>
         <hr>
+        <strong>Fotos:</strong>
+        <% if @buffet.cover.present? %>
+          <div class="w-100 rounded shadow my-3">
+            <%= render 'carroussel' %>
+          </div>
+        <% end %>
         <p><strong>Razão social: </strong><%= @buffet.company_name%></p>
       <% end %>
       
@@ -34,8 +46,9 @@
       <p><strong>Cidade: </strong><%= @buffet.city%></p>
       <p><strong>Estado: </strong><%= @buffet.state_code%></p>
       <p><strong>Métodos de pagamento aceitos: </strong><%= @buffet.payment_method%></p>
-      <p><strong>Descrição: </strong><%= @buffet.description%></p>
-      
+      <div class="w-75">
+        <p><strong>Descrição: </strong><%= @buffet.description%></p>
+      </div>
       <% if company_signed_in? && current_company.buffet == @buffet %>
         <%= link_to 'Editar informações', edit_buffet_path(@buffet.id), class: "btn btn-outline-dark" %>
       <% end %>

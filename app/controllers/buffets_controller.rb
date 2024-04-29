@@ -75,7 +75,9 @@ class BuffetsController < ApplicationController
       :state_code,
       :description,
       :email,
-      :payment_method
+      :payment_method,
+      :cover,
+      images: []
     )
   end
 

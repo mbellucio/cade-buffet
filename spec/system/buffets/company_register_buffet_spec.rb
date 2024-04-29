@@ -21,6 +21,7 @@ describe 'Company register a buffet' do
     fill_in "Bairro", with: "Tijuca"
     fill_in "CEP", with: "20561-116"
     fill_in "Métodos de pagamento aceitos", with: "pix, cc, cd"
+    attach_file "Foto de exibição", Rails.root.join("spec", "support", "buffet_img.jpg")
     fill_in "Descrição", with: "Buffet de casamento"
     click_on "Enviar"
 
@@ -31,6 +32,7 @@ describe 'Company register a buffet' do
     expect(page).to have_content("Buffet de casamento")
     expect(page).to have_content("pix, cc, cd")
     expect(page).to have_content("support@gmail.com")
+    expect(page).to have_css('img[src*="buffet_img.jpg"]')
   end
 
   it "with empty data" do

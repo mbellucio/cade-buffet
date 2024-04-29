@@ -2,6 +2,8 @@ class Buffet < ApplicationRecord
   belongs_to :company
   accepts_nested_attributes_for :company
   has_many :events
+  has_one_attached :cover
+  has_many_attached :images
 
   validates :company_id, :email, uniqueness: true
   validates :email, format:

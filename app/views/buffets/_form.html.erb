@@ -58,6 +58,14 @@
         <%= f.text_field :payment_method, class: "form-control" %>
       </div>
       <div>
+        <%= f.label :cover, class: "form-label" %>
+        <%= f.file_field :cover, class: "form-control" %>
+      </div>
+      <div>
+        <%= f.label :images, class: "form-label" %>
+        <%= f.file_field :images, multiple: true, class: "form-control" %>
+      </div>
+      <div>
         <%= f.label :description, class: "form-label" %>
         <%= f.text_area :description, {class: "form-control", rows: "4"} %>
       </div>

@@ -9,3 +9,10 @@ ass: a firma kkkkkkkkkkkkk doente que fala sozinho
 
 ainda ta digitando? pior voce q ta lendo kkkkkkkkkkkkkkkkkkkkkkkk
 
+//29/4 => fim da sprint 2
+
+Não faço a mínima ideia de como testar as fotos do carrossel
+missão impossível. 
+
+ps: testes de autenticação ainda pendentes!!!!!!!!!!!!!!!! 
+
