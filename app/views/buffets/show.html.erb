@@ -35,9 +35,9 @@
             <%= render 'carroussel' %>
           </div>
         <% end %>
-        <p><strong>Razão social: </strong><%= @buffet.company_name%></p>
+        <p><strong>CNPJ: </strong><%= @buffet.company.company_registration_number%></p>
       <% end %>
-      
+  
       <p><strong>E-mail: </strong><%= @buffet.email%></p>
       <p><strong>Telefone para contato: </strong><%= @buffet.phone_number%></p>
       <p><strong>CEP: </strong><%= @buffet.zip_code%></p>
