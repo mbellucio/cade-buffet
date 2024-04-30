@@ -58,6 +58,15 @@
         <%= f.text_field :payment_method, class: "form-control" %>
       </div>
       <div>
+        <p class="form-label">Métodos de pagamento aceitos:</p>
+        <%= f.collection_check_boxes :payment_method_ids, PaymentMethod.all, :id, :method, {multiple: true} do |cb|%>
+          <div>
+            <%= cb.label(class: "form-check-label") %>
+            <%= cb.check_box(class: "form-check-control") %>
+          </div>
+        <% end %>
+      </div>
+      <div>
         <%= f.label :cover, class: "form-label" %>
         <%= f.file_field :cover, class: "form-control" %>
       </div>

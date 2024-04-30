@@ -50,7 +50,6 @@ describe 'Visitant access homepage' do
     )
       Buffet.create!(
       email: "somecompany@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company",
       phone_number: "112345556",
       zip_code: "123231231",
@@ -63,7 +62,6 @@ describe 'Visitant access homepage' do
     )
       Buffet.create!(
       email: "somecompany2@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company 2",
       phone_number: "21312534556",
       zip_code: "123125657654",

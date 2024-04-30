@@ -43,9 +43,14 @@
       <p><strong>CEP: </strong><%= @buffet.zip_code%></p>
       <p><strong>Endereço: </strong><%= @buffet.adress%></p>
       <p><strong>Bairro: </strong><%= @buffet.neighborhood%></p>
+      <strong>Métodos de pagamento aceitos:</strong>
+      <ul id="payments">
+        <% @buffet.payment_methods.each do |pm| %>
+          <li><%= pm.method %></li>
+        <% end %>
+      </ul>
       <p><strong>Cidade: </strong><%= @buffet.city%></p>
       <p><strong>Estado: </strong><%= @buffet.state_code%></p>
-      <p><strong>Métodos de pagamento aceitos: </strong><%= @buffet.payment_method%></p>
       <div class="w-75">
         <p><strong>Descrição: </strong><%= @buffet.description%></p>
       </div>

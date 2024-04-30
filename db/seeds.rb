@@ -8,93 +8,9 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 Pricing.create(category: "Dias úteis")
-pricing = Pricing.create(category: "Finais de semana e feriados")
+Pricing.create(category: "Finais de semana e feriados")
 
-company = Company.create!(
-  buffet_name: "Buffet TreinaDev12",
-  company_registration_number: "74.391.888/0001-77",
-  email: "campuscode@gmail.com",
-  password: "safestpasswordever"
-)
-buffet = Buffet.create!(
-  email: "treinadev12@gmail.com",
-  payment_method: "pix, cc",
-  company_name: "Campus Code",
-  phone_number: "(93) 98321-8045",
-  zip_code: "04477-480",
-  adress: "Rua Fernando",
-  neighborhood: "Sete Praias",
-  city: "São Paulo",
-  state_code: "SP",
-  description: "O Buffet TreinaDev12 oferece uma experiência gastronômica única, com uma variedade de opções deliciosas para satisfazer todos os paladares. Com um nome tão especial, você pode esperar uma combinação de pratos cuidadosamente elaborados e um serviço excepcional para tornar qualquer evento inesquecível. Seja para uma festa de casamento, um evento corporativo ou uma reunião especial, o Buffet TreinaDev12 está pronto para oferecer uma experiência gastronômica memorável para você e seus convidados.",
-  company_id: company.id
-)
-buffet.cover.attach(io: File.open(Rails.root.join('spec', 'support', 'buffet_img.jpg')), filename: 'buffet_img.jpg')
-event = Event.create(
-  name: "Churrasco",
-  description: "Churrasco clássico: Picanha, cerveja e pagode.",
-  min_quorum: 10,
-  max_quorum: 50,
-  standard_duration: 240,
-  menu: "Picanha, fraldinha, maminha, linguiça, pão de alho, cupim no bafo, choripam, etc.",
-  serve_alcohol: true,
-  handle_decoration: false,
-  valet_service: false,
-  flexible_location: true,
-  buffet_id: buffet.id
-)
-event_pricing = EventPricing.create(
-  event_id: event.id,
-  pricing_id: pricing.id,
-  base_price: 1000,
-  extra_person_fee: 120,
-  extra_hour_fee: 150
-)
-
-company_2 = Company.create!(
-  buffet_name: "Buffet Bellucio",
-  company_registration_number: "74.391.888/0001-99",
-  email: "bellucio@gmail.com",
-  password: "safestpasswordever"
-)
-buffet_2 = Buffet.create!(
-  email: "belluciobuffet@gmail.com",
-  payment_method: "pix, cc",
-  company_name: "Bellucio LTDA",
-  phone_number: "(93) 98321-2245",
-  zip_code: "2561-116",
-  adress: "Rua Araxá",
-  neighborhood: "Grajau",
-  city: "Rio de Janeiro",
-  state_code: "RJ",
-  description: "O Buffet Bellucio oferece uma experiência gastronômica única, com uma variedade de opções deliciosas para satisfazer todos os paladares. Com um nome tão especial, você pode esperar uma combinação de pratos cuidadosamente elaborados e um serviço excepcional para tornar qualquer evento inesquecível. Seja para uma festa de casamento, um evento corporativo ou uma reunião especial, o Buffet TreinaDev12 está pronto para oferecer uma experiência gastronômica memorável para você e seus convidados.",
-  company_id: company_2.id
-)
-buffet_2.cover.attach(io: File.open(Rails.root.join('spec', 'support', 'buffet_img.jpg')), filename: 'buffet_img_2.jpeg')
-event_2 = Event.create(
-  name: "Churrasco",
-  description: "Churrasco clássico: Picanha, cerveja e pagode.",
-  min_quorum: 10,
-  max_quorum: 50,
-  standard_duration: 240,
-  menu: "Picanha, fraldinha, maminha, linguiça, pão de alho, cupim no bafo, choripam, etc.",
-  serve_alcohol: true,
-  handle_decoration: false,
-  valet_service: false,
-  flexible_location: true,
-  buffet_id: buffet_2.id
-)
-event_pricing_2 = EventPricing.create(
-  event_id: event_2.id,
-  pricing_id: pricing_2.id,
-  base_price: 1000,
-  extra_person_fee: 120,
-  extra_hour_fee: 150
-)
-
-client = Client.create(
-  full_name: "Marcus Aurelius",
-  social_security_number: "110.489.617-62",
-  email: "marcusaurelius@gmail.com",
-  password: "estoicismrules"
-)
+PaymentMethod.create(method: "PIX")
+PaymentMethod.create(method: "Cartão de Crédito")
+PaymentMethod.create(method: "Cartão de Débito")
+PaymentMethod.create(method: "Depósito Bancário")

@@ -9,9 +9,10 @@ describe 'Company view buffet' do
       email: "company@gmail.com",
       password: "safestpasswordever"
     )
-    Buffet.create!(
+    payment_method = PaymentMethod.create!(method: "PIX")
+    payment_method_2 = PaymentMethod.create!(method: "Cartão de Crédito")
+    buffet = Buffet.create!(
       email: "somecompany@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company",
       phone_number: "112345556",
       zip_code: "123231231",
@@ -22,6 +23,8 @@ describe 'Company view buffet' do
       description: "A nice buffet",
       company_id: company.id
     )
+    BuffetPaymentMethod.create!(buffet_id: buffet.id, payment_method_id: payment_method.id)
+    BuffetPaymentMethod.create!(buffet_id: buffet.id, payment_method_id: payment_method_2.id)
     #act
     login_as(company, :scope => :company)
     visit root_path
@@ -34,6 +37,10 @@ describe 'Company view buffet' do
       expect(page).to have_content "company@gmail.com"
       expect(page).to have_content "112345556"
       expect(page).to have_content "123231231"
+      within("ul#payments") do
+        expect(page).to have_content "PIX"
+        expect(page).to have_content "Cartão de Crédito"
+      end
       expect(page).to have_content "some district"
       expect(page).to have_content "some city"
       expect(page).to have_content "CA"

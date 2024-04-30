@@ -10,7 +10,6 @@ describe 'Company view event details' do
     )
     buffet = Buffet.create!(
       email: "somecompany@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company",
       phone_number: "112345556",
       zip_code: "123231231",
@@ -58,7 +57,6 @@ describe 'Company view event details' do
     )
     buffet = Buffet.create!(
       email: "somecompany@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company",
       phone_number: "112345556",
       zip_code: "123231231",

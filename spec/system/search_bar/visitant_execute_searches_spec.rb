@@ -11,7 +11,6 @@ describe 'Visitant execute searches' do
     )
     Buffet.create!(
       email: "someemail@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company",
       phone_number: "112345556",
       zip_code: "123231231",
@@ -50,7 +49,6 @@ describe 'Visitant execute searches' do
     )
     Buffet.create!(
       email: "someemail@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company",
       phone_number: "112345556",
       zip_code: "123231231",
@@ -63,7 +61,6 @@ describe 'Visitant execute searches' do
     )
     Buffet.create!(
       email: "someemail2@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company2",
       phone_number: "1123213213",
       zip_code: "124534535",
@@ -111,7 +108,6 @@ describe 'Visitant execute searches' do
     )
     buffet = Buffet.create!(
       email: "someemail@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company",
       phone_number: "112345556",
       zip_code: "123231231",
@@ -124,7 +120,6 @@ describe 'Visitant execute searches' do
     )
     buffet2 = Buffet.create!(
       email: "someemail2@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company2",
       phone_number: "1123213213",
       zip_code: "124534535",
@@ -137,7 +132,6 @@ describe 'Visitant execute searches' do
     )
     buffet3 = Buffet.create!(
       email: "someemail3@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company2",
       phone_number: "1123213213",
       zip_code: "124534535",
@@ -221,7 +215,6 @@ describe 'Visitant execute searches' do
     )
     Buffet.create!(
       email: "someemail@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company",
       phone_number: "112345556",
       zip_code: "123231231",
@@ -234,7 +227,6 @@ describe 'Visitant execute searches' do
     )
     Buffet.create!(
       email: "someemail2@gmail.com",
-      payment_method: "pix, cc",
       company_name: "some company2",
       phone_number: "1123213213",
       zip_code: "124534535",

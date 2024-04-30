@@ -13,7 +13,6 @@ RSpec.describe EventPricing, type: :model do
         )
         buffet = Buffet.create!(
           email: "somecompany@gmail.com",
-          payment_method: "pix, cc",
           company_name: "some company",
           phone_number: "112345556",
           zip_code: "123231231",
@@ -24,7 +23,8 @@ RSpec.describe EventPricing, type: :model do
           description: "A nice buffet",
           company_id: company.id
         )
-        event = Event.create!(
+
+        Event.create!(
           name: "event1",
           description: "muito legal!",
           min_quorum: 10,
@@ -60,7 +60,6 @@ RSpec.describe EventPricing, type: :model do
         )
         buffet = Buffet.create!(
           email: "somecompany@gmail.com",
-          payment_method: "pix, cc",
           company_name: "some company",
           phone_number: "112345556",
           zip_code: "123231231",
@@ -84,7 +83,7 @@ RSpec.describe EventPricing, type: :model do
           flexible_location: true,
           buffet_id: buffet.id
         )
-        pricing = Pricing.create!(category: "Weekday")
+        Pricing.create!(category: "Weekday")
         event_pricing = EventPricing.new(
           event_id: event.id,
           pricing_id: "",
@@ -107,7 +106,6 @@ RSpec.describe EventPricing, type: :model do
         )
         buffet = Buffet.create!(
           email: "somecompany@gmail.com",
-          payment_method: "pix, cc",
           company_name: "some company",
           phone_number: "112345556",
           zip_code: "123231231",
@@ -154,7 +152,6 @@ RSpec.describe EventPricing, type: :model do
         )
         buffet = Buffet.create!(
           email: "somecompany@gmail.com",
-          payment_method: "pix, cc",
           company_name: "some company",
           phone_number: "112345556",
           zip_code: "123231231",
@@ -201,7 +198,6 @@ RSpec.describe EventPricing, type: :model do
         )
         buffet = Buffet.create!(
           email: "somecompany@gmail.com",
-          payment_method: "pix, cc",
           company_name: "some company",
           phone_number: "112345556",
           zip_code: "123231231",
@@ -250,7 +246,6 @@ RSpec.describe EventPricing, type: :model do
         )
         buffet = Buffet.create!(
           email: "somecompany@gmail.com",
-          payment_method: "pix, cc",
           company_name: "some company",
           phone_number: "112345556",
           zip_code: "123231231",
@@ -297,7 +292,6 @@ RSpec.describe EventPricing, type: :model do
         )
         buffet = Buffet.create!(
           email: "somecompany@gmail.com",
-          payment_method: "pix, cc",
           company_name: "some company",
           phone_number: "112345556",
           zip_code: "123231231",
@@ -344,7 +338,6 @@ RSpec.describe EventPricing, type: :model do
         )
         buffet = Buffet.create!(
           email: "somecompany@gmail.com",
-          payment_method: "pix, cc",
           company_name: "some company",
           phone_number: "112345556",
           zip_code: "123231231",

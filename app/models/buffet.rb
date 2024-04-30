@@ -4,6 +4,8 @@ class Buffet < ApplicationRecord
   has_many :events
   has_one_attached :cover
   has_many_attached :images
+  has_many :buffet_payment_methods
+  has_many :payment_methods, through: :buffet_payment_methods
 
   validates :company_id, :email, uniqueness: true
   validates :email, format:
@@ -18,8 +20,15 @@ class Buffet < ApplicationRecord
     :state_code,
     :description,
     :email,
-    :payment_method,
     presence: true
   )
   validates :state_code, length: {is:2}
+  # validate :at_least_one_buffet_payment_method
+
+  private
+  def at_least_one_buffet_payment_method
+    if self.buffet_payment_methods.empty?
+      self.errors.add(:base, "O Buffet deve ter pelo menos 1 método de pagamento registrado")
+    end
+  end
 end
