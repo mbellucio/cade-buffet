@@ -40,6 +40,7 @@
             </div>
           <% elsif client_signed_in? %>
             <div class="d-flex align-items-end">
+              <%= link_to 'Meus pedidos', client_orders_path,  class: "btn btn-outline-light" %>
               <%= button_to 'Sair', destroy_client_session_path, method: :delete, class: "btn btn-outline-light mx-2" %>
               <p class="text-light align-self-end"><%= "Logado como: #{current_client.full_name}" %></p>
             </div>

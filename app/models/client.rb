@@ -4,6 +4,8 @@ class Client < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :orders
+
   validates :full_name, :social_security_number, presence: true
   validates :social_security_number, uniqueness: true
   validates :social_security_number, format: {

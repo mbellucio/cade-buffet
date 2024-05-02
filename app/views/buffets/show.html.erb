@@ -10,7 +10,6 @@
 <% end %>
 
 <div class="container d-flex justify-content-center mb-5">
-
   <div id="buffet-details" class="shadow rounded p-3 mx-3">
     <div class="container">
 
@@ -74,7 +73,7 @@
       <% if @buffet.events.empty? %>
         <p>Não existem eventos cadastrados</p>
       <% else %>
-        <div class="row text-center">
+        <div class="row text-center" id="event">
           <% @buffet.events.each do |event| %>
             <div class="col">
               <%= link_to event.name, event_path(event.id), class: "link-dark" %>
@@ -91,5 +90,4 @@
       
     </div>
   </div>
-
 </div>

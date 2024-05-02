@@ -47,6 +47,10 @@
           <p><%= "Adicional por pessoa: #{number_to_currency event_pricing.extra_person_fee}"%></p>
           <p><%= "Adicional por hora extra de evento: #{number_to_currency event_pricing.extra_hour_fee}"%></p>
           
+          <% if client_signed_in? %>
+            <%= link_to 'Contratar', new_order_path(event_pricing_id: event_pricing.id), class: "btn btn-dark" %>
+          <% end %>
+          
           <% if company_signed_in? && current_company.buffet == @event.buffet %>
             <div class="d-flex">
               <%= link_to 'Editar', edit_event_pricing_path(event_pricing.id, pricing_id: pricing.id, event_id: @event.id), class: "btn btn-outline-dark me-2" %>

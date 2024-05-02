@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   end
   resources :events, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :event_pricings, only: [:new, :create, :edit, :update, :destroy]
+  resources :orders, only: [:new, :create, :show] do
+    get "client", on: :collection
+  end
 end
