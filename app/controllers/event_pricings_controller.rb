@@ -55,3 +55,4 @@ class EventPricingsController < ApplicationController
     )
   end
 end
+

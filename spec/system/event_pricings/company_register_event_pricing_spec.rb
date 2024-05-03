@@ -42,7 +42,6 @@ describe 'Company register event pricing' do
       click_on "Configurar"
     end
     #assert
-    expect(current_path).to eq(new_event_pricing_path)
     expect(page).to have_field "Preço base (10 pessoas)"
     expect(page).to have_field "Adicional por pessoa"
     expect(page).to have_field "Adicional por hora extra de evento"

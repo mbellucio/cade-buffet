@@ -14,12 +14,22 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   resources :companies, only: [:new, :create]
+
   resources :buffets, only: [:new, :create, :show, :edit, :update] do
     get "search", on: :collection
   end
-  resources :events, only: [:new, :create, :show, :edit, :update, :destroy]
-  resources :event_pricings, only: [:new, :create, :edit, :update, :destroy]
-  resources :orders, only: [:new, :create, :show] do
+
+  resources :events, only: [:new, :create, :show, :edit, :update, :destroy] do
+    resources :pricings, only: [] do
+      resources :event_pricings, only: [:new]
+    end
+  end
+
+  resources :event_pricings, only: [:create, :edit, :update, :destroy] do
+    resources :orders, only: [:new]
+  end
+
+  resources :orders, only: [:create, :show] do
     get "client", on: :collection
   end
 end
