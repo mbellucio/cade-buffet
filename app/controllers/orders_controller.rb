@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order_and_check_user, only: [:show]
+  before_action :authenticate_client!, only: [:client, :new, :create]
 
   def show
     @order = Order.find(params[:id])
