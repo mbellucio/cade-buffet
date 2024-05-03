@@ -1,9 +1,12 @@
 class OrdersController < ApplicationController
-  before_action :set_order_and_check_user, only: [:show]
+  before_action :set_order_and_check_authorization, only: [:show]
   before_action :authenticate_client!, only: [:client, :new, :create]
+  before_action :authenticate_company!, only: [:company]
 
   def show
-    @order = Order.find(params[:id])
+    if company_signed_in?
+      @duplicated_booking_dates = current_company.orders.where.not(id: @order.id).where(booking_date: @order.booking_date)
+    end
   end
 
   def new
@@ -26,6 +29,10 @@ class OrdersController < ApplicationController
     @orders = current_client.orders
   end
 
+  def company
+    @orders = current_company.orders.order(:status)
+  end
+
   private
   def order_params
     params.require(:order).permit(
@@ -38,9 +45,18 @@ class OrdersController < ApplicationController
     )
   end
 
-  def set_order_and_check_user
+  def set_order_and_check_authorization
     @order = Order.find(params[:id])
-    if @order.client != current_client
+
+    unless client_signed_in? || company_signed_in?
+      return redirect_to root_path, notice: "Você não tem acesso a este pedido"
+    end
+
+    if client_signed_in? && @order.client != current_client
+      return redirect_to root_path, notice: "Você não tem acesso a este pedido"
+    end
+
+    if company_signed_in? && @order.company != current_company
       return redirect_to root_path, notice: "Você não tem acesso a este pedido"
     end
   end

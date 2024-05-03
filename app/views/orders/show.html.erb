@@ -1,15 +1,31 @@
+<% color = { "pending" => "bg-warning", "confirmed" => "bg-success", "canceled" => "bg-danger" } %>
+
 <div class="container d-flex justify-content-center mb-5">
-  <div class="rounded shadow p-5">
-    <h3>Código do pedido: <%= @order.code %></h3>
-    <hr>
-    <p><strong>Buffet: </strong><%= @order.company.buffet_name %></p>
-    <p><strong>Evento: </strong><%= @order.event_pricing.event.name %></p>
-    <p><strong>Número de convidados: </strong><%= @order.predicted_guests %></p>
-    <p><strong>Data do evento: </strong><%= l(@order.booking_date) %></p>
-    <p><strong>Local do evento: </strong><%= @order.event_adress %></p>
-    <p><strong>Detalhes do evento: </strong><%= @order.event_details %></p>
-    <hr>
-    <p><strong>Status do pedido: </strong><%= t(@order.status) %></p>
+  <div>
+    
+    <% if company_signed_in? && @duplicated_booking_dates.any? %>
+      <div class="container border mb-2">
+        <p class="text-danger mb-1"><%= "Já existe um ou mais pedidos requeridos para esta data (#{l(@order.booking_date)}):" %></p>
+        <ul>
+          <% @duplicated_booking_dates.each do |order| %>
+            <li><p><%= "Pedido: #{order.code} - #{order.event_pricing.event.name}" %></p></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <div class="rounded shadow p-5">
+      <h3>Código do pedido: <%= @order.code %></h3>
+      <hr>
+      <p><strong>Buffet: </strong><%= @order.company.buffet_name %></p>
+      <p><strong>Evento: </strong><%= @order.event_pricing.event.name %></p>
+      <p><strong>Número de convidados: </strong><%= @order.predicted_guests %></p>
+      <p><strong>Data do evento: </strong><%= l(@order.booking_date) %></p>
+      <p><strong>Local do evento: </strong><%= @order.event_adress %></p>
+      <p><strong>Detalhes do evento: </strong><%= @order.event_details %></p>
+      <hr>
+      <span class="<%= "rounded p-1 #{color[@order.status]}" %>"><strong><%= t(@order.status) %></strong></span>
+    </div>
   </div>
 </div>
 

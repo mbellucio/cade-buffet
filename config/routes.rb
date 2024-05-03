@@ -31,5 +31,6 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:create, :show] do
     get "client", on: :collection
+    get "company", on: :collection
   end
 end

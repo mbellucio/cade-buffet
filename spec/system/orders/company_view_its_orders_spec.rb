@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'client register order' do
+describe 'Company view its orders' do
   it 'successfully' do
     #arrange
     company = Company.create!(
@@ -35,20 +35,12 @@ describe 'client register order' do
       buffet_id: buffet.id
     )
     pricing_weekday = Pricing.create!(category: "Weekday")
-    pricing_weekend = Pricing.create!(category: "Weekend")
-    EventPricing.create!(
+    event_pricing = EventPricing.create!(
       event_id: event.id,
       pricing_id: pricing_weekday.id,
       base_price: 4000,
       extra_person_fee: 300,
       extra_hour_fee: 500
-    )
-    EventPricing.create!(
-      event_id: event.id,
-      pricing_id: pricing_weekend.id,
-      base_price: 7000,
-      extra_person_fee: 400,
-      extra_hour_fee: 900
     )
     client = Client.create!(
       full_name: "Matheus Bellucio",
@@ -56,35 +48,44 @@ describe 'client register order' do
       email: "matheus@gmail.com",
       password: "safestpasswordever"
     )
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return("AA44FF55")
+    Order.create!(
+      company_id: company.id,
+      client_id: client.id,
+      event_pricing_id: event_pricing.id,
+      booking_date: 1.day.from_now,
+      predicted_guests: 30,
+      event_details: "details",
+      event_adress: "some street 10",
+      status: :confirmed
+    )
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return("BB77DD99")
+    Order.create!(
+      company_id: company.id,
+      client_id: client.id,
+      event_pricing_id: event_pricing.id,
+      booking_date: 2.day.from_now,
+      predicted_guests: 50,
+      event_details: "details 2",
+      event_adress: "some street 20",
+      status: :pending
+    )
     #act
-    login_as(client, scope: :client)
+    login_as(company, scope: :company)
     visit root_path
-    within("div#buffet-#{buffet.id}") do
-      click_on "Ver detalhes"
+    within("nav") do
+      click_on("Pedidos")
     end
-    within("div#event") do
-      click_on(event.name)
-    end
-    within("div#pricing-#{pricing_weekday.id}") do
-      click_on "Contratar"
-    end
-    fill_in "Data do evento",	with: 1.day.from_now
-    fill_in "Número de convidados", with: 30
-    fill_in "Detalhes do evento", with: "Queremos também um crepeiro durante a festa."
-    fill_in "Endereço do evento", with: "Rua Guimarães 20"
-    click_on "Contratar serviço"
     #assert
-    expect(page).to have_content "Pedido realizado com sucesso!"
-    expect(page).to have_content "Buffet: Buffet Legal"
-    expect(page).to have_content "Evento: Festa Infantil"
-    expect(page).to have_content "Número de convidados: 30"
-    expect(page).to have_content "Data do evento: #{1.day.from_now.strftime("%d/%m/%Y")}"
-    expect(page).to have_content "Local do evento: Rua Guimarães 20"
-    expect(page).to have_content "Detalhes do evento: Queremos também um crepeiro durante a festa"
-    expect(page).to have_content "Aguardando avaliação do buffet"
+    within("div#pedido-0") do
+      expect(page).to have_link "Pedido: BB77DD99"
+    end
+    within("div#pedido-1") do
+      expect(page).to have_link "Pedido: AA44FF55"
+    end
   end
 
-  it "with empty data" do
+  it "and must be authenticated" do
     #arrange
     company = Company.create!(
       buffet_name: "Buffet Legal",
@@ -118,20 +119,12 @@ describe 'client register order' do
       buffet_id: buffet.id
     )
     pricing_weekday = Pricing.create!(category: "Weekday")
-    pricing_weekend = Pricing.create!(category: "Weekend")
-    EventPricing.create!(
+    event_pricing = EventPricing.create!(
       event_id: event.id,
       pricing_id: pricing_weekday.id,
       base_price: 4000,
       extra_person_fee: 300,
       extra_hour_fee: 500
-    )
-    EventPricing.create!(
-      event_id: event.id,
-      pricing_id: pricing_weekend.id,
-      base_price: 7000,
-      extra_person_fee: 400,
-      extra_hour_fee: 900
     )
     client = Client.create!(
       full_name: "Matheus Bellucio",
@@ -139,35 +132,35 @@ describe 'client register order' do
       email: "matheus@gmail.com",
       password: "safestpasswordever"
     )
+    Order.create!(
+      company_id: company.id,
+      client_id: client.id,
+      event_pricing_id: event_pricing.id,
+      booking_date: 1.day.from_now,
+      predicted_guests: 30,
+      event_details: "details",
+      event_adress: "some street 10",
+      status: :confirmed
+    )
     #act
-    login_as(client, scope: :client)
-    visit root_path
-    within("div#buffet-#{buffet.id}") do
-      click_on "Ver detalhes"
-    end
-    within("div#event") do
-      click_on(event.name)
-    end
-    within("div#pricing-#{pricing_weekday.id}") do
-      click_on "Contratar"
-    end
-    fill_in "Data do evento",	with: ""
-    fill_in "Número de convidados", with: ""
-    fill_in "Detalhes do evento", with: ""
-    fill_in "Endereço do evento", with: ""
-    click_on "Contratar serviço"
+    visit company_orders_path
     #assert
-    expect(page).to have_content "Data do evento não pode ficar em branco"
-    expect(page).to have_content "Número de convidados não pode ficar em branco"
-    expect(page).to have_content "Endereço do evento não pode ficar em branco"
+    expect(current_path).not_to eq company_orders_path
+    expect(page).to have_content "Para continuar, faça login ou registre-se."
   end
 
-  it "cancels and go back" do
+  it "and dont view other company orders" do
     #arrange
     company = Company.create!(
       buffet_name: "Buffet Legal",
       company_registration_number: "74.391.888/0001-77",
       email: "company@gmail.com",
+      password: "safestpasswordever"
+    )
+    company_2 = Company.create!(
+      buffet_name: "Buffet Maneiro",
+      company_registration_number: "74.391.888/0001-88",
+      email: "company2@gmail.com",
       password: "safestpasswordever"
     )
     buffet = Buffet.create!(
@@ -182,6 +175,18 @@ describe 'client register order' do
       description: "A nice buffet",
       company_id: company.id
     )
+    buffet_2 = Buffet.create!(
+      email: "somecompany2@gmail.com",
+      company_name: "some company2",
+      phone_number: "112345213123",
+      zip_code: "12213211",
+      adress: "some street 2000",
+      neighborhood: "some district2",
+      city: "some city2",
+      state_code: "NY",
+      description: "A nice buffet 2",
+      company_id: company_2.id
+    )
     event = Event.create!(
       name: "Festa Infantil",
       description: "muito legal!",
@@ -195,21 +200,33 @@ describe 'client register order' do
       flexible_location: true,
       buffet_id: buffet.id
     )
+    event_2 = Event.create!(
+      name: "Festa Infantil 2",
+      description: "muito legal 2",
+      min_quorum: 10,
+      max_quorum: 50,
+      standard_duration: 240,
+      menu: "Cachorro quente e batata frita 2",
+      serve_alcohol: true,
+      handle_decoration: true,
+      valet_service: false,
+      flexible_location: true,
+      buffet_id: buffet_2.id
+    )
     pricing_weekday = Pricing.create!(category: "Weekday")
-    pricing_weekend = Pricing.create!(category: "Weekend")
-    EventPricing.create!(
+    event_pricing = EventPricing.create!(
       event_id: event.id,
       pricing_id: pricing_weekday.id,
       base_price: 4000,
       extra_person_fee: 300,
       extra_hour_fee: 500
     )
-    EventPricing.create!(
-      event_id: event.id,
-      pricing_id: pricing_weekend.id,
-      base_price: 7000,
-      extra_person_fee: 400,
-      extra_hour_fee: 900
+    event_pricing_2 = EventPricing.create!(
+      event_id: event_2.id,
+      pricing_id: pricing_weekday.id,
+      base_price: 4000,
+      extra_person_fee: 300,
+      extra_hour_fee: 500
     )
     client = Client.create!(
       full_name: "Matheus Bellucio",
@@ -217,20 +234,36 @@ describe 'client register order' do
       email: "matheus@gmail.com",
       password: "safestpasswordever"
     )
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return("AA44FF55")
+    Order.create!(
+      company_id: company.id,
+      client_id: client.id,
+      event_pricing_id: event_pricing.id,
+      booking_date: 1.day.from_now,
+      predicted_guests: 30,
+      event_details: "details",
+      event_adress: "some street 10",
+      status: :confirmed
+    )
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return("BB77DD99")
+    Order.create!(
+      company_id: company_2.id,
+      client_id: client.id,
+      event_pricing_id: event_pricing_2.id,
+      booking_date: 2.day.from_now,
+      predicted_guests: 50,
+      event_details: "details 2",
+      event_adress: "some street 20",
+      status: :pending
+    )
     #act
-    login_as(client, scope: :client)
+    login_as(company, scope: :company)
     visit root_path
-    within("div#buffet-#{buffet.id}") do
-      click_on "Ver detalhes"
+    within("nav") do
+      click_on("Pedidos")
     end
-    within("div#event") do
-      click_on(event.name)
-    end
-    within("div#pricing-#{pricing_weekday.id}") do
-      click_on "Contratar"
-    end
-    click_on "Voltar"
     #assert
-    expect(current_path).to eq event_path(event.id)
+    expect(page).to have_link "Pedido: AA44FF55"
+    expect(page).not_to have_link "Pedido: BB77DD99"
   end
 end
