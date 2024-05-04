@@ -1,4 +1,4 @@
-<% color = { "pending" => "bg-warning", "confirmed" => "bg-success", "canceled" => "bg-danger" } %>
+<% color = { "pending" => "bg-warning", "awaiting" => "bg-warning", "confirmed" => "bg-success", "canceled" => "bg-danger" } %>
 
 <div class="container d-flex justify-content-center mb-5">
   <div>
@@ -23,7 +23,37 @@
       <p><strong>Data do evento: </strong><%= l(@order.booking_date) %></p>
       <p><strong>Local do evento: </strong><%= @order.event_adress %></p>
       <p><strong>Detalhes do evento: </strong><%= @order.event_details %></p>
+      
+      <% if company_signed_in? && @order.budget.blank? %>
+        <%= link_to 'Criar orçamento', new_order_budget_path(order_id: @order.id), class: "btn btn-dark pt-2" %>
+      <% end %>
       <hr>
+
+      <% if @order.budget.present? %>
+        <div>
+          <h5>Orçamento proposto:</h5>
+          <p><strong>Preço base para <%= @order.predicted_guests %> convidados: </strong><%= number_to_currency @order.budget.base_price %></p>
+          
+          <% if @order.budget.additional_cost > 0 %>
+            <p><strong>Taxa extra: </strong><%= number_to_currency @order.budget.additional_cost %></p>
+            <p><strong>Razão da taxa extra: </strong><%= @order.budget.additional_cost_describe %></p>
+          <% end %>
+          
+          <% if @order.budget.discount > 0 %>
+            <p><strong>Desconto: </strong><%= number_to_currency @order.budget.discount %></p>
+            <p><strong>Razão do desconto: </strong><%= @order.budget.discount_describe %></p>
+          <% end %>
+          <p><strong>Forma de pagamento: </strong><%= @order.budget.payment_method.method %></p>
+          <strong>Total: <%= number_to_currency @order.budget.final_price %></strong>
+
+          <% if client_signed_in? && @order.status == "pending" %>
+           
+          <% end %>
+          
+          <hr>
+        </div>
+      <% end %>
+
       <span class="<%= "rounded p-1 #{color[@order.status]}" %>"><strong><%= t(@order.status) %></strong></span>
     </div>
   </div>

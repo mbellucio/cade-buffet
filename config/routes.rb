@@ -32,5 +32,9 @@ Rails.application.routes.draw do
   resources :orders, only: [:create, :show] do
     get "client", on: :collection
     get "company", on: :collection
+    post "awaiting", on: :member
+    post "confirmed", on: :member
+    post "canceled", on: :member
+    resources :budgets, only: [:new, :create]
   end
 end

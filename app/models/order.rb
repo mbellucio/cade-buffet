@@ -2,8 +2,9 @@ class Order < ApplicationRecord
   belongs_to :company
   belongs_to :client
   belongs_to :event_pricing
+  has_one :budget
 
-  enum status: {pending: 0, confirmed: 5, canceled: 9}
+  enum status: {pending: 0, awaiting: 3, confirmed: 5, canceled: 9}
 
   before_validation :generate_code
 
@@ -17,6 +18,19 @@ class Order < ApplicationRecord
     :event_adress,
     presence: true
   )
+
+  def calculate_budget
+    client_guests = self.predicted_guests
+    event_base_guest_number = self.event_pricing.event.min_quorum
+    extra_person_fee = self.event_pricing.extra_person_fee
+
+    if client_guests > event_base_guest_number
+      extra = (client_guests - event_base_guest_number) * extra_person_fee
+      return self.event_pricing.base_price + extra
+    else
+      return self.event_pricing.base_price
+    end
+  end
 
   private
   def generate_code

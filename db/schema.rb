@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_01_061259) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_03_175109) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_061259) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "budgets", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "payment_method_id", null: false
+    t.integer "base_price", default: 0
+    t.integer "additional_cost", default: 0
+    t.string "additional_cost_describe"
+    t.integer "discount", default: 0
+    t.string "discount_describe"
+    t.date "proposal_deadline"
+    t.integer "final_price", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_budgets_on_order_id"
+    t.index ["payment_method_id"], name: "index_budgets_on_payment_method_id"
   end
 
   create_table "buffet_payment_methods", force: :cascade do |t|
@@ -152,6 +168,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_061259) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "budgets", "orders"
+  add_foreign_key "budgets", "payment_methods"
   add_foreign_key "buffet_payment_methods", "buffets"
   add_foreign_key "buffet_payment_methods", "payment_methods"
   add_foreign_key "buffets", "companies"

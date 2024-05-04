@@ -33,6 +33,21 @@ class OrdersController < ApplicationController
     @orders = current_company.orders.order(:status)
   end
 
+  def awaiting
+    @order.awaiting!
+    redirect_to @order
+  end
+
+  def confirmed
+    @order.confirmed!
+    redirect_to @order
+  end
+
+  def canceled
+    @order.canceled!
+    redirect_to @order
+  end
+
   private
   def order_params
     params.require(:order).permit(

@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      budget: Orçamento
+    attributes:
+      budget:
+        base_price: Cálculo base
+        additional_cost: Taxa extra
+        additional_cost_describe: Razão da taxa extra
+        discount: Desconto
+        discount_describe: Razão do desconto
+        payment_method_id: Método de pagamento
+        proposal_deadline: Data limite do orçamento
+        final_price: Preço final
