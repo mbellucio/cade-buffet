@@ -30,6 +30,7 @@ describe 'Company register event' do
     fill_in "Limite máximo de pessoas", with: 50
     fill_in "Duração padrão do evento", with: 240
     fill_in "Menu do evento", with: "Picanha, maminha, baby beef"
+    attach_file 'Foto de exibição do evento', Rails.root.join('spec', 'support', 'buffet_img.jpg')
     check("Serve bebida alcoólica")
     check("Faz a decoração")
     check("Serviço de estacionamento/valet")
@@ -39,6 +40,7 @@ describe 'Company register event' do
     expect(page).to have_link("Voltar")
     within("div#event-details") do
       expect(page).to have_content("Churrasco")
+      expect(page).to have_css('img[src*="buffet_img.jpg"]')
       expect(page).to have_content("bem legal")
       expect(page).to have_content("10")
       expect(page).to have_content("50")

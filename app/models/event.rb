@@ -3,6 +3,8 @@ class Event < ApplicationRecord
   has_many :event_pricings
   has_many :orders
   has_many :pricings, through: :event_pricings
+  has_one_attached :event_cover
+  has_many_attached :event_images
 
   validates(
     :name,

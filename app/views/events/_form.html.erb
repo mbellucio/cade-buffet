@@ -18,6 +18,14 @@
         <%= f.text_area :description, class: "form-control" %>
       </div>
       <div>
+        <%= f.label :event_cover, class: "form-label" %>
+        <%= f.file_field :event_cover, class: "form-control" %>
+      </div>
+      <div>
+        <%= f.label :event_images, class: "form-label" %>
+        <%= f.file_field :event_images, class: "form-control" %>
+      </div>
+      <div>
         <%= f.label :min_quorum, class: "form-label" %>
         <%= f.text_field :min_quorum, class: "form-control" %>
       </div>

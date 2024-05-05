@@ -57,6 +57,8 @@ class EventsController < ApplicationController
       :handle_decoration,
       :valet_service,
       :flexible_location,
+      :event_cover,
+      :event_images
     )
   end
 end
