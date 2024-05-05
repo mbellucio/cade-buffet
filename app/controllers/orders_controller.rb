@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
   end
 
   def client
-    @orders = current_client.orders
+    @orders = current_client.orders.order(created_at: :desc)
     check_proposal_deadline
   end
 
