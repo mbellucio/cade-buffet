@@ -1,10 +1,11 @@
 class OrdersController < ApplicationController
-  before_action :set_order_and_check_authorization, only: [:show]
+  before_action :set_order_and_check_authorization, only: [:show, :confirmed]
   before_action :authenticate_client!, only: [:client, :new, :create]
   before_action :authenticate_company!, only: [:company]
 
   def show
     if company_signed_in?
+
       @duplicated_booking_dates = current_company.orders.where.not(id: @order.id).where(booking_date: @order.booking_date)
     end
   end
@@ -27,24 +28,16 @@ class OrdersController < ApplicationController
 
   def client
     @orders = current_client.orders
+    check_proposal_deadline
   end
 
   def company
     @orders = current_company.orders.order(:status)
-  end
-
-  def awaiting
-    @order.awaiting!
-    redirect_to @order
+    check_proposal_deadline
   end
 
   def confirmed
     @order.confirmed!
-    redirect_to @order
-  end
-
-  def canceled
-    @order.canceled!
     redirect_to @order
   end
 
@@ -58,6 +51,15 @@ class OrdersController < ApplicationController
       :company_id,
       :event_pricing_id
     )
+  end
+
+  def check_proposal_deadline
+    awaiting_orders = @orders.where(status: :awaiting)
+    awaiting_orders.each do |order|
+      if order.budget.proposal_deadline < Date.today
+        order.canceled!
+      end
+    end
   end
 
   def set_order_and_check_authorization

@@ -49,8 +49,12 @@
           <p><strong>Forma de pagamento: </strong><%= @order.budget.payment_method.method %></p>
           <strong>Total: <%= number_to_currency @order.budget.final_price %></strong>
 
-          <% if client_signed_in? && @order.status == "pending" %>
-           
+          <% if client_signed_in? && @order.status == "awaiting"%>
+            <hr>
+            <div>
+              <strong class="text-danger">Data limite para confirmar pedido: <%= l(@order.budget.proposal_deadline) %></strong>
+              <%= button_to "Confirmar pedido", confirmed_order_path(@order.id), method: :post, class: "btn btn-primary mt-2" %>
+            </div>
           <% end %>
           
           <hr>
