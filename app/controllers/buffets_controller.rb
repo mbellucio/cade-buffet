@@ -1,6 +1,6 @@
 class BuffetsController < ApplicationController
   before_action :find_buffet, only: [:show]
-  before_action :find_company_buffet, only: [:edit, :update]
+  before_action :find_company_buffet_and_authorize, only: [:edit, :update]
   before_action :authenticate_company!, only: [:edit, :create, :new, :update]
 
   def new
@@ -52,13 +52,17 @@ class BuffetsController < ApplicationController
   end
 
   private
-  def find_company_buffet
-    @buffet = current_company.buffet
+  def find_company_buffet_and_authorize
+    @buffet = Buffet.find(params[:id])
+
+    if @buffet != current_company.buffet
+      return redirect_to root_path, notice: "Você não tem acesso a este buffet"
+    end
   end
 
   def find_buffet
     if company_signed_in?
-      find_company_buffet
+      @buffet = current_company.buffet
     else
       @buffet = Buffet.find(params[:id])
     end

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :find_event, only: [:edit, :update, :destroy]
+  before_action :find_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_company!, only: [:create, :edit, :update, :new, :destroy]
 
   def new
@@ -39,9 +39,10 @@ class EventsController < ApplicationController
 
   private
   def find_event
-    @event = current_company.buffet.events.find_by(id: params[:id])
-    if @event.nil?
-      redirect_to buffet_path(current_company.buffet.id)
+    @event = Event.find(params[:id])
+
+    if company_signed_in? && @event.buffet.company != current_company
+      return redirect_to root_path, notice: "Você não tem acesso a este evento"
     end
   end
 

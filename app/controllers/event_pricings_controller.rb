@@ -43,6 +43,10 @@ class EventPricingsController < ApplicationController
 
   def find_event_pricing
     @event_pricing = EventPricing.find(params[:id])
+
+    if @event_pricing.event.buffet.company != current_company
+      return redirect_to root_path, notice: "Você não tem acesso a este evento"
+    end
   end
 
   def event_pricing_params
@@ -55,4 +59,3 @@ class EventPricingsController < ApplicationController
     )
   end
 end
-
