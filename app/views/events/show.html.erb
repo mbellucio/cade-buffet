@@ -1,18 +1,14 @@
-
-<% if !company_signed_in? %>
-  <div class="container text-center">
-    <h2>Você está vendo um evento do Buffet: <%= @event.buffet.company.buffet_name %></h2>
-  </div>
-<% end %>
-
-<div class="container ms-5 ">
+<div class="container ms-5 col-2">
   <%= link_to 'Voltar', buffet_path(@event.buffet.id), class: "btn btn-dark mb-3" %>
 </div>
 
 <div id="events" class="container d-flex justify-content-center mb-5">
-  <div id=event-details class="shadow rounded p-4 mx-3 w-50">
+  <div id=event-details class="shadow rounded p-4 mx-3 col-8">
 
-    <h2><%= @event.name %></h2>
+    <div class = "container d-flex align-items-center">
+      <h2 ><%= @event.name %></h2>
+      <span class="rounded bg-dark buffet-tag text-light px-2 ms-2" %><strong><%= @event.buffet.company.buffet_name %></strong></span>
+    </div>
     <hr>
     <% if @event.event_cover.present? %>
         <div class="w-100 rounded shadow my-3">
@@ -39,7 +35,7 @@
     
   </div>
 
-  <div id="pricings" class="shadow rounded p-4 mx-3">
+  <div id="pricings" class="shadow rounded p-4 mx-3 col-4">
     <h2>Precificação do evento</h2>
     <hr>
     <% Pricing.all.each do |pricing| %>

@@ -10,7 +10,8 @@
 <% end %>
 
 <div class="container d-flex justify-content-center mb-5">
-  <div id="buffet-details" class="shadow rounded p-3 mx-3">
+
+  <div id="buffet-details" class="shadow rounded p-3 mx-3 col-9">
     <div class="container">
 
       <% if company_signed_in? && current_company.buffet == @buffet %>
@@ -60,7 +61,7 @@
       </div>
   </div>
 
-  <div id="events" class="shadow rounded p-3 mx-3">
+  <div id="events" class="shadow rounded p-3 mx-3 col-3">
     <div class="container text-center">
       
       <% if company_signed_in? && current_company.buffet == @buffet %>
