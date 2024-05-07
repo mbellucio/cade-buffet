@@ -6,7 +6,7 @@ class Order < ApplicationRecord
 
   enum status: {pending: 0, awaiting: 3, confirmed: 5, canceled: 9}
 
-  before_validation :generate_code
+  before_validation :generate_code, on: :create
 
   validate :booking_date_is_future
   validates(
