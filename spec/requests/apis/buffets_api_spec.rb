@@ -107,5 +107,17 @@ describe 'Buffet API' do
       expect(json_response.first["buffet_name"]).to eq "Jaquin"
       expect(json_response.first["state_code"]).to eq "CA"
     end
+
+    it "return empty if there is no buffet" do
+      #arrange
+
+      #act
+      get "/api/v1/buffets"
+      #assert
+      expect(response.status).to eq 200
+      expect(response.content_type).to include "application/json"
+      json_response = JSON.parse(response.body)
+      expect(json_response).to eq []
+    end
   end
 end
