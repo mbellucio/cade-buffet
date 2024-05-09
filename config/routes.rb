@@ -19,14 +19,6 @@ Rails.application.routes.draw do
     get "search", on: :collection
   end
 
-  namespace :api do
-    namespace :v1 do
-      resources :buffets, only: [:index] do
-        resources :events, only: [:index]
-      end
-    end
-  end
-
   resources :events, only: [:new, :create, :show, :edit, :update, :destroy] do
     resources :pricings, only: [] do
       resources :event_pricings, only: [:new]
@@ -44,5 +36,13 @@ Rails.application.routes.draw do
     post "confirmed", on: :member
     post "canceled", on: :member
     resources :budgets, only: [:new, :create]
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :buffets, only: [:index, :show] do
+        resources :events, only: [:index]
+      end
+    end
   end
 end

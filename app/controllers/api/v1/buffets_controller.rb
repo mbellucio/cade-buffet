@@ -8,4 +8,17 @@ class Api::V1::BuffetsController < ActionController::API
     end
     render status: 200, json: buffets.as_json(only: [:city, :state_code, :id], methods: [:buffet_name])
   end
+
+  def show
+    begin
+      buffet = Buffet.find(params[:id])
+      render status: 200, json: buffet.as_json(
+        include: {payment_methods: {only: [:method]}},
+        except: [:created_at, :updated_at, :company_id, :company_name],
+        methods: [:buffet_name]
+      )
+    rescue
+      render status: 404
+    end
+  end
 end
