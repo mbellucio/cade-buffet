@@ -27,6 +27,10 @@ class Event < ApplicationRecord
     comparison: { greater_than: 0 }
   )
 
+  def over_limit_guests?(guests)
+    return guests > self.max_quorum
+  end
+
   def translate(bool)
     if bool
      return "Sim"
