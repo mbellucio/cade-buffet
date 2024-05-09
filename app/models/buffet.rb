@@ -25,6 +25,10 @@ class Buffet < ApplicationRecord
   validates :state_code, length: {is:2}
   # validate :at_least_one_buffet_payment_method
 
+  def buffet_name
+    self.company.buffet_name
+  end
+
   private
   def at_least_one_buffet_payment_method
     if self.buffet_payment_methods.empty?
