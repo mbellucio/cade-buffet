@@ -7,7 +7,7 @@ Welcome to the Cadê Buffet API!. This documentation will guide you throught our
 Cadê Buffet is a completely open API. No authentication is required to query and get data.
 
 ## Resources
-### Buffets
+### BUFFETS
 A Buffet is the organization that can cater for many events.
 
 **Endpoints**
@@ -71,8 +71,7 @@ Content-Type: application/json
   <li><code>payment_methods</code> array -- An array of payment methods accepted by the buffet</li>
 </ul>
 
-## Resources
-### Events
+### EVENTS
 Events are a specific catering service for a specific type of event.
 
 **Endpoints**
