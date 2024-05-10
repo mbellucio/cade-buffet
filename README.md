@@ -92,6 +92,8 @@ http http://localhost:3000/api/v1/events/1?booking_date=2024-05-10&guest_number=
 ```
 **Example response:**
 ```
+HTTP/1.0 200 OK
+Content-Type: application/json
 {
   "event_id": 1,
   "event": "Churrasco",
