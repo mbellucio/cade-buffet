@@ -71,5 +71,38 @@ Content-Type: application/json
   <li><code>payment_methods</code> array -- An array of payment methods accepted by the buffet</li>
 </ul>
 
+## Resources
+### Events
+Events are a specific catering service for a specific type of event.
+
+**Endpoints**
+<ul>
+  <li><code>/api/v1/buffets/:buffet_id/events/</code> -- get all the events resources from a specif buffet</li>
+  <li>
+    <code>/api/v1/events/:id/</code> -- get a response on weather a certain type of event is available for a certain date and guest number 
+    <ul>
+      <li>those are mandatory params for this resource: <code> params: {booking_date: date, guest_number: guest_number}</code></li>
+    </ul>
+  </li>
+</ul>
+
+**Example request:**
+```
+http http://localhost:3000/api/v1/events/1?booking_date=2024-05-10&guest_number=20
+```
+**Example response:**
+```
+{
+  "event_id": 1,
+  "event": "Churrasco",
+  "estimated_price": 2000
+}
+```
+**Attributtes:**
+<ul>
+  <li><code>event</code> string -- the type of event</li>
+  <li><code>estimated_price</code> string -- Price prediction on the event based on date and guest number</li>
+</ul>
+
 <hr>
 Project made during the crash course "Ruby on rails with TDD" - TreinaDev12 class by Campus Code
