@@ -16,3 +16,9 @@ missão impossível.
 
 ps: testes de autenticação ainda pendentes!!!!!!!!!!!!!!!! 
 
+////////////////////////////////////////////////
+
+TODO MEU NOBRE: 
+
+- validação de CPF
+- validação de CNPJ
