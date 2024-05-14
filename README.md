@@ -6,19 +6,62 @@ A buffet system application project using Ruby on Rails.
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#cade-buffet-api">Cadê Buffet API</a></li>
+    <li><a href="#about-this-project">About this project</a></li>
     <li><a href="#built-with">Built With</a></li>
+    <li><a href="#external-gems-used">External Gems used</a></li>
     <li><a href="#installation">Installation</a></li>
+    <li><a href="#testing">Testing</a></li>
+    <li><a href="#system-description-and-functions">System functions and description</a></li>
+    <li><a href="#cade-buffet-api">Cadê Buffet API</a></li>
     <li><a href="#authors">Authors</a></li>
     <li><a href="#links">Links</a></li>
   </ol>
 </details>
+
+## About this project
+### TreinaDev12 by Campus Code
+[Treina Dev](https://treinadev.com.br/) is a tuition free selection process hosted by [Campus Code](https://www.campuscode.com.br/) 
+to find new talents and prepare them for the Ruby on Rails development market.
+### Project tasks
+The life cycle of this project is the incremental type one. Based on Scrum principles, each week a new sprint
+is generated on their platform with the tasks to implement new functionalities into the project
+### Test Driven Development
+All functionalities of this application were made using TDD principles, therefore all the application is propperly covered by tests. 
+Any atempt to alter or add anything to this project is secure by those tests, guaranteeing a safe application scalability.
 
 ## Built With
 ![Ruby on Rails](https://img.shields.io/badge/Ruby_on_Rails-A10E3B?style=for-the-badge&amp;logo=rubyonrails&amp;logoColor=white)
 ![html](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![css](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+
+## External Gems used
+<ul>
+  <li><a href="https://github.com/heartcombo/devise">Devise</a> - Authentication</li>
+  <li><a href="https://github.com/fnando/cpf_cnpj">cpf_cnpj</a> - Brazilian ID validation</li>
+  <li><a href="https://github.com/rspec/rspec-rails">rspec-rails</a> - testing</li>
+  <li><a href="https://teamcapybara.github.io/capybara/">Capybara</a> - system testing</li>
+</ul>
+
+## Installation
+### Local Setup
+1. Install Ruby ***3.2.3***.
+2. Clone this repository
+3. Once inside the project folder run ```bundle install```
+4. Run ```rails db:migrate```
+5. Run ```rails db:seed``` to create admin user via seeding.
+6. Run ```rails s``` to start server.
+7. Go to ```localhost:3000``` to access Cadê Buffet Application
+
+## Testing
+To run all the tests use this command on the prompt: ```rspec```<br/>
+The test files are located at: <code>./spec</code> <br/>
+There are 3 types of tests covering this project: 
+<ul>
+  <li>System tests - located at <code>./spec/system</code></li>
+  <li>Model tests - located at <code>./spec/model</code></li>
+  <li>Request tests - located at <code>./spec/request</code></li>
+</ul>
 
 ## System Description and Functions
 There are two roles in the system: **Company** and **Client**.<br/><br/>
