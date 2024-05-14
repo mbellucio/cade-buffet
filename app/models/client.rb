@@ -1,3 +1,5 @@
+require "cpf_cnpj"
+
 class Client < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -8,8 +10,16 @@ class Client < ApplicationRecord
 
   validates :full_name, :social_security_number, presence: true
   validates :social_security_number, uniqueness: true
-  validates :social_security_number, format: {
-    with: /\A\d{3}\.\d{3}\.\d{3}-\d{2}\z/,
-    message: "deve ser no formato xxx.xxx.xxx-xx"
-  }
+  validate :cpf_is_valid
+  # validates :social_security_number, format: {
+  #   with: /\A\d{3}\.\d{3}\.\d{3}-\d{2}\z/,
+  #   message: "deve ser no formato xxx.xxx.xxx-xx"
+  # }
+
+  private
+  def cpf_is_valid
+    unless CPF.valid?(self.social_security_number)
+      self.errors.add(:social_security_number, "tem que ser válido")
+    end
+  end
 end

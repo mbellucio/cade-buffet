@@ -65,7 +65,7 @@ describe 'User register as client' do
       expect(page).to have_content "Senha não pode ficar em branco"
       expect(page).to have_content "Nome completo não pode ficar em branco"
       expect(page).to have_content "CPF não pode ficar em branco"
-      expect(page).to have_content "CPF deve ser no formato xxx.xxx.xxx-xx"
+      expect(page).to have_content "CPF tem que ser válido"
     end
   end
 end

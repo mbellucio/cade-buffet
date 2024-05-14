@@ -22,3 +22,12 @@ TODO MEU NOBRE:
 
 - validação de CPF
 - validação de CNPJ
+
+
+==============================================================
+
+13/05/2024
+
+cliente deve poder recusar proposta
+poblema de nao deletar evento esta pq os evento pricing tem ordi
+

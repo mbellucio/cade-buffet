@@ -31,6 +31,9 @@ class EventPricingsController < ApplicationController
 
   def destroy
     event_id = @event_pricing.event.id
+    if @event_pricing.orders.any?
+      return redirect_to event_path(event_id), notice: "Existem pedidos ativos com esta precificação, impossível deletar."
+    end
     @event_pricing.destroy
     redirect_to event_path(event_id)
   end

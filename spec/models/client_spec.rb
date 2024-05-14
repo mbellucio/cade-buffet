@@ -40,7 +40,7 @@ RSpec.describe Client, type: :model do
     end
 
     describe "format" do
-      it "Social Security number has xxx.xxx.xxx-xx format" do
+      it "Social Security number is not valid" do
         #arrange
         client = Client.new(social_security_number: "111.111.111-1")
         client2 = Client.new(social_security_number: "111111111")
@@ -51,11 +51,10 @@ RSpec.describe Client, type: :model do
         client3.valid?
         #assert
         expect(client.errors.include? :social_security_number).to be_truthy
-        expect(client.errors[:social_security_number]).to include("deve ser no formato xxx.xxx.xxx-xx")
+        expect(client.errors[:social_security_number]).to include("tem que ser válido")
         expect(client2.errors.include? :social_security_number).to be_truthy
         expect(client3.errors.include? :social_security_number).to be_truthy
       end
     end
   end
 end
-

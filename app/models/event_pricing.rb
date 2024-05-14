@@ -1,6 +1,7 @@
 class EventPricing < ApplicationRecord
   belongs_to :pricing
   belongs_to :event
+  has_many :orders
 
   validates(
     :base_price,

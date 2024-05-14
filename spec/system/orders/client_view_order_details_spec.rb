@@ -125,7 +125,7 @@ describe 'Client view order details' do
     )
     client_2 = Client.create!(
       full_name: "Juliana",
-      social_security_number: "455.069.420-45",
+      social_security_number: "697.463.190-19",
       email: "juliana@gmail.com",
       password: "safestpasswordever"
     )
