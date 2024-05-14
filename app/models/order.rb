@@ -9,6 +9,7 @@ class Order < ApplicationRecord
   before_validation :generate_code, on: :create
 
   validate :booking_date_is_future
+  validate :predicted_guests_valid_range?
   validates(
     :company_id,
     :client_id,
@@ -40,6 +41,12 @@ class Order < ApplicationRecord
   def booking_date_is_future
     if self.booking_date.present? && self.booking_date <= Date.today
       self.errors.add(:booking_date, " deve ser futura.")
+    end
+  end
+
+  def predicted_guests_valid_range?
+    if self.predicted_guests.present? && self.predicted_guests > self.event_pricing.event.max_quorum
+      self.errors.add(:predicted_guests, " deve ser menor ou igual ao máximo estipulado pelo evento")
     end
   end
 end
