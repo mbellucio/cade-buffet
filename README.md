@@ -1,4 +1,46 @@
-# Cadê Buffet API 
+
+# Cadê Buffet: Catering Web Application
+
+A buffet system application project using Ruby on Rails.
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#cade-buffet-api">Cadê Buffet API</a></li>
+    <li><a href="#built-with">Built With</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#authors">Authors</a></li>
+    <li><a href="#links">Links</a></li>
+  </ol>
+</details>
+
+## Built With
+![Ruby on Rails](https://img.shields.io/badge/Ruby_on_Rails-A10E3B?style=for-the-badge&amp;logo=rubyonrails&amp;logoColor=white)
+![html](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![css](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+
+## System Description and Functions
+There are two roles in the system: **Company** and **Client**.<br/><br/>
+Company can:<br/>
+<ol>
+    <li>Create, Edit Buffet</li>
+    <li>Create, Edit, Delete Events</li>
+    <li>Create, Edit, Delete Event Pricings</li>
+    <li>Accept orders issued by clients countering with a budget offer</li>
+</ol>
+
+Clients can:<br/>
+<ol>
+    <li>Search Buffets by name, city or event</li>
+    <li>Check Buffet details</li>
+    <li>Check events details</li>
+    <li>Create event orders</li>
+</ol>
+
+<hr>
+
+## Cade Buffet API 
 
 ### Introduction
 Welcome to the Cadê Buffet API!. This documentation will guide you throught our API and its available resources and how to consume them with HTTP requests.
