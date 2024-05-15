@@ -9,7 +9,7 @@ class Order < ApplicationRecord
 
   before_validation :generate_code, on: :create
 
-  validate :booking_date_is_future
+  validate :booking_date_is_future, on: :create
   validate :predicted_guests_valid_range?
   validates(
     :company_id,

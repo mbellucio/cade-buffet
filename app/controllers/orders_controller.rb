@@ -60,6 +60,12 @@ class OrdersController < ApplicationController
         order.canceled!
       end
     end
+    pending_orders = @orders.where(status: :pending)
+    pending_orders.each do |order|
+      if order.booking_date < Date.today
+        order.canceled!
+      end
+    end
   end
 
   def set_order_and_check_authorization
