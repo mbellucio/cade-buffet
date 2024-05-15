@@ -1,7 +1,7 @@
 class BuffetsController < ApplicationController
   before_action :find_buffet, only: [:show]
-  before_action :find_company_buffet_and_authorize, only: [:edit, :update]
-  before_action :authenticate_company!, only: [:edit, :create, :new, :update]
+  before_action :find_company_buffet_and_authorize, only: [:edit, :update, :deactivate, :activate]
+  before_action :authenticate_company!, only: [:edit, :create, :new, :update, :deactivate, :activate]
 
   def new
     if current_company.buffet.present?
@@ -49,6 +49,16 @@ class BuffetsController < ApplicationController
       result = Buffet.joins(:company).where("buffet_name LIKE ? OR city LIKE ?", "%#{@query}%", "%#{@query}%")
     end
     @buffets = result.includes(:company, :events).sort_by { |buffet| buffet.company.buffet_name }
+  end
+
+  def deactivate
+    @buffet.update(active: false)
+    redirect_to @buffet
+  end
+
+  def activate
+    @buffet.update(active: true)
+    redirect_to @buffet
   end
 
   private

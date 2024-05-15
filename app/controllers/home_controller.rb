@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_action :redirect_company
 
   def index
-    @buffets = Buffet.all
+    @buffets = Buffet.where(active: true)
   end
 
   def redirect_company

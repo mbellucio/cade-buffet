@@ -3,7 +3,7 @@
 </div>
 
 <div id="events" class="container d-flex justify-content-center mb-5">
-  <div id=event-details class="shadow rounded p-4 mx-3 col-8">
+  <div id=event-details class="shadow rounded p-4 mx-3 col-7">
 
     <div class = "container d-flex align-items-center">
       <h2 ><%= @event.name %></h2>
@@ -11,7 +11,7 @@
     </div>
     <hr>
     <% if @event.event_cover.present? %>
-        <div class="rounded shadow my-3 col-9">
+        <div class="rounded shadow my-3 col-12">
           <%= render 'carroussel' %>
         </div>
     <% end %>
@@ -35,7 +35,7 @@
     
   </div>
 
-  <div id="pricings" class="shadow rounded p-4 mx-3 col-4">
+  <div id="pricings" class="shadow rounded p-4 mx-3 col-4" style="height: 100%">
     <h2>Precificação do evento</h2>
     <hr>
     <% Pricing.all.each do |pricing| %>

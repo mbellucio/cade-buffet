@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :buffets, only: [:new, :create, :show, :edit, :update] do
     get "search", on: :collection
+    post "deactivate", on: :member
+    post "activate", on: :member
   end
 
   resources :events, only: [:new, :create, :show, :edit, :update, :destroy] do

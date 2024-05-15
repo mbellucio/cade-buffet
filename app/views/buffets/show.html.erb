@@ -17,6 +17,9 @@
       <% if company_signed_in? && current_company.buffet == @buffet %>
         <h2>Informações do Buffet</h2>
         <hr>
+        <% unless @buffet.active %>
+          <h5 class="text-danger">Este Buffet está desativado</h5>
+        <% end %>
         <strong>Fotos:</strong>
         <% if @buffet.cover.present? %>
           <div class="rounded shadow my-3 col-12">
@@ -55,9 +58,15 @@
         <p><strong>Descrição: </strong><%= @buffet.description%></p>
       </div>
       <% if company_signed_in? && current_company.buffet == @buffet %>
-        <%= link_to 'Editar informações', edit_buffet_path(@buffet.id), class: "btn btn-outline-dark" %>
+        <div class="d-flex">
+          <%= link_to 'Editar informações', edit_buffet_path(@buffet.id), class: "btn btn-outline-dark me-2" %>
+          <% if @buffet.active %>
+            <%= button_to 'Desativar Buffet', deactivate_buffet_path(@buffet.id), method: :post, class: "btn btn-warning" %>
+          <% else %>
+            <%= button_to 'Reativar Buffet', activate_buffet_path(@buffet.id), method: :post, class: "btn btn-primary" %>
+          <% end %>
+        </div>
       <% end %>
-      
       </div>
   </div>
 
@@ -87,7 +96,7 @@
                 <%= link_to event.name, event_path(event.id), class: "link-dark", style:"font-size: 20px" %>
                 <hr>
                 <% if event.event_cover.present? %>
-                  <%= image_tag event.event_cover, class: "card-img-top img-fluid" %>
+                  <%= image_tag event.event_cover, class: "card-img-top img-fluid rounded-5" %>
                 <% end %>
               </div>
             <% end %>
