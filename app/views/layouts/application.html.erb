@@ -13,7 +13,7 @@
   <body>
     <header> 
       <nav class="navbar bg-dark">
-        <div class="container d-flex align-items-center">
+        <div class="container-fluid d-flex align-items-center px-5">
           <div id="logo-text">
             <%= link_to root_path do %>
               <h1 class="navbar-brand btn text-light">Cadê Buffet</h1>
@@ -24,7 +24,7 @@
             <div>
               <%= form_with url: search_buffets_path, method: :get do |f| %>
                 <div class="d-flex position-absolute top-50 start-50 translate-middle">
-                  <%= f.text_field :query, placeholder: "Procurar..." %>
+                  <%= f.text_field :query, class:"form-control", placeholder: "Procurar..." %>
                   <%= f.submit "Procurar", class: "btn btn-light ms-2" %>
                 </div>
               <% end %>
@@ -38,13 +38,13 @@
                 <%= link_to "Pedidos", company_orders_path, class: "btn btn-outline-light mx-2" %>
               <% end %>    
               <%= button_to 'Sair', destroy_company_session_path, method: :delete, class: "btn btn-outline-light mx-2" %>
-              <p class="text-light align-self-end"><%= "Logado como:#{current_company.buffet_name}" %></p>
+              <span class="text-light align-self-center d-inline-block"><%= "#{current_company.email} | #{current_company.buffet_name}" %></span>
             </div>
           <% elsif client_signed_in? %>
             <div class="d-flex align-items-end">
               <%= link_to 'Meus pedidos', client_orders_path,  class: "btn btn-outline-light" %>
               <%= button_to 'Sair', destroy_client_session_path, method: :delete, class: "btn btn-outline-light mx-2" %>
-              <p class="text-light align-self-end"><%= "Logado como: #{current_client.full_name}" %></p>
+              <span class="text-light align-self-center d-inline-block"><%= "#{current_client.email} | #{current_client.full_name}" %></span>
             </div>
           <% else %>
             <div class="register-links">

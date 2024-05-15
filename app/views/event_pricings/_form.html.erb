@@ -1,9 +1,9 @@
-<div class="container text-center">
+<div class="container text-center col-3">
   <h2><%= "Precificação para #{@pricing.category}" %></h2>
 </div>
 
 <div class="d-flex justify-content-center mb-4">
-  <div class="container shadow rounded p-5 w-50">
+  <div class="container shadow rounded p-5 col-3">
     <% if @event_pricing.errors.any? %>
       <ul>
         <% @event_pricing.errors.full_messages.each do |err| %>

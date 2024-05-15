@@ -11,7 +11,7 @@
 
 <div class="container d-flex justify-content-center mb-5">
 
-  <div id="buffet-details" class="shadow rounded p-3 mx-3 col-9">
+  <div id="buffet-details" class="shadow rounded p-3 mx-3 col-7">
     <div class="container">
 
       <% if company_signed_in? && current_company.buffet == @buffet %>
@@ -19,7 +19,7 @@
         <hr>
         <strong>Fotos:</strong>
         <% if @buffet.cover.present? %>
-          <div class="rounded shadow my-3 col-9">
+          <div class="rounded shadow my-3 col-12">
             <%= render 'carroussel' %>
           </div>
         <% end %>
@@ -31,7 +31,7 @@
         <hr>
         <strong>Fotos:</strong>
         <% if @buffet.cover.present? %>
-          <div class="w-100 rounded shadow my-3">
+          <div class="rounded shadow my-3 col-12">
             <%= render 'carroussel' %>
           </div>
         <% end %>
@@ -61,7 +61,7 @@
       </div>
   </div>
 
-  <div id="events" class="shadow rounded p-3 mx-3 col-3">
+  <div id="events" class="shadow rounded p-3 mx-3 col-4" style="height: 99%;">
     <div class="container text-center">
       
       <% if company_signed_in? && current_company.buffet == @buffet %>
@@ -76,7 +76,7 @@
       <% else %>
         <div class="row text-center" id="event">
           <% @buffet.events.each do |event| %>
-            <div class="col">
+            <div class="col-6 mb-3">
               <%= link_to event.name, event_path(event.id), class: "link-dark" %>
             </div>
           <% end %>
