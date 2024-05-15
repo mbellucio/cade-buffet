@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Client view event link' do
-  it '' do
+  it 'successfully' do
     #arrange
     company = Company.create!(
       buffet_name: "some Buffet",

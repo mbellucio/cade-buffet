@@ -71,27 +71,29 @@
       <% end %>
       
       <hr>
-      <% if @buffet.events.empty? %>
-        <p>Não existem eventos cadastrados</p>
-      <% else %>
-        <div class="row text-center" id="event">
-          <% @buffet.events.each do |event| %>
-            <div class="col-6 mb-3 rounded-5 border p-4" id=<%= "event-#{event.id}"%>>
-              <%= link_to event.name, event_path(event.id), class: "link-dark", style:"font-size: 20px" %>
-              <hr>
-              <% if event.event_cover.present? %>
-                <%= image_tag event.event_cover, class: "img-fluid"%>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-      
       <% if company_signed_in? && current_company.buffet == @buffet %>
         <div class="container text-center">
-          <%= link_to 'Cadastrar evento', new_event_path, class: "btn btn-outline-dark mt-3" %>
+          <%= link_to 'Cadastrar evento', new_event_path, class: "btn btn-outline-dark" %>
         </div>
       <% end %>
+      <hr>
+      <div class="overflow-y-scroll overflow-hidden" style="height:950px">
+        <% if @buffet.events.empty? %>
+          <p>Não existem eventos cadastrados</p>
+        <% else %>
+          <div class="row text-center d-flex justify-content-center" id="event">
+            <% @buffet.events.each do |event| %>
+              <div class="col-10 mb-3 rounded-5 border p-4" id=<%= "event-#{event.id}"%>>
+                <%= link_to event.name, event_path(event.id), class: "link-dark", style:"font-size: 20px" %>
+                <hr>
+                <% if event.event_cover.present? %>
+                  <%= image_tag event.event_cover, class: "card-img-top img-fluid" %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
       
     </div>
   </div>
