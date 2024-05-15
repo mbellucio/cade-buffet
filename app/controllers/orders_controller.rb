@@ -5,9 +5,9 @@ class OrdersController < ApplicationController
 
   def show
     if company_signed_in?
-
       @duplicated_booking_dates = current_company.orders.where.not(id: @order.id).where(booking_date: @order.booking_date)
     end
+    @message = Message.new
   end
 
   def new

@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     post "confirmed", on: :member
     post "canceled", on: :member
     resources :budgets, only: [:new, :create]
+    resources :messages, only: [:create]
   end
 
   namespace :api do

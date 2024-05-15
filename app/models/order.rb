@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   belongs_to :client
   belongs_to :event_pricing
   has_one :budget
+  has_many :messages
 
   enum status: {pending: 0, awaiting: 3, confirmed: 5, canceled: 9}
 

@@ -6,6 +6,7 @@ class Company < ApplicationRecord
 
   has_one :buffet
   has_many :orders
+  has_many :messages, as: :user
 
   validates :buffet_name, :company_registration_number, presence: true
   validates :company_registration_number, uniqueness: true

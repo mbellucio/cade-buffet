@@ -7,6 +7,7 @@ class Client < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders
+  has_many :messages, as: :user
 
   validates :full_name, :social_security_number, presence: true
   validates :social_security_number, uniqueness: true
