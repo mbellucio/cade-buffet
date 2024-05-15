@@ -15,7 +15,7 @@ describe 'User register as client' do
     click_on "Enviar"
     #assert
     within("nav") do
-      expect(page).to have_content "Logado como: Matheus Bellucio"
+      expect(page).to have_content "matheusbellucio@gmail.com | Matheus Bellucio"
       expect(page).to have_content "Sair"
     end
   end
@@ -39,7 +39,7 @@ describe 'User register as client' do
     click_on "Sair"
     #assert
     within("nav") do
-      expect(page).not_to have_content "Logado como: Matheus Bellucio"
+      expect(page).not_to have_content "matheus@gmail.com | Matheus Bellucio"
       expect(page).not_to have_content "Sair"
       expect(page).to have_content("Empresas/Buffets")
       expect(page).to have_content("Entrar")
