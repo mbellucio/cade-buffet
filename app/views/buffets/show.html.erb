@@ -76,8 +76,12 @@
       <% else %>
         <div class="row text-center" id="event">
           <% @buffet.events.each do |event| %>
-            <div class="col-6 mb-3">
-              <%= link_to event.name, event_path(event.id), class: "link-dark" %>
+            <div class="col-6 mb-3 rounded-5 border p-4" id=<%= "event-#{event.id}"%>>
+              <%= link_to event.name, event_path(event.id), class: "link-dark", style:"font-size: 20px" %>
+              <hr>
+              <% if event.event_cover.present? %>
+                <%= image_tag event.event_cover, class: "img-fluid"%>
+              <% end %>
             </div>
           <% end %>
         </div>
