@@ -66,22 +66,24 @@
   <% if client_signed_in? && @order.messages.any? || company_signed_in? %>
     <div class="ms-3 d-flex flex-column col-6">
       <h2 class="container text-center">Chat com o <%= company_signed_in? ? "Cliente" : "Buffet" %></h2>
-      <div id="message-box" class="container shadow rounded-5 border p-2 d-flex flex-column overflow-y-scroll" style="height: 480px">
+      <div id="message-box" class="container col-12 shadow rounded-5 border p-2 d-flex flex-column overflow-y-scroll overflow-hidden" style="height: 480px;">
         <% unless @order.messages.any? %>
           <h4 class="align-self-center" style="margin-top: 30%; color: grey">Mande uma mensagem para o cliente...</h4>
         <% end %>
         <% @order.messages.each do |message| %>
           <% if company_signed_in? %>
             <% alignment_class = message.user_type == "Client" ? "align-self-start text-start" : "align-self-end text-end" %>
-            <div class="<%= "#{alignment_class}"%> w-50 justify-items-center mx-3">
+            <div class="<%= "#{alignment_class}"%> w-50 justify-items-center mx-3 text-wrap mt-2">
               <% color_class = message.user_type == "Client" ? "border" : "bg-dark text-light" %>
-              <p class="rounded-5 d-inline-block py-2 px-4 <%="#{color_class}"%>"><%=message.content %></p>
+              <span class="rounded-5 d-inline-block py-2 px-4 text-break <%="#{color_class}"%>"><%=message.content %></span>
+              <p class="mx-3" style="font-size: 12px"><%=l message.created_at, format: :short%></p>
             </div>
           <% else %>
             <% alignment_class = message.user_type == "Company" ? "align-self-start text-start" : "align-self-end text-end" %>
             <div class="<%= "#{alignment_class}"%> w-50 justify-items-center mx-3">
               <% color_class = message.user_type == "Company" ? "border" : "bg-dark text-light" %>
-              <p class="rounded-5 d-inline-block py-2 px-4 <%="#{color_class}"%>"><%=message.content %></p>
+              <span class="rounded-5 d-inline-block py-2 px-4 text-break <%="#{color_class}"%>"><%=message.content %></span>
+              <p class="mx-3" style="font-size: 12px"><%=l message.created_at, format: :short%></p>
             </div>
           <% end %>
         <% end %>
