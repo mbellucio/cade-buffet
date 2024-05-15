@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Company view chatbox' do
-  it 'successfully' do
+  it 'when no messages were traded yet' do
     #arrange
     company = Company.create!(
       buffet_name: "Buffet Legal",
@@ -58,13 +58,17 @@ describe 'Company view chatbox' do
       event_adress: "some street 10",
       status: :pending
     )
-    company.messages.create!(content: "Hello world", order_id: order.id)
     #act
     login_as(company, scope: :company)
     visit order_path(order.id)
     #assert
-    expect(page).to have_content "Hello world"
-    expect(page).to have_button "Enviar"
+    expect(page).to have_content "Chat com o Cliente"
+    within("div#message-box") do
+      expect(page).to have_content "Mande uma mensagem para o cliente..."
+    end
+    within("div#message-input") do
+      expect(page).to have_field "escreva uma mensagem..."
+      expect(page).to have_button "Enviar"
+    end
   end
 end
-
