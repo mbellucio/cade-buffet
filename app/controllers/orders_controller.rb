@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order_and_check_authorization, only: [:show, :confirmed]
+  before_action :set_order_and_check_authorization, only: [:show, :confirmed, :canceled]
   before_action :authenticate_client!, only: [:client, :new, :create]
   before_action :authenticate_company!, only: [:company]
 
@@ -38,6 +38,11 @@ class OrdersController < ApplicationController
 
   def confirmed
     @order.confirmed!
+    redirect_to @order
+  end
+
+  def canceled
+    @order.canceled!
     redirect_to @order
   end
 

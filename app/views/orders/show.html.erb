@@ -27,9 +27,14 @@
       <p><strong>Local do evento: </strong><%= @order.event_adress %></p>
       <p><strong>Detalhes do evento: </strong><%= @order.event_details %></p>
       
-      <% if company_signed_in? && @order.budget.blank? %>
-        <%= link_to 'Criar orçamento', new_order_budget_path(order_id: @order.id), class: "btn btn-dark pt-2" %>
-      <% end %>
+      <div class="pt-2 d-flex" id="order-actions">
+        <% if company_signed_in? && @order.budget.blank? && @order.status == "pending" %>
+          <%= link_to 'Criar orçamento', new_order_budget_path(order_id: @order.id), class: "btn btn-dark me-2" %>
+        <% end %>
+        <% if company_signed_in? && @order.status == "awaiting" || @order.status == "pending"%>
+          <%= button_to 'Cancelar pedido', canceled_order_path, method: :post, class: "btn btn-danger" %>
+        <% end %>
+      </div>
       <hr>
 
       <% if @order.budget.present? %>
