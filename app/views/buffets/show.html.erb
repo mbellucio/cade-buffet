@@ -20,15 +20,15 @@
         <% unless @buffet.active %>
           <h5 class="text-danger">Este Buffet está desativado</h5>
         <% end %>
-        <strong>Fotos:</strong>
+        <strong class="fs-5">Fotos:</strong>
         <% if @buffet.cover.present? %>
           <div class="rounded shadow my-3 col-12">
             <%= render 'carroussel' %>
           </div>
         <% end %>
-        <p><strong>Nome fantasia: </strong><%= @buffet.company.buffet_name%></p>
-        <p><strong>Razão social: </strong><%= @buffet.company_name%></p>
-        <p><strong>CNPJ: </strong><%= @buffet.company.company_registration_number%></p>
+        <p><strong class="fs-5">Nome fantasia: </strong><%= @buffet.company.buffet_name%></p>
+        <p><strong class="fs-5">Razão social: </strong><%= @buffet.company_name%></p>
+        <p><strong class="fs-5">CNPJ: </strong><%= @buffet.company.company_registration_number%></p>
       <% else %>
         <h2><%= @buffet.company.buffet_name %></h2>
         <hr>
@@ -38,25 +38,22 @@
             <%= render 'carroussel' %>
           </div>
         <% end %>
-        <p><strong>CNPJ: </strong><%= @buffet.company.company_registration_number%></p>
+        <p><strong class="fs-5">CNPJ: </strong><%= @buffet.company.company_registration_number%></p>
       <% end %>
-  
-      <p><strong>E-mail: </strong><%= @buffet.email%></p>
-      <p><strong>Telefone para contato: </strong><%= @buffet.phone_number%></p>
-      <p><strong>CEP: </strong><%= @buffet.zip_code%></p>
-      <p><strong>Endereço: </strong><%= @buffet.adress%></p>
-      <p><strong>Bairro: </strong><%= @buffet.neighborhood%></p>
-      <strong>Métodos de pagamento aceitos:</strong>
+      <p><strong class="fs-5">Descrição: </strong><%= @buffet.description%></p>
+      <p><strong class="fs-5">E-mail: </strong><%= @buffet.email%></p>
+      <p><strong class="fs-5">Telefone para contato: </strong><%= @buffet.phone_number%></p>
+      <p><strong class="fs-5">CEP: </strong><%= @buffet.zip_code%></p>
+      <p><strong class="fs-5">Endereço: </strong><%= @buffet.adress%></p>
+      <p><strong class="fs-5">Bairro: </strong><%= @buffet.neighborhood%></p>
+      <strong class="fs-5">Métodos de pagamento aceitos:</strong>
       <ul id="payments">
         <% @buffet.payment_methods.each do |pm| %>
           <li><%= pm.method %></li>
         <% end %>
       </ul>
-      <p><strong>Cidade: </strong><%= @buffet.city%></p>
-      <p><strong>Estado: </strong><%= @buffet.state_code%></p>
-      <div class="w-75">
-        <p><strong>Descrição: </strong><%= @buffet.description%></p>
-      </div>
+      <p><strong class="fs-5">Cidade: </strong><%= @buffet.city%></p>
+      <p><strong class="fs-5">Estado: </strong><%= @buffet.state_code%></p>
       <% if company_signed_in? && current_company.buffet == @buffet %>
         <div class="d-flex">
           <%= link_to 'Editar informações', edit_buffet_path(@buffet.id), class: "btn btn-outline-dark me-2" %>
@@ -82,7 +79,7 @@
       <hr>
       <% if company_signed_in? && current_company.buffet == @buffet %>
         <div class="container text-center">
-          <%= link_to 'Cadastrar evento', new_event_path, class: "btn btn-outline-dark" %>
+          <%= link_to 'Cadastrar evento', new_event_path, class: "btn btn-dark" %>
         </div>
       <% end %>
       <hr>
@@ -93,7 +90,7 @@
           <div class="row text-center d-flex justify-content-center" id="event">
             <% @buffet.events.where(active: true).each do |event| %>
               <div class="col-10 mb-3 rounded-5 border p-4" id=<%= "event-#{event.id}"%>>
-                <%= link_to event.name, event_path(event.id), class: "link-dark", style:"font-size: 20px" %>
+                <%= link_to event.name, event_path(event.id), class: "btn btn-outline-dark rounded-5", style:"font-size: 20px" %>
                 <hr>
                 <% if event.event_cover.present? %>
                   <%= image_tag event.event_cover, class: "card-img-top img-fluid rounded-5" %>

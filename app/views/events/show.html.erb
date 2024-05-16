@@ -20,15 +20,15 @@
         </div>
     <% end %>
 
-    <p><strong>Limite mínimo de pessoas:</strong> <%= @event.min_quorum %></p>
-    <p><strong>Limite máximo de pessoas:</strong> <%= @event.max_quorum %></p>
-    <p><strong>Duração padrão do evento (min):</strong> <%= @event.standard_duration %></p>
-    <p><strong>Menu do evento:</strong> <%= @event.menu %></p>
-    <p><strong>Serve bebida alcoólica:</strong> <%= @event.translate @event.serve_alcohol %></p>
-    <p><strong>Faz a decoração:</strong> <%= @event.translate @event.handle_decoration %></p>
-    <p><strong>Serviço de estacionamento/valet:</strong> <%= @event.translate @event.valet_service %></p>
-    <p><strong>Realiza evento no local do contratante:</strong> <%= @event.translate @event.flexible_location %></p>
-    <p><strong>Descrição do evento:</strong> <%= @event.description %></p>
+    <p><strong class="fs-5">Limite mínimo de pessoas:</strong> <%= @event.min_quorum %></p>
+    <p><strong class="fs-5">Limite máximo de pessoas:</strong> <%= @event.max_quorum %></p>
+    <p><strong class="fs-5">Duração padrão do evento (min):</strong> <%= @event.standard_duration %></p>
+    <p><strong class="fs-5">Menu do evento:</strong> <%= @event.menu %></p>
+    <p><strong class="fs-5">Serve bebida alcoólica:</strong> <%= @event.translate @event.serve_alcohol %></p>
+    <p><strong class="fs-5">Faz a decoração:</strong> <%= @event.translate @event.handle_decoration %></p>
+    <p><strong class="fs-5">Serviço de estacionamento/valet:</strong> <%= @event.translate @event.valet_service %></p>
+    <p><strong class="fs-5">Realiza evento no local do contratante:</strong> <%= @event.translate @event.flexible_location %></p>
+    <p><strong class="fs-5">Descrição do evento:</strong> <%= @event.description %></p>
 
     <% if company_signed_in? && current_company.buffet == @event.buffet%>
       <div class="d-flex">
