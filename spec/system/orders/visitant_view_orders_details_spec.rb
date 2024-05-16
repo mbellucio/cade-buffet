@@ -1,18 +1,12 @@
 require 'rails_helper'
 
-describe 'Company edit event pricing' do
-  it 'and fails if event pricing belongs to another company' do
+describe 'Visitant view orders details' do
+  it 'and fails because is not authenticated' do
     #arrange
     company = Company.create!(
-      buffet_name: "some Buffet",
+      buffet_name: "Buffet Legal",
       company_registration_number: "74.391.888/0001-77",
       email: "company@gmail.com",
-      password: "safestpasswordever"
-    )
-    company_2 = Company.create!(
-      buffet_name: "some Buffet 2",
-      company_registration_number: "74.391.888/0001-88",
-      email: "company2@gmail.com",
       password: "safestpasswordever"
     )
     buffet = Buffet.create!(
@@ -28,7 +22,7 @@ describe 'Company edit event pricing' do
       company_id: company.id
     )
     event = Event.create!(
-      name: "event1",
+      name: "Festa Infantil",
       description: "muito legal!",
       min_quorum: 10,
       max_quorum: 50,
@@ -40,24 +34,35 @@ describe 'Company edit event pricing' do
       flexible_location: true,
       buffet_id: buffet.id
     )
-    pricing = Pricing.create!(category: "Weekday")
+    pricing_weekday = Pricing.create!(category: "Weekday")
     event_pricing = EventPricing.create!(
       event_id: event.id,
-      pricing_id: pricing.id,
+      pricing_id: pricing_weekday.id,
       base_price: 4000,
       extra_person_fee: 300,
       extra_hour_fee: 500
     )
+    client = Client.create!(
+      full_name: "Matheus Bellucio",
+      social_security_number: "455.069.420-36",
+      email: "matheus@gmail.com",
+      password: "safestpasswordever"
+    )
+    order = Order.create!(
+      company_id: company.id,
+      client_id: client.id,
+      event_pricing_id: event_pricing.id,
+      booking_date: 1.day.from_now,
+      predicted_guests: 30,
+      event_details: "details",
+      event_adress: "some street 10",
+      status: :pending
+    )
     #act
-    login_as(company_2, scope: :company)
-    patch "/event_pricings/#{event_pricing.id}", :params => {:event_pricing => {
-      :base_price => 2000,
-      :extra_person_fee => 300,
-      :extra_hour_fee => 200,
-      :pricing_id => pricing.id,
-      :event_id => event.id
-    }}
+    visit order_path(order.id)
     #assert
-    expect(response).to redirect_to new_buffet_path
+    expect(current_path).not_to eq order_path(order.id)
+    expect(current_path).to eq root_path
+    expect(page).to have_content "Você não tem acesso a este pedido"
   end
 end

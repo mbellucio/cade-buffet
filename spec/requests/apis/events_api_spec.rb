@@ -82,7 +82,7 @@ describe 'Event API' do
   end
 
   context "GET /api/v1/events/id" do
-    it "consults availability with success" do
+    it "consults availability with success with guest number greater than the default of the event" do
       #arrange
       company = Company.create!(
         buffet_name: "Buffet Legal",
@@ -145,6 +145,71 @@ describe 'Event API' do
       expect(json_response["event_id"]).to eq event.id
       expect(json_response["event"]).to eq "Festa Infantil"
       expect(json_response["estimated_price"]).to eq 9000
+    end
+
+    it "consults availability with success with guest number less or equal to the default of the event" do
+      #arrange
+      company = Company.create!(
+        buffet_name: "Buffet Legal",
+        company_registration_number: "74.391.888/0001-77",
+        email: "company@gmail.com",
+        password: "safestpasswordever"
+      )
+      buffet = Buffet.create!(
+        email: "somecompany@gmail.com",
+        company_name: "some company",
+        phone_number: "112345556",
+        zip_code: "123231231",
+        adress: "some street 1000",
+        neighborhood: "some district",
+        city: "some city",
+        state_code: "CA",
+        description: "A nice buffet",
+        company_id: company.id
+      )
+      event = Event.create!(
+        name: "Festa Infantil",
+        description: "muito legal!",
+        min_quorum: 30,
+        max_quorum: 50,
+        standard_duration: 240,
+        menu: "Cachorro quente e batata frita",
+        serve_alcohol: true,
+        handle_decoration: true,
+        valet_service: false,
+        flexible_location: true,
+        buffet_id: buffet.id
+      )
+      pricing_weekday = Pricing.create!(category: "Dias úteis")
+      pricing_weekend = Pricing.create!(category: "Finais de semana e feriados")
+      payment_method = PaymentMethod.create!(method: "PIX")
+      BuffetPaymentMethod.create!(
+        buffet_id: buffet.id,
+        payment_method_id: payment_method.id,
+      )
+      EventPricing.create!(
+        event_id: event.id,
+        pricing_id: pricing_weekday.id,
+        base_price: 4000,
+        extra_person_fee: 300,
+        extra_hour_fee: 500
+      )
+      EventPricing.create!(
+        event_id: event.id,
+        pricing_id: pricing_weekend.id,
+        base_price: 5000,
+        extra_person_fee: 400,
+        extra_hour_fee: 700
+      )
+      #act
+      get "/api/v1/events/#{event.id}", params: {booking_date: "2050-01-02", guest_number: "29"}
+      #assert
+      expect(response.status).to eq 200
+      expect(response.content_type).to include "application/json"
+      json_response = JSON.parse(response.body)
+      expect(json_response["event_id"]).to eq event.id
+      expect(json_response["event"]).to eq "Festa Infantil"
+      expect(json_response["estimated_price"]).to eq 5000
     end
 
     it "receive error if date is not future" do
@@ -425,6 +490,61 @@ describe 'Event API' do
       expect(json_response.first["flexible_location"]).to eq true
       expect(json_response.first["buffet"]["buffet_name"]).to eq "some Buffet"
       expect(json_response.first["buffet"]["id"]).to eq buffet.id
+    end
+
+    it "receive error if date is within pricing category not covered by event" do
+      #arrange
+      company = Company.create!(
+        buffet_name: "Buffet Legal",
+        company_registration_number: "74.391.888/0001-77",
+        email: "company@gmail.com",
+        password: "safestpasswordever"
+      )
+      buffet = Buffet.create!(
+        email: "somecompany@gmail.com",
+        company_name: "some company",
+        phone_number: "112345556",
+        zip_code: "123231231",
+        adress: "some street 1000",
+        neighborhood: "some district",
+        city: "some city",
+        state_code: "CA",
+        description: "A nice buffet",
+        company_id: company.id
+      )
+      event = Event.create!(
+        name: "Festa Infantil",
+        description: "muito legal!",
+        min_quorum: 30,
+        max_quorum: 50,
+        standard_duration: 240,
+        menu: "Cachorro quente e batata frita",
+        serve_alcohol: true,
+        handle_decoration: true,
+        valet_service: false,
+        flexible_location: true,
+        buffet_id: buffet.id
+      )
+      pricing_weekday = Pricing.create!(category: "Dias úteis")
+      payment_method = PaymentMethod.create!(method: "PIX")
+      BuffetPaymentMethod.create!(
+        buffet_id: buffet.id,
+        payment_method_id: payment_method.id,
+      )
+      EventPricing.create!(
+        event_id: event.id,
+        pricing_id: pricing_weekday.id,
+        base_price: 4000,
+        extra_person_fee: 300,
+        extra_hour_fee: 500
+      )
+      #act
+      get "/api/v1/events/#{event.id}", params: {booking_date: "2050-01-02", guest_number: "40"}
+      #assert
+      expect(response.status).to eq 200
+      expect(response.content_type).to include "application/json"
+      json_response = JSON.parse(response.body)
+      expect(json_response["error"]).to eq "Este evento não é realizado neste período da semana"
     end
   end
 end

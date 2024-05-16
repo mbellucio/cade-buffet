@@ -28,11 +28,4 @@ class Buffet < ApplicationRecord
   def buffet_name
     self.company.buffet_name
   end
-
-  private
-  def at_least_one_buffet_payment_method
-    if self.buffet_payment_methods.empty?
-      self.errors.add(:base, "O Buffet deve ter pelo menos 1 método de pagamento registrado")
-    end
-  end
 end

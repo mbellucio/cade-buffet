@@ -20,12 +20,6 @@ class Budget < ApplicationRecord
   validate :proposal_deadline_is_future
 
   def calc_final_price
-    if self.additional_cost.nil?
-      self.additional_cost = 0
-    end
-    if self.discount.nil?
-      self.discount = 0
-    end
     return self.base_price + self.additional_cost - self.discount
   end
 

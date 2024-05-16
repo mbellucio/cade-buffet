@@ -117,7 +117,7 @@ describe 'Client view order details' do
       extra_person_fee: 300,
       extra_hour_fee: 500
     )
-    client_1 = Client.create!(
+    client = Client.create!(
       full_name: "Matheus Bellucio",
       social_security_number: "455.069.420-36",
       email: "matheus@gmail.com",
@@ -132,7 +132,7 @@ describe 'Client view order details' do
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return("AA44FF55")
     Order.create!(
       company_id: company.id,
-      client_id: client_1.id,
+      client_id: client.id,
       event_pricing_id: event_pricing.id,
       booking_date: 1.day.from_now,
       predicted_guests: 30,
@@ -141,7 +141,7 @@ describe 'Client view order details' do
       status: :pending
     )
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return("BB77DD99")
-    order = Order.create!(
+    order_2 = Order.create!(
       company_id: company.id,
       client_id: client_2.id,
       event_pricing_id: event_pricing.id,
@@ -152,10 +152,11 @@ describe 'Client view order details' do
       status: :pending
     )
     #act
-    login_as(client_1, scope: :client_1)
-    visit order_path(order.id)
+    login_as(client, scope: :client)
+    visit order_path(order_2.id)
     #assert
-    expect(current_path).not_to eq order_path(order.id)
+    expect(current_path).not_to eq order_path(order_2.id)
+    expect(current_path).to eq root_path
     expect(page).to have_content "Você não tem acesso a este pedido"
   end
 end

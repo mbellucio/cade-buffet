@@ -26,6 +26,7 @@ class EventPricingsController < ApplicationController
       return redirect_to @event_pricing.event
     end
     get_event_and_pricing
+    flash.now[:notice] = "Edição não foi bem sucedida"
     render "edit"
   end
 

@@ -166,4 +166,33 @@ describe 'Company edits buffet' do
     expect(current_path).not_to eq edit_buffet_path(buffet_2.id)
     expect(page).to have_content "Você não tem acesso a este buffet"
   end
+
+  it "with invalid data" do
+    company = Company.create!(
+      buffet_name: "some Buffet",
+      company_registration_number: "74.391.888/0001-77",
+      email: "company@gmail.com",
+      password: "safestpasswordever"
+    )
+    buffet = Buffet.create!(
+      email: "someemail@gmail.com",
+      company_name: "some company",
+      phone_number: "112345556",
+      zip_code: "123231231",
+      adress: "some street 1000",
+      neighborhood: "some district",
+      city: "some city",
+      state_code: "CA",
+      description: "A nice buffet",
+      company_id: company.id
+    )
+    #act
+    login_as(company, scope: :company)
+    visit buffet_path(buffet.id)
+    click_on "Editar informações"
+    fill_in "E-mail", with: ""
+    click_on "Enviar"
+    #assert
+    expect(page).to have_content "Edição não foi bem sucedida"
+  end
 end

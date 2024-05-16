@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Client confirms order' do
-  it 'Successfully' do
+describe 'Client view budget details' do
+  it 'and order is canceled if client did not accept budget offer in time' do
     #arrange
     company = Company.create!(
       buffet_name: "Buffet Legal",
@@ -53,7 +53,6 @@ describe 'Client confirms order' do
       email: "matheus@gmail.com",
       password: "safestpasswordever"
     )
-    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return("AA44FF55")
     order = Order.create!(
       company_id: company.id,
       client_id: client.id,
@@ -65,25 +64,17 @@ describe 'Client confirms order' do
       status: :awaiting
     )
     Budget.create!(
-      order_id: order.id,
       payment_method_id: payment_method.id,
-      base_price: 3000,
-      additional_cost: 0,
-      additional_cost_describe: "",
-      discount: 0,
-      discount_describe: "",
-      proposal_deadline: 2.day.from_now,
-      final_price: 3000
+      order_id: order.id,
+      proposal_deadline: 1.week.from_now
     )
     #act
+    travel 1.month
     login_as(client, scope: :client)
     visit root_path
     click_on "Meus pedidos"
-    click_on "Pedido: AA44FF55"
-    click_on "Confirmar pedido"
+    click_on order.code
     #assert
-    expect(page).to have_content "pedido confirmado"
-    expect(page).not_to have_content "Data limite para confirmar pedido: #{2.day.from_now.strftime("%d/%m/%Y")}"
-    expect(page).not_to have_button "Confirmar pedido"
+    expect(page).to have_content "pedido cancelado"
   end
 end
