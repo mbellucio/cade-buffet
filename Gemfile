@@ -21,6 +21,8 @@ gem "devise"
 
 gem "cpf_cnpj"
 
+gem 'simplecov', require: false, group: :test
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]

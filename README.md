@@ -41,6 +41,7 @@ Any atempt to alter or add anything to this project is secure by those tests, gu
   <li><a href="https://github.com/fnando/cpf_cnpj">cpf_cnpj</a> - Brazilian ID validation</li>
   <li><a href="https://github.com/rspec/rspec-rails">rspec-rails</a> - testing</li>
   <li><a href="https://teamcapybara.github.io/capybara/">Capybara</a> - system testing</li>
+  <li><a href="https://github.com/simplecov-ruby/simplecov">simplecov</a> - test analytics</li>
 </ul>
 
 ## Installation
