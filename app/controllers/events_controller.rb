@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  before_action :find_event, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_company!, only: [:create, :edit, :update, :new, :destroy]
+  before_action :find_event, only: [:show, :edit, :update, :destroy, :deactivate, :activate]
+  before_action :authenticate_company!, only: [:create, :edit, :update, :new, :destroy, :deactivate, :activate]
 
   def new
     @event = Event.new
@@ -37,6 +37,16 @@ class EventsController < ApplicationController
     redirect_to buffet_path(buffet_id), notice: "Evento removido com sucesso!"
   end
 
+  def deactivate
+    @event.update(active: false)
+    redirect_to @event
+  end
+
+  def activate
+    @event.update(active: true)
+    redirect_to @event
+  end
+
   private
   def find_event
     @event = Event.find(params[:id])
@@ -63,3 +73,5 @@ class EventsController < ApplicationController
     )
   end
 end
+
+

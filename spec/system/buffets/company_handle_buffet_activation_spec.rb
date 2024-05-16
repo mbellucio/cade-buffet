@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Company handle buffet activation' do
-  it 'and desactivate it' do
+  it 'and deactivate it' do
     #arrange
     company = Company.create!(
       buffet_name: "some Buffet",

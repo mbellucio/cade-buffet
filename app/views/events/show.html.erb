@@ -10,6 +10,10 @@
       <span class="rounded bg-dark buffet-tag text-light px-2 ms-2" %><strong><%= @event.buffet.company.buffet_name %></strong></span>
     </div>
     <hr>
+    <% unless @event.active %>
+      <h5 class="text-danger">Este Evento está desativado</h5>
+    <% end %>
+    
     <% if @event.event_cover.present? %>
         <div class="rounded shadow my-3 col-12">
           <%= render 'carroussel' %>
@@ -29,10 +33,14 @@
     <% if company_signed_in? && current_company.buffet == @event.buffet%>
       <div class="d-flex">
         <%= link_to 'Editar', edit_event_path(@event.id), class: "btn btn-outline-dark me-3" %>
-        <%= button_to 'Remover evento', event_path(@event.id), method: :delete, class: "btn btn-outline-dark " %>
+        <%= button_to 'Remover evento', event_path(@event.id), method: :delete, class: "btn btn-outline-dark me-3" %>
+        <% if @event.active %>
+          <%= button_to 'Desativar Evento', deactivate_event_path(@event.id), method: :post, class: "btn btn-warning" %>
+        <% else %>
+          <%= button_to 'Reativar Evento', activate_event_path(@event.id), method: :post, class: "btn btn-primary" %>
+        <% end %>   
       </div>
     <% end %>
-    
   </div>
 
   <div id="pricings" class="shadow rounded p-4 mx-3 col-4" style="height: 100%">
@@ -55,10 +63,9 @@
           <% if company_signed_in? && current_company.buffet == @event.buffet %>
             <div class="d-flex">
               <%= link_to 'Editar', edit_event_pricing_path(event_pricing.id), class: "btn btn-outline-dark me-2" %>
-              <%= button_to 'Remover',  event_pricing_path(event_pricing.id), method: :delete, class: "btn btn-outline-dark " %>
+              <%= button_to 'Remover',  event_pricing_path(event_pricing.id), method: :delete, class: "btn btn-outline-dark me-2" %>
             </div>
           <% end %>
-          
         <% else %>
           
           <% if company_signed_in? && current_company.buffet == @event.buffet %>

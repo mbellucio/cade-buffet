@@ -91,7 +91,7 @@
           <p>Não existem eventos cadastrados</p>
         <% else %>
           <div class="row text-center d-flex justify-content-center" id="event">
-            <% @buffet.events.each do |event| %>
+            <% @buffet.events.where(active: true).each do |event| %>
               <div class="col-10 mb-3 rounded-5 border p-4" id=<%= "event-#{event.id}"%>>
                 <%= link_to event.name, event_path(event.id), class: "link-dark", style:"font-size: 20px" %>
                 <hr>
@@ -103,7 +103,6 @@
           </div>
         <% end %>
       </div>
-      
     </div>
   </div>
 </div>

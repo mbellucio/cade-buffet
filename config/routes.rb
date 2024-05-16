@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     resources :pricings, only: [] do
       resources :event_pricings, only: [:new]
     end
+    post "deactivate", on: :member
+    post "activate", on: :member
   end
 
   resources :event_pricings, only: [:create, :edit, :update, :destroy] do
