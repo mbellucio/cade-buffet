@@ -26,14 +26,14 @@ class EventPricingsController < ApplicationController
       return redirect_to @event_pricing.event
     end
     get_event_and_pricing
-    flash.now[:notice] = "Edição não foi bem sucedida"
+    flash.now[:alert] = "Edição não foi bem sucedida"
     render "edit"
   end
 
   def destroy
     event_id = @event_pricing.event.id
     if @event_pricing.orders.any?
-      return redirect_to event_path(event_id), notice: "Existem pedidos ativos com esta precificação, impossível deletar."
+      return redirect_to event_path(event_id), alert: "Existem pedidos ativos com esta precificação, impossível deletar."
     end
     @event_pricing.destroy
     redirect_to event_path(event_id)
@@ -49,7 +49,7 @@ class EventPricingsController < ApplicationController
     @event_pricing = EventPricing.find(params[:id])
 
     if @event_pricing.event.buffet.company != current_company
-      return redirect_to root_path, notice: "Você não tem acesso a este evento"
+      return redirect_to root_path, alert: "Você não tem acesso a este evento"
     end
   end
 

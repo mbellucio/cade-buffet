@@ -77,15 +77,15 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
 
     unless client_signed_in? || company_signed_in?
-      return redirect_to root_path, notice: "Você não tem acesso a este pedido"
+      return redirect_to root_path, alert: "Você não tem acesso a este pedido"
     end
 
     if client_signed_in? && @order.client != current_client
-      return redirect_to root_path, notice: "Você não tem acesso a este pedido"
+      return redirect_to root_path, alert: "Você não tem acesso a este pedido"
     end
 
     if company_signed_in? && @order.company != current_company
-      return redirect_to root_path, notice: "Você não tem acesso a este pedido"
+      return redirect_to root_path, alert: "Você não tem acesso a este pedido"
     end
   end
 end

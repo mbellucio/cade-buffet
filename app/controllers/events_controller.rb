@@ -52,7 +52,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if company_signed_in? && @event.buffet.company != current_company
-      return redirect_to root_path, notice: "Você não tem acesso a este evento"
+      return redirect_to root_path, alert: "Você não tem acesso a este evento"
     end
   end
 
@@ -73,5 +73,3 @@ class EventsController < ApplicationController
     )
   end
 end
-
-

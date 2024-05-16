@@ -21,7 +21,7 @@ class BudgetsController < ApplicationController
   def set_order_check_company_authorization
     @order = Order.find(params[:order_id])
     if @order.company != current_company
-      return redirect_to root_path, notice: "Você não tem acesso a esta tela."
+      return redirect_to root_path, alert: "Você não tem acesso a esta tela."
     end
   end
 

@@ -66,13 +66,13 @@ class BuffetsController < ApplicationController
     @buffet = Buffet.find(params[:id])
 
     if @buffet != current_company.buffet
-      return redirect_to root_path, notice: "Você não tem acesso a este buffet"
+      return redirect_to root_path, alert: "Você não tem acesso a este buffet"
     end
   end
 
   def buffet_is_active?
     unless @buffet.active
-      return redirect_to root_path, notice: "Você não tem acesso a este buffet"
+      return redirect_to root_path, alert: "Você não tem acesso a este buffet"
     end
   end
 
