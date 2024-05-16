@@ -10,11 +10,10 @@ A buffet system application project using Ruby on Rails.
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#external-gems-used">External Gems used</a></li>
     <li><a href="#installation">Installation</a></li>
+    <li><a href="#dummy-data">Dummy data</a></li>
     <li><a href="#testing">Testing</a></li>
     <li><a href="#system-description-and-functions">System functions and description</a></li>
     <li><a href="#cade-buffet-api">Cadê Buffet API</a></li>
-    <li><a href="#authors">Authors</a></li>
-    <li><a href="#links">Links</a></li>
   </ol>
 </details>
 
@@ -62,6 +61,16 @@ There are 3 types of tests covering this project:
   <li>System tests - located at <code>./spec/system</code></li>
   <li>Model tests - located at <code>./spec/model</code></li>
   <li>Request tests - located at <code>./spec/request</code></li>
+</ul>
+
+## Dummy data
+For testing and viewing the UI some dummy data was inserted into the 
+**db/seeds.rb** file.
+Only the <code>Jaquin Buffet</code> has events, orders and chat messages to visualize.
+here are the credentials to log into Jaquin Buffet as a Company User: 
+<ul>
+  <li>Email: jaquin@gmail.com</li>
+  <li>Password: safestpasswordever</li>
 </ul>
 
 ## System Description and Functions
