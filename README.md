@@ -50,7 +50,7 @@ Any atempt to alter or add anything to this project is secure by those tests, gu
 2. Clone this repository
 3. Once inside the project folder run ```bundle install```
 4. Run ```rails db:migrate```
-5. Run ```rails db:seed``` to create admin user via seeding.
+5. Run ```rails db:seed``` to create vital models for application.
 6. Run ```rails s``` to start server.
 7. Go to ```localhost:3000``` to access Cadê Buffet Application
 
@@ -72,6 +72,8 @@ Company can:<br/>
     <li>Create, Edit, Delete Events</li>
     <li>Create, Edit, Delete Event Pricings</li>
     <li>Accept orders issued by clients countering with a budget offer</li>
+    <li>Cancel orders</li>
+    <li>Activate/Deactivate Buffet and it's events</li>
 </ol>
 
 Clients can:<br/>
@@ -80,6 +82,7 @@ Clients can:<br/>
     <li>Check Buffet details</li>
     <li>Check events details</li>
     <li>Create event orders</li>
+    <li>Accept budget offer for order</li>
 </ol>
 
 <hr>
