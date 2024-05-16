@@ -152,7 +152,7 @@ ep2_a = EventPricing.create!(
   extra_person_fee: 400,
   extra_hour_fee: 900
 )
-ep1_b = EventPricing.create!(
+EventPricing.create!(
   event_id: event_b.id,
   pricing_id: p1.id,
   base_price: 4000,
