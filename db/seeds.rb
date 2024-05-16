@@ -22,7 +22,7 @@ company_a = Company.create!(
   email: "jaquin@gmail.com",
   password: "safestpasswordever"
 )
-buffet_a = Buffet.create!(
+buffet_a = Buffet.new(
   email: "buffetjaquin@gmail.com",
   company_name: "Jaquin comidas",
   phone_number: "112345556",
@@ -41,12 +41,14 @@ buffet_a = Buffet.create!(
     Venha nos conhecer e descubra por que somos a escolha ideal para tornar o seu evento ainda mais especial!",
   company_id: company_a.id,
 )
+buffet_a.cover.attach(io: File.open('./app/assets/images/jaquin.jpg'), filename: 'jaquin.jpg', content_type: 'image/jpg')
+buffet_a.save
 BuffetPaymentMethod.create!(buffet_id: buffet_a.id, payment_method_id: pix.id)
 BuffetPaymentMethod.create!(buffet_id: buffet_a.id, payment_method_id: cc.id)
 BuffetPaymentMethod.create!(buffet_id: buffet_a.id, payment_method_id: cd.id)
 BuffetPaymentMethod.create!(buffet_id: buffet_a.id, payment_method_id: dep.id)
 
-event_a = Event.create!(
+event_a = Event.new(
   name: "Jantar elegante",
   description: "Prepare-se para uma noite de elegância e sofisticação no evento exclusivo do Buffet do Jaquin.
     Em um ambiente luxuoso e refinado, você será recebido com o melhor da gastronomia gourmet e um serviço impecável.
@@ -82,7 +84,9 @@ event_a = Event.create!(
   flexible_location: true,
   buffet_id: buffet_a.id,
 )
-event_b = Event.create!(
+event_a.event_cover.attach(io: File.open('./app/assets/images/fancy_dinner.jpg'), filename: 'fancy_dinner.jpg', content_type: 'image/jpg')
+event_a.save
+event_b = Event.new(
   name: "Festa de 15 anos",
   description: "Bem-vindos a uma noite de celebração e encanto no renomado Buffet do Chef Jaquin, onde cada detalhe é
     meticulosamente preparado para proporcionar uma experiência inesquecível. Nossa equipe talentosa está dedicada a
@@ -138,6 +142,8 @@ event_b = Event.create!(
   flexible_location: true,
   buffet_id: buffet_a.id,
 )
+event_b.event_cover.attach(io: File.open('./app/assets/images/15y_party.jpeg'), filename: '15y_party.jpeg', content_type: 'image/jpeg')
+event_b.save
 ep1_a = EventPricing.create!(
   event_id: event_a.id,
   pricing_id: p1.id,
@@ -179,7 +185,7 @@ client_b = Client.create!(
   password: "safestpasswordever"
 )
 client_c = Client.create!(
-  full_name: "Rafael Salgadi",
+  full_name: "Rafael Salgado",
   social_security_number: "487.468.040-21",
   email: "rafa@gmail.com",
   password: "safestpasswordever"
@@ -312,6 +318,8 @@ buffet_b = Buffet.create!(
   description: "Buffet bem legal",
   company_id: company_b.id,
 )
+buffet_b.cover.attach(io: File.open('./app/assets/images/test.jpg'), filename: 'test.jpg', content_type: 'image/jpg')
+buffet_b.save
 BuffetPaymentMethod.create!(buffet_id: buffet_b.id, payment_method_id: pix.id)
 
 company_c = Company.create!(
@@ -320,7 +328,7 @@ company_c = Company.create!(
   email: "greal@gmail.com",
   password: "safestpasswordever"
 )
-buffet_c = Buffet.create!(
+buffet_c = Buffet.new(
   email: "grealbuffet@gmail.com",
   company_name: "Elite Gastronômica Empreendimentos Ltda.",
   phone_number: "112345556",
@@ -332,6 +340,8 @@ buffet_c = Buffet.create!(
   description: "Buffet bem legal",
   company_id: company_c.id,
 )
+buffet_c.cover.attach(io: File.open('./app/assets/images/test.jpg'), filename: 'test.jpg', content_type: 'image/jpg')
+buffet_c.save
 BuffetPaymentMethod.create!(buffet_id: buffet_c.id, payment_method_id: pix.id)
 
 company_d = Company.create!(
@@ -340,7 +350,7 @@ company_d = Company.create!(
   email: "sdivino@gmail.com",
   password: "safestpasswordever"
 )
-buffet_d = Buffet.create!(
+buffet_d = Buffet.new(
   email: "sdivinobuffet@gmail.com",
   company_name: "Sabores Nobres S.A.",
   phone_number: "112345556",
@@ -352,6 +362,8 @@ buffet_d = Buffet.create!(
   description: "Buffet bem legal",
   company_id: company_d.id,
 )
+buffet_d.cover.attach(io: File.open('./app/assets/images/test.jpg'), filename: 'test.jpg', content_type: 'image/jpg')
+buffet_d.save
 BuffetPaymentMethod.create!(buffet_id: buffet_d.id, payment_method_id: pix.id)
 ################################################################
 # ==============================================================

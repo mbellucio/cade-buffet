@@ -27,6 +27,16 @@
 
 .box:hover {
   transform: scale(1.2);
-  background-color: black;
+  background-color: rgb(0, 0, 0);
   color: white;
+}
+
+.btn-index {
+  transition: transform 0.3s ease-in, background-color 0.3s ease;
+}
+
+.btn-index:hover {
+  transform: scale(1.2);
+  background-color: white;
+  color: black;
 }
