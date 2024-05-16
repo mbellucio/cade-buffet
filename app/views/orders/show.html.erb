@@ -58,7 +58,10 @@
             <hr>
             <div>
               <strong class="text-danger">Data limite para confirmar pedido: <%= l(@order.budget.proposal_deadline) %></strong>
-              <%= button_to "Confirmar pedido", confirmed_order_path(@order.id), method: :post, class: "btn btn-primary mt-2" %>
+              <div class="d-flex mt-2">
+                <%= button_to "Confirmar pedido", confirmed_order_path(@order.id), method: :post, class: "btn btn-primary me-3" %>
+                <%= button_to 'Cancelar pedido', canceled_order_path, method: :post, class: "btn btn-danger" %>
+              </div>
             </div>
           <% end %>
           

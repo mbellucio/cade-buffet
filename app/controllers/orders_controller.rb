@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
       return redirect_to @order, notice: "Pedido realizado com sucesso!"
     end
     @event_pricing = EventPricing.find(params[:order][:event_pricing_id])
-    flash.now[:notice] = "Não foi possível contratar o serviço"
+    flash.now[:alert] = "Não foi possível contratar o serviço"
     render "new"
   end
 

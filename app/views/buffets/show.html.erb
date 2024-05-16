@@ -56,7 +56,7 @@
       <p><strong class="fs-5">Estado: </strong><%= @buffet.state_code%></p>
       <% if company_signed_in? && current_company.buffet == @buffet %>
         <div class="d-flex">
-          <%= link_to 'Editar informações', edit_buffet_path(@buffet.id), class: "btn btn-outline-dark me-2" %>
+          <%= link_to 'Editar informações', edit_buffet_path(@buffet.id), class: "btn btn-dark me-2" %>
           <% if @buffet.active %>
             <%= button_to 'Desativar Buffet', deactivate_buffet_path(@buffet.id), method: :post, class: "btn btn-warning" %>
           <% else %>

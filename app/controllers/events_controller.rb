@@ -26,7 +26,7 @@ class EventsController < ApplicationController
     if @event.update(event_params)
       return redirect_to @event, notice: "Evento atualizado com sucesso!"
     end
-    flash.now[:notice] = "Falha ao atualizar evento."
+    flash.now[:alert] = "Falha ao atualizar evento."
     render "edit"
   end
 

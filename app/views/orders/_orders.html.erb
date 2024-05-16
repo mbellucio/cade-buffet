@@ -1,7 +1,7 @@
 <% color = { "pending" => "bg-warning", "awaiting" => "bg-warning", "confirmed" => "bg-success", "canceled" => "bg-danger" } %>
 
 <% @orders.each_with_index do |order, index| %>
-  <div class="container col-6 rounded shadow p-3 my-3" id=<%= "pedido-#{index}"%>>
+  <div class="container col-7 rounded shadow p-3 my-3" id=<%= "pedido-#{index}"%>>
     <div class="col">
       <%= link_to order_path(order.id), class: "btn btn-link text-dark" do %>
         <h2>Pedido: <%= order.code %></h2>

@@ -32,13 +32,13 @@
 
     <% if company_signed_in? && current_company.buffet == @event.buffet%>
       <div class="d-flex">
-        <%= link_to 'Editar', edit_event_path(@event.id), class: "btn btn-outline-dark me-3" %>
-        <%= button_to 'Remover evento', event_path(@event.id), method: :delete, class: "btn btn-outline-dark me-3" %>
+        <%= link_to 'Editar', edit_event_path(@event.id), class: "btn btn-dark me-3" %>
         <% if @event.active %>
-          <%= button_to 'Desativar Evento', deactivate_event_path(@event.id), method: :post, class: "btn btn-warning" %>
+          <%= button_to 'Desativar Evento', deactivate_event_path(@event.id), method: :post, class: "btn btn-warning me-3" %>
         <% else %>
-          <%= button_to 'Reativar Evento', activate_event_path(@event.id), method: :post, class: "btn btn-primary" %>
-        <% end %>   
+          <%= button_to 'Reativar Evento', activate_event_path(@event.id), method: :post, class: "btn btn-primary me-3" %>
+        <% end %>  
+        <%= button_to 'Remover evento', event_path(@event.id), method: :delete, class: "btn btn-danger" %>
       </div>
     <% end %>
   </div>
@@ -63,7 +63,7 @@
           <% if company_signed_in? && current_company.buffet == @event.buffet %>
             <div class="d-flex">
               <%= link_to 'Editar', edit_event_pricing_path(event_pricing.id), class: "btn btn-outline-dark me-2" %>
-              <%= button_to 'Remover',  event_pricing_path(event_pricing.id), method: :delete, class: "btn btn-outline-dark me-2" %>
+              <%= button_to 'Remover',  event_pricing_path(event_pricing.id), method: :delete, class: "btn btn-outline-danger me-2" %>
             </div>
           <% end %>
         <% else %>
