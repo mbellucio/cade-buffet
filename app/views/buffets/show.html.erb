@@ -20,8 +20,8 @@
         <% unless @buffet.active %>
           <h5 class="text-danger">Este Buffet está desativado</h5>
         <% end %>
-        <strong class="fs-5">Fotos:</strong>
         <% if @buffet.cover.present? %>
+          <strong class="fs-5">Fotos:</strong>
           <div class="rounded shadow my-3 col-12">
             <%= render 'carroussel' %>
           </div>
@@ -83,7 +83,7 @@
         </div>
       <% end %>
       <hr>
-      <div class="overflow-y-scroll overflow-hidden" style="height:950px">
+      <div class="overflow-y-scroll overflow-hidden" style="height:600px">
         <% if @buffet.events.empty? %>
           <p>Não existem eventos cadastrados</p>
         <% else %>
