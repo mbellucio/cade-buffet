@@ -19,8 +19,14 @@ class Budget < ApplicationRecord
 
   validate :proposal_deadline_is_future
 
+  before_save :set_base_price, :calc_final_price
+
   def calc_final_price
-    return self.base_price + self.additional_cost - self.discount
+    self.final_price = self.base_price + self.additional_cost - self.discount
+  end
+
+  def set_base_price
+    self.base_price = self.order.calculate_budget
   end
 
   private

@@ -8,7 +8,6 @@ class BudgetsController < ApplicationController
 
   def create
     @budget = Budget.new(budget_params)
-    @budget.final_price = @budget.calc_final_price
     @budget.order.awaiting!
     if @budget.save
       return redirect_to order_path(@budget.order.id), notice: "Orçamento criado!"
