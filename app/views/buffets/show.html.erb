@@ -111,6 +111,14 @@
     <div id="ratings" class="shadow rounded p-3 mx-3 mt-4" style="max-height: 800px">
       <h2 class="text-center">Avaliações</h2>
       <hr>
+       
+      <% if @buffet.ratings.length > 3 %>
+       <div class="text-center">
+          <%= link_to 'Ver todas as avaliações', buffet_ratings_path(@buffet.id), class: "btn btn-dark" %>
+        </div>
+        <hr>
+      <% end %>
+
       <div class="overflow-y-scroll overflow-hidden">
         <% if @buffet.ratings.any? %>
         <div class="row d-flex justify-content-center">

@@ -1,17 +1,21 @@
 class RatingsController < ApplicationController
-  before_action :find_buffet, only: [:new, :create]
+  before_action :find_buffet, only: [:new, :create, :index]
 
   def new
     @rating = Rating.new
   end
+
+  def index; end
 
   def create
     @rating = Rating.new(rating_params)
     @rating.buffet = @buffet
     @rating.client = current_client
     if @rating.save
-      return redirect_to @buffet, notice: "Avaliação enviada com sucesso!"
+      return redirect_to buffet_path(@buffet.id), notice: "Avaliação enviada com sucesso!"
     end
+    flash.now[:alert] = "Não foi possível enviar avaliação"
+    render "new"
   end
 
   private
