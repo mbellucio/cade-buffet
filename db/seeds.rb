@@ -198,7 +198,7 @@ rating_b = Rating.new(
   value: 5,
   feedback: "Melhor buffet que já contratei! Recomendo!",
 )
-rating_b.image.attach(io: File.open('./app/assets/images/person_2.jpg'), filename: 'person_2.jpg', content_type: 'image/jpg')
+rating_b.image.attach(io: File.open('./app/assets/images/person_2.jpeg'), filename: 'person_2.jpeg', content_type: 'image/jpeg')
 rating_b.save
 client_c = Client.create!(
   full_name: "Rafael Salgado",
@@ -212,7 +212,7 @@ rating_c = Rating.new(
   value: 5,
   feedback: "Valeu muito a pena!!!! Obrigado!!",
 )
-rating_c.image.attach(io: File.open('./app/assets/images/person_3.PNG'), filename: 'person_3.PNG', content_type: 'image/PNG')
+rating_c.image.attach(io: File.open('./app/assets/images/person_3.jpg'), filename: 'person_3.jpg', content_type: 'image/jpg')
 rating_c.save
 rating_d = Rating.new(
   client_id: client_a.id,
@@ -220,7 +220,7 @@ rating_d = Rating.new(
   value: 5,
   feedback: "Farei novamente ano que vem com eles! Adorei!",
 )
-rating_d.image.attach(io: File.open('./app/assets/images/person_4.PNG'), filename: 'person_4.PNG', content_type: 'image/PNG')
+rating_d.image.attach(io: File.open('./app/assets/images/person_4.jpeg'), filename: 'person_4.jpeg', content_type: 'image/jpeg')
 rating_d.save
 Order.create!(
   company_id: company_a.id,
@@ -397,6 +397,46 @@ buffet_d = Buffet.new(
 buffet_d.cover.attach(io: File.open('./app/assets/images/test.jpg'), filename: 'test.jpg', content_type: 'image/jpg')
 buffet_d.save
 BuffetPaymentMethod.create!(buffet_id: buffet_d.id, payment_method_id: pix.id)
+
+Event.create!(
+  name: "Jantar elegante",
+  description: "just a nice event",
+  min_quorum: 5,
+  max_quorum: 16,
+  standard_duration: 240,
+  menu: "good food",
+  serve_alcohol: true,
+  handle_decoration: true,
+  valet_service: false,
+  flexible_location: true,
+  buffet_id: buffet_b.id,
+)
+Event.create!(
+  name: "Jantar elegante",
+  description: "just a nice event",
+  min_quorum: 5,
+  max_quorum: 16,
+  standard_duration: 240,
+  menu: "good food",
+  serve_alcohol: true,
+  handle_decoration: true,
+  valet_service: false,
+  flexible_location: true,
+  buffet_id: buffet_c.id,
+)
+Event.create!(
+  name: "Jantar elegante",
+  description: "just a nice event",
+  min_quorum: 5,
+  max_quorum: 16,
+  standard_duration: 240,
+  menu: "good food",
+  serve_alcohol: true,
+  handle_decoration: true,
+  valet_service: false,
+  flexible_location: true,
+  buffet_id: buffet_d.id,
+)
 ################################################################
 # ==============================================================
 ################################################################
