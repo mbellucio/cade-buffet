@@ -2,6 +2,7 @@
 <div class="container-fluid ms-5">
   <%= link_to 'Voltar', buffet_path(@buffet.id), class: "btn btn-dark" %>
 </div>
+<h2 class="text-center">Avaliações de <%= @buffet.company.buffet_name %>:</h2>
 <div class="d-flex justify-content-center" id="ratings">
   <div class="container">
      <div class="row mt-4">

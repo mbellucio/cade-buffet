@@ -178,18 +178,50 @@ client_a = Client.create!(
   email: "matheus@gmail.com",
   password: "safestpasswordever"
 )
+rating_a = Rating.new(
+  client_id: client_a.id,
+  buffet_id: buffet_a.id,
+  value: 5,
+  feedback: "Adorei o evento!!",
+)
+rating_a.image.attach(io: File.open('./app/assets/images/person_1.jpg'), filename: 'person_1.jpg', content_type: 'image/jpg')
+rating_a.save
 client_b = Client.create!(
-  full_name: "Julia kanzaki",
+  full_name: "Julia",
   social_security_number: "967.140.620-36",
   email: "julia@gmail.com",
   password: "safestpasswordever"
 )
+rating_b = Rating.new(
+  client_id: client_b.id,
+  buffet_id: buffet_a.id,
+  value: 5,
+  feedback: "Melhor buffet que já contratei! Recomendo!",
+)
+rating_b.image.attach(io: File.open('./app/assets/images/person_2.jpg'), filename: 'person_2.jpg', content_type: 'image/jpg')
+rating_b.save
 client_c = Client.create!(
   full_name: "Rafael Salgado",
   social_security_number: "487.468.040-21",
   email: "rafa@gmail.com",
   password: "safestpasswordever"
 )
+rating_c = Rating.new(
+  client_id: client_c.id,
+  buffet_id: buffet_a.id,
+  value: 5,
+  feedback: "Valeu muito a pena!!!! Obrigado!!",
+)
+rating_c.image.attach(io: File.open('./app/assets/images/person_3.PNG'), filename: 'person_3.PNG', content_type: 'image/PNG')
+rating_c.save
+rating_d = Rating.new(
+  client_id: client_a.id,
+  buffet_id: buffet_a.id,
+  value: 5,
+  feedback: "Farei novamente ano que vem com eles! Adorei!",
+)
+rating_d.image.attach(io: File.open('./app/assets/images/person_4.PNG'), filename: 'person_4.PNG', content_type: 'image/PNG')
+rating_d.save
 Order.create!(
   company_id: company_a.id,
   client_id: client_a.id,
