@@ -8,6 +8,7 @@ class Client < ApplicationRecord
 
   has_many :orders
   has_many :messages, as: :user
+  has_many :ratings
 
   validates :full_name, :social_security_number, presence: true
   validates :social_security_number, uniqueness: true

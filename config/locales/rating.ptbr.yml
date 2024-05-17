@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      rating: Avaliação
+    attributes:
+      rating:
+        value: Nota
+        feedback: Descrição
+        image: Foto
+        

@@ -6,6 +6,7 @@ class Buffet < ApplicationRecord
   has_many_attached :images
   has_many :buffet_payment_methods
   has_many :payment_methods, through: :buffet_payment_methods
+  has_many :ratings
 
   validates :company_id, :email, uniqueness: true
   validates :email, format:
@@ -28,4 +29,5 @@ class Buffet < ApplicationRecord
   def buffet_name
     self.company.buffet_name
   end
+
 end

@@ -13,7 +13,11 @@
 
   <div id="buffet-details" class="shadow rounded p-3 mx-3 col-7">
     <div class="container">
-
+      <% if client_signed_in? && @client_confirmed_past_orders.any? && current_client.ratings.empty? %>
+        <%= link_to 'Avaliar Buffet', new_buffet_rating_path(@buffet.id), class: "btn btn-success"%>
+        <hr>
+      <% end %>
+     
       <% if company_signed_in? && current_company.buffet == @buffet %>
         <h2>Informações do Buffet</h2>
         <hr>
@@ -67,39 +71,64 @@
       </div>
   </div>
 
-  <div id="events" class="shadow rounded p-3 mx-3 col-4" style="height: 99%;">
-    <div class="container text-center">
-      
-      <% if company_signed_in? && current_company.buffet == @buffet %>
-        <h2>Eventos cadastrados</h2>
-      <% else %>
-        <h2>Eventos disponíveis</h2>
-      <% end %>
-      
-      <hr>
-      <% if company_signed_in? && current_company.buffet == @buffet %>
-        <div class="container text-center">
-          <%= link_to 'Cadastrar evento', new_event_path, class: "btn btn-dark" %>
-        </div>
-        <hr>
-      <% end %> 
-      <div class="overflow-y-scroll overflow-hidden" style="height:600px">
-        <% if @buffet.events.empty? %>
-          <p>Não existem eventos cadastrados</p>
+  <div class="col-4">
+    <div id="events" class="shadow rounded p-3 mx-3" style="height: auto;">
+      <div class="container text-center">
+        
+        <% if company_signed_in? && current_company.buffet == @buffet %>
+          <h2>Eventos cadastrados</h2>
         <% else %>
-          <div class="row text-center d-flex justify-content-center" id="event">
-            <% @buffet.events.where(active: true).each do |event| %>
-              <div class="col-10 mb-3 rounded-5 border p-4" id=<%= "event-#{event.id}"%>>
-                <%= link_to event.name, event_path(event.id), class: "btn btn-outline-dark rounded-5", style:"font-size: 20px" %>
-                <hr>
-                <% if event.event_cover.present? %>
-                  <%= image_tag event.event_cover, class: "card-img-top img-fluid rounded-5" %>
-                <% end %>
-              </div>
-            <% end %>
+          <h2>Eventos disponíveis</h2>
+        <% end %>
+        
+        <hr>
+        <% if company_signed_in? && current_company.buffet == @buffet %>
+          <div class="container text-center">
+            <%= link_to 'Cadastrar evento', new_event_path, class: "btn btn-dark" %>
           </div>
+          <hr>
+        <% end %> 
+        <div class="overflow-y-scroll overflow-hidden" style="height:600px">
+          <% if @buffet.events.empty? %>
+            <p>Não existem eventos cadastrados</p>
+          <% else %>
+            <div class="row text-center d-flex justify-content-center" id="event">
+              <% @buffet.events.where(active: true).each do |event| %>
+                <div class="col-10 mb-3 rounded-5 border p-4" id=<%= "event-#{event.id}"%>>
+                  <%= link_to event.name, event_path(event.id), class: "btn btn-outline-dark rounded-5", style:"font-size: 20px" %>
+                  <hr>
+                  <% if event.event_cover.present? %>
+                    <%= image_tag event.event_cover, class: "card-img-top img-fluid rounded-5" %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div id="ratings" class="shadow rounded p-3 mx-3 mt-4" style="max-height: 800px">
+      <h2 class="text-center">Avaliações</h2>
+      <hr>
+      <div class="overflow-y-scroll overflow-hidden">
+        <% if @buffet.ratings.any? %>
+        <div class="row d-flex justify-content-center">
+          <% @buffet.ratings.reverse.slice(0, 3).each do |rating| %>
+            <div class="col-10 mb-3 rounded-5 border p-4">
+              <h2 class="text-center"><%= rating.value %>/5</h2>
+              <hr>
+              <i>Por: <%= rating.client.full_name %></i>
+              <p><%= rating.feedback %></p>
+              <% if rating.image.present? %>
+                <%= image_tag rating.image, class: "card-img-top img-fluid rounded-5" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+

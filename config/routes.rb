@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get "search", on: :collection
     post "deactivate", on: :member
     post "activate", on: :member
+    resources :ratings, only: [:new, :create]
   end
 
   resources :events, only: [:new, :create, :show, :edit, :update, :destroy] do

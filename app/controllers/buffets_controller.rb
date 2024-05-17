@@ -1,5 +1,6 @@
 class BuffetsController < ApplicationController
   before_action :find_buffet, only: [:show]
+  before_action :find_client_confirmed_past_orders, only: [:show]
   before_action :find_company_buffet_and_authorize, only: [:edit, :update, :deactivate, :activate]
   before_action :authenticate_company!, only: [:edit, :create, :new, :update, :deactivate, :activate]
 
@@ -82,6 +83,15 @@ class BuffetsController < ApplicationController
     else
       @buffet = Buffet.find(params[:id])
       buffet_is_active?
+    end
+  end
+
+  def find_client_confirmed_past_orders
+    if client_signed_in?
+      @client_confirmed_past_orders = @buffet.company.orders
+        .where(client_id: current_client.id)
+        .where(status: :confirmed)
+        .filter {|order| Date.today > order.booking_date}
     end
   end
 
