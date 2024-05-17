@@ -73,6 +73,12 @@ here are the credentials to log into Jaquin Buffet as a Company User:
   <li>Password: safestpasswordever</li>
 </ul>
 
+here are the credentials to log as Client User:
+<ul>
+  <li>Email: matheus@gmail.com.com</li>
+  <li>Password: safestpasswordever</li>
+</ul>
+
 ## System Description and Functions
 There are two roles in the system: **Company** and **Client**.<br/><br/>
 Company can:<br/>
@@ -92,6 +98,8 @@ Clients can:<br/>
     <li>Check events details</li>
     <li>Create event orders</li>
     <li>Accept budget offer for order</li>
+    <li>Cancel order on pending and awaiting status</li>
+    <li>Rate buffets</li>
 </ol>
 
 <hr>
