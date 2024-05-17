@@ -40,3 +40,16 @@
   background-color: white;
   color: black;
 }
+
+.rating {
+  display: inline-block;
+}
+
+.fa {
+  font-size: 15px;
+}
+
+.checked {
+  color: orange;
+}
+

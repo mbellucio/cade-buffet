@@ -35,6 +35,20 @@
         <p><strong class="fs-5">CNPJ: </strong><%= @buffet.company.company_registration_number%></p>
       <% else %>
         <h2><%= @buffet.company.buffet_name %></h2>
+        <% if @buffet.ratings.any? %>
+          <div>
+            <div class="rating">
+              <% (1..5).each do |i| %>
+                <% if i <= @buffet.average_rating %>
+                  <span class="fa fa-star checked"></span>
+                <% else %>
+                  <span class="fa fa-star"></span>
+                <% end %>
+              <% end %>
+            </div>
+            <span>(<%= @buffet.average_rating %>)</span>
+          </div>
+        <% end %>
         <hr>
         <strong>Fotos:</strong>
         <% if @buffet.cover.present? %>
@@ -108,7 +122,7 @@
       </div>
     </div>
 
-    <div id="ratings" class="shadow rounded p-3 mx-3 mt-4" style="max-height: 800px">
+    <div id="ratings" class="shadow rounded p-3 mx-3 mt-4">
       <h2 class="text-center">Avaliações</h2>
       <hr>
        
@@ -119,7 +133,7 @@
         <hr>
       <% end %>
 
-      <div class="overflow-y-scroll overflow-hidden">
+      <div class="overflow-y-scroll overflow-hidden" style="height: 600px">
         <% if @buffet.ratings.any? %>
         <div class="row d-flex justify-content-center">
           <% @buffet.ratings.reverse.slice(0, 3).each do |rating| %>

@@ -142,6 +142,30 @@ describe 'Buffet API' do
         description: "A nice buffet",
         company_id: company.id
       )
+      client = Client.create!(
+        full_name: "Matheus Bellucio",
+        social_security_number: "455.069.420-36",
+        email: "matheus@gmail.com",
+        password: "safestpasswordever"
+      )
+      client_2 = Client.create!(
+        full_name: "Jules",
+        social_security_number: "925.506.760-50",
+        email: "jules@gmail.com",
+        password: "safestpasswordever"
+      )
+      Rating.create!(
+        client_id: client.id,
+        buffet_id: buffet.id,
+        value: 5,
+        feedback: "muito legal"
+      )
+      Rating.create!(
+        client_id: client_2.id,
+        buffet_id: buffet.id,
+        value: 3,
+        feedback: "muito legal 2"
+      )
       payment_method = PaymentMethod.create!(method: "PIX")
       payment_method_2 = PaymentMethod.create!(method: "Cartão de Crédito")
       BuffetPaymentMethod.create!(buffet_id: buffet.id, payment_method_id: payment_method.id)
@@ -162,6 +186,7 @@ describe 'Buffet API' do
       expect(json_response["city"]).to eq "some city"
       expect(json_response["state_code"]).to eq "CA"
       expect(json_response["description"]).to eq "A nice buffet"
+      expect(json_response["average_rating"]).to eq "4.0"
 
       expect(json_response["payment_methods"].length).to eq 2
       expect(json_response["payment_methods"].first["method"]).to eq "PIX"

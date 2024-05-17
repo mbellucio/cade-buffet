@@ -17,7 +17,22 @@
           <% if buffet.cover.present? %>
             <%= image_tag buffet.cover, class:"card-img-top img-fluid" %>
           <% end %>
-          
+
+          <% if buffet.ratings.any? %>
+            <div>
+              <div class="rating mt-2 ms-3">
+                <% (1..5).each do |i| %>
+                  <% if i <= buffet.average_rating %>
+                    <span class="fa fa-star checked"></span>
+                  <% else %>
+                    <span class="fa fa-star"></span>
+                  <% end %>
+                <% end %>
+              </div>
+              <span>(<%= buffet.average_rating %>)</span>
+            </div>
+          <% end %>
+            
           <div class="card-body">
             <h5 class="card-title"><%= buffet.company.buffet_name %></h5>
             <p class="card-text"><%= "#{buffet.city}, #{buffet.state_code}" %></p>

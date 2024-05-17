@@ -15,7 +15,7 @@ class Api::V1::BuffetsController < ActionController::API
       render status: 200, json: buffet.as_json(
         include: {payment_methods: {only: [:method]}},
         except: [:created_at, :updated_at, :company_id, :company_name],
-        methods: [:buffet_name]
+        methods: [:buffet_name, :average_rating]
       )
     rescue
       render status: 404

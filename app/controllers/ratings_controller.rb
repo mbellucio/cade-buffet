@@ -1,5 +1,8 @@
 class RatingsController < ApplicationController
+  before_action :authenticate_client!, only: [:create, :new]
   before_action :find_buffet, only: [:new, :create, :index]
+  before_action :client_already_rated, only: [:create]
+
 
   def new
     @rating = Rating.new
@@ -19,6 +22,12 @@ class RatingsController < ApplicationController
   end
 
   private
+  def client_already_rated
+    if @buffet.ratings.where(client_id: current_client.id).any?
+      return redirect_to root_path, alert: "Você já avaliou este buffet."
+    end
+  end
+
   def rating_params
     params.require(:rating).permit(
       :image,

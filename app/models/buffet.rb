@@ -30,4 +30,8 @@ class Buffet < ApplicationRecord
     self.company.buffet_name
   end
 
+  def average_rating
+    self.ratings.average(:value).round(1)
+  end
+
 end

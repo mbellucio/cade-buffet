@@ -492,7 +492,7 @@ describe 'Event API' do
       expect(json_response.first["buffet"]["id"]).to eq buffet.id
     end
 
-    it "receive error if date is within pricing category not covered by event" do
+    it "receive error if date is within pricing category not covered by event - weekend" do
       #arrange
       company = Company.create!(
         buffet_name: "Buffet Legal",
